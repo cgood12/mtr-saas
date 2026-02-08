@@ -13,11 +13,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MTR Direct — Own Your Rentals">
 <meta name="twitter:description" content="Stop paying Airbnb 15-20%. Get direct bookings with full automation.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--primary:#A0583E;--primary-light:#C4795A;--primary-dark:#7A3F2B;--bg:#FAF8F5;--text:#2D2D2D;--white:#FFFFFF;--gray-50:#F7F5F2;--gray-100:#EDE9E4;--gray-200:#D9D3CC;--gray-400:#9E9689;--gray-600:#6B6560;--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08),0 12px 40px rgba(0,0,0,.06)}
@@ -49,8 +51,10 @@ a{color:var(--primary);text-decoration:none}
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
 .nav.scrolled{background:rgba(250,248,245,.85);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--text)}
-.nav-logo span{color:var(--primary)}
+.nav-logo{font-family:'Rubik',sans-serif;font-size:1.4rem;color:var(--text);display:flex;align-items:center;gap:2px}
+.nav-logo .mtr{font-weight:700}
+.nav-logo .bar{color:var(--primary);font-weight:500}
+.nav-logo .direct{font-weight:500}
 .nav-links{display:flex;gap:32px;align-items:center}
 .nav-links a{font-size:.9rem;font-weight:500;color:var(--gray-600);transition:color .2s}
 .nav-links a:hover{color:var(--text)}
@@ -227,7 +231,7 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <!-- Nav -->
 <nav class="nav" id="nav">
 <div class="container nav-inner">
-<a href="#" class="nav-logo">MTR <span>Direct</span></a>
+<a href="#" class="nav-logo"><span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span></a>
 <div class="nav-links">
 <a href="#how-it-works">How It Works</a>
 <a href="#features">Features</a>
