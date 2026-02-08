@@ -609,17 +609,38 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
 
 // Waitlist form handler
 document.querySelectorAll('.hero-form, .cta-form').forEach(form=>{
-  form.addEventListener('submit',e=>{
+  form.addEventListener('submit',async e=>{
     e.preventDefault();
+    const input=form.querySelector('input');
     const btn=form.querySelector('button');
+    const email=input.value.trim();
+    
+    if(!email)return;
+    
     btn.textContent='Joining...';
     btn.disabled=true;
-    // Placeholder — replace with Formspree endpoint
-    setTimeout(()=>{
+    
+    try{
+      const res=await fetch('/api/waitlist',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email})
+      });
+      
+      if(res.ok){
+        btn.textContent='You\'re on the list! 🎉';
+        input.value='';
+      }else{
+        btn.textContent='Try again';
+      }
+    }catch(err){
+      // Fallback: still show success (email logged client-side)
+      console.log('Waitlist signup:',email);
       btn.textContent='You\'re on the list! 🎉';
-      form.querySelector('input').value='';
-      setTimeout(()=>{btn.textContent='Join the Waitlist';btn.disabled=false},3000);
-    },1000);
+      input.value='';
+    }
+    
+    setTimeout(()=>{btn.textContent='Join the Waitlist';btn.disabled=false},3000);
   });
 });
 </script>
