@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MTR Direct — Airbnb's Automation Without Airbnb's Fees</title>
 <meta name="description" content="The all-in-one platform for medium-term rental hosts. From ad to move-in, fully automated.">
+<meta property="og:title" content="MTR Direct — Airbnb's Automation Without Airbnb's Fees">
+<meta property="og:description" content="The all-in-one platform for medium-term rental hosts. Direct bookings, automated marketing, tenant screening, and lease management.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mtrdirect.com">
+<meta property="og:image" content="https://mtrdirect.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MTR Direct — Own Your Rentals">
+<meta name="twitter:description" content="Stop paying Airbnb 15-20%. Get direct bookings with full automation.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&display=swap" rel="stylesheet">
@@ -173,7 +183,8 @@ a{color:var(--primary);text-decoration:none}
 .faq-list{max-width:700px;margin:48px auto 0}
 .faq-item{border-bottom:1px solid var(--gray-100);padding:24px 0}
 .faq-item:first-child{border-top:1px solid var(--gray-100)}
-.faq-q{font-weight:600;font-size:1.05rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q{font-weight:600;font-size:1.05rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;width:100%;text-align:left;font-family:inherit;color:inherit;padding:0}
+.faq-q:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
 .faq-q::after{content:'+';font-size:1.4rem;color:var(--gray-400);transition:transform .2s;flex-shrink:0}
 .faq-item.open .faq-q::after{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
@@ -199,9 +210,19 @@ a{color:var(--primary);text-decoration:none}
 .footer-links{display:flex;gap:24px}
 .footer-links a{font-size:.85rem;color:var(--gray-400);transition:color .2s}
 .footer-links a:hover{color:var(--text)}
+
+/* Skip Link */
+.skip-link{position:absolute;top:-100px;left:16px;background:var(--primary);color:var(--white);padding:12px 24px;border-radius:8px;font-weight:600;z-index:1000;transition:top .2s}
+.skip-link:focus{top:16px}
+
+/* Focus styles for buttons */
+button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
+.price-card.featured button:focus-visible{outline-color:var(--white)}
 </style>
 </head>
 <body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
 
 <!-- Nav -->
 <nav class="nav" id="nav">
@@ -218,11 +239,12 @@ a{color:var(--primary);text-decoration:none}
 </nav>
 
 <!-- Hero -->
+<main id="main">
 <section class="hero" id="waitlist">
 <div class="container">
 <h1 class="reveal">Airbnb's Automation.<br><span>Without Airbnb's Fees.</span></h1>
 <p class="reveal reveal-delay-1">The all-in-one platform for medium-term rental hosts. From ad to move-in, fully automated.</p>
-<form class="hero-form reveal reveal-delay-2" action="https://api.mtrdirect.com/waitlist" method="POST" onsubmit="handleWaitlist(event, this)">
+<form class="hero-form reveal reveal-delay-2">
 <input type="email" name="email" placeholder="Enter your email" required>
 <button type="submit">Join the Waitlist</button>
 </form>
@@ -443,7 +465,7 @@ a{color:var(--primary);text-decoration:none}
 <li>Lease generation</li>
 <li>Payment processing</li>
 </ul>
-<button class="price-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join Waitlist</button>
+<button class="price-btn" data-scroll="waitlist">Join Waitlist</button>
 </div>
 <div class="price-card featured reveal reveal-delay-2">
 <div class="tier">Professional</div>
@@ -457,7 +479,7 @@ a{color:var(--primary);text-decoration:none}
 <li>Move-in automation</li>
 <li>Priority support</li>
 </ul>
-<button class="price-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join Waitlist</button>
+<button class="price-btn" data-scroll="waitlist">Join Waitlist</button>
 </div>
 <div class="price-card reveal reveal-delay-3">
 <div class="tier">Business</div>
@@ -471,7 +493,7 @@ a{color:var(--primary);text-decoration:none}
 <li>API access</li>
 <li>White-glove onboarding</li>
 </ul>
-<button class="price-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join Waitlist</button>
+<button class="price-btn" data-scroll="waitlist">Join Waitlist</button>
 </div>
 </div>
 <p class="pricing-lock reveal">🔒 <span>Launch pricing</span> — locks in forever for early members.</p>
@@ -503,28 +525,28 @@ a{color:var(--primary);text-decoration:none}
 </div>
 <div class="faq-list reveal">
 <div class="faq-item">
-<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is a medium-term rental (MTR)?</div>
-<div class="faq-a"><p>A medium-term rental is typically a furnished rental lasting 1–12 months. Common tenants include traveling nurses, corporate relocators, and people in transition. It's the sweet spot between short-term (Airbnb) and long-term (traditional leases).</p></div>
+<button class="faq-q" aria-expanded="false">What is a medium-term rental (MTR)?</button>
+<div class="faq-a" role="region"><p>A medium-term rental is typically a furnished rental lasting 1–12 months. Common tenants include traveling nurses, corporate relocators, and people in transition. It's the sweet spot between short-term (Airbnb) and long-term (traditional leases).</p></div>
 </div>
 <div class="faq-item">
-<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need any technical skills?</div>
-<div class="faq-a"><p>None at all. If you can fill out a form, you can use MTR Direct. Your direct booking site, ads, and automations are all set up for you. We handle the tech — you handle the hospitality.</p></div>
+<button class="faq-q" aria-expanded="false">Do I need any technical skills?</button>
+<div class="faq-a" role="region"><p>None at all. If you can fill out a form, you can use MTR Direct. Your direct booking site, ads, and automations are all set up for you. We handle the tech — you handle the hospitality.</p></div>
 </div>
 <div class="faq-item">
-<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I keep my Airbnb listing?</div>
-<div class="faq-a"><p>Absolutely. Many hosts use MTR Direct alongside Airbnb. The goal is to reduce your dependency on platforms that take 15–20% — not to force you off them overnight. As direct bookings grow, you can decide what makes sense.</p></div>
+<button class="faq-q" aria-expanded="false">Can I keep my Airbnb listing?</button>
+<div class="faq-a" role="region"><p>Absolutely. Many hosts use MTR Direct alongside Airbnb. The goal is to reduce your dependency on platforms that take 15–20% — not to force you off them overnight. As direct bookings grow, you can decide what makes sense.</p></div>
 </div>
 <div class="faq-item">
-<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does the marketing engine work?</div>
-<div class="faq-a"><p>We create and manage Facebook & Instagram ad campaigns targeted at your ideal tenants — traveling nurses, corporate workers, and relocators in your market. You set your budget, we handle the creative, targeting, and optimization.</p></div>
+<button class="faq-q" aria-expanded="false">How does the marketing engine work?</button>
+<div class="faq-a" role="region"><p>We create and manage Facebook & Instagram ad campaigns targeted at your ideal tenants — traveling nurses, corporate workers, and relocators in your market. You set your budget, we handle the creative, targeting, and optimization.</p></div>
 </div>
 <div class="faq-item">
-<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">When will MTR Direct launch?</div>
-<div class="faq-a"><p>We're currently in private beta with a small group of hosts. Join the waitlist to get early access and lock in launch pricing forever. We'll notify you as soon as spots open up.</p></div>
+<button class="faq-q" aria-expanded="false">When will MTR Direct launch?</button>
+<div class="faq-a" role="region"><p>We're currently in private beta with a small group of hosts. Join the waitlist to get early access and lock in launch pricing forever. We'll notify you as soon as spots open up.</p></div>
 </div>
 <div class="faq-item">
-<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if I only have one property?</div>
-<div class="faq-a"><p>MTR Direct is built for hosts with 1–5+ properties. Our Starter plan at $29/month is designed specifically for single-property hosts. Even one property saving $500+/month in Airbnb fees makes it a no-brainer.</p></div>
+<button class="faq-q" aria-expanded="false">What if I only have one property?</button>
+<div class="faq-a" role="region"><p>MTR Direct is built for hosts with 1–5+ properties. Our Starter plan at $29/month is designed specifically for single-property hosts. Even one property saving $500+/month in Airbnb fees makes it a no-brainer.</p></div>
 </div>
 </div>
 </div>
@@ -535,21 +557,21 @@ a{color:var(--primary);text-decoration:none}
 <div class="container">
 <h2 class="section-title reveal">Ready to Own Your Rentals?</h2>
 <p class="reveal reveal-delay-1">Stop paying platform fees. Start building a rental business you actually control.</p>
-<form class="cta-form reveal reveal-delay-2" action="https://api.mtrdirect.com/waitlist" method="POST" onsubmit="handleWaitlist(event, this)">
+<form class="cta-form reveal reveal-delay-2">
 <input type="email" name="email" placeholder="Enter your email" required>
 <button type="submit">Join the Waitlist</button>
 </form>
 </div>
 </section>
 
+</main>
+
 <!-- Footer -->
 <footer class="footer">
 <div class="container footer-inner">
 <p class="footer-copy">© 2026 MTR Direct. All rights reserved.</p>
 <div class="footer-links">
-<a href="#">Privacy</a>
-<a href="#">Terms</a>
-<a href="#">Contact</a>
+<a href="mailto:hello@mtrdirect.com">Contact</a>
 </div>
 </div>
 </footer>
@@ -563,20 +585,39 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
+// Scroll buttons
+document.querySelectorAll('[data-scroll]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=document.getElementById(btn.dataset.scroll);
+    if(target)target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const isOpen=item.classList.contains('open');
+    item.classList.toggle('open');
+    btn.setAttribute('aria-expanded',!isOpen);
+  });
+});
+
 // Waitlist form handler
-function handleWaitlist(e,form){
-  e.preventDefault();
-  const email=form.querySelector('input[name=email]').value;
-  const btn=form.querySelector('button');
-  btn.textContent='Joining...';
-  btn.disabled=true;
-  // Placeholder — replace with real endpoint
-  setTimeout(()=>{
-    btn.textContent='You\'re on the list! 🎉';
-    form.querySelector('input').value='';
-    setTimeout(()=>{btn.textContent='Join the Waitlist';btn.disabled=false},3000);
-  },1000);
-}
+document.querySelectorAll('.hero-form, .cta-form').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const btn=form.querySelector('button');
+    btn.textContent='Joining...';
+    btn.disabled=true;
+    // Placeholder — replace with Formspree endpoint
+    setTimeout(()=>{
+      btn.textContent='You\'re on the list! 🎉';
+      form.querySelector('input').value='';
+      setTimeout(()=>{btn.textContent='Join the Waitlist';btn.disabled=false},3000);
+    },1000);
+  });
+});
 </script>
 </body>
 </html>
