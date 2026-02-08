@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MTR Direct — Template Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#A0583E;--dark:#2D2D2D;--cream:#FAF8F5;--white:#fff}
+body{font-family:'DM Sans',sans-serif;color:var(--dark);background:var(--cream);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.header{text-align:center;padding:80px 24px 60px}
+.header h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,5vw,3rem);margin-bottom:12px}
+.header p{color:#888;font-size:1.05rem;max-width:560px;margin:0 auto}
+.header .badge{display:inline-block;background:var(--primary);color:var(--white);padding:6px 16px;border-radius:100px;font-size:.75rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:24px}
+
+.templates{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:32px;max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+.template-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 2px 24px rgba(0,0,0,.06);transition:all .3s}
+.template-card:hover{transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,0,0,.1)}
+.template-preview{position:relative;aspect-ratio:4/3;overflow:hidden;background:#eee}
+.template-preview iframe{width:400%;height:400%;transform:scale(.25);transform-origin:top left;border:none;pointer-events:none}
+.template-info{padding:24px}
+.template-name{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:4px}
+.template-desc{color:#888;font-size:.9rem;margin-bottom:16px;line-height:1.6}
+.template-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.template-tags span{background:var(--cream);padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:500;color:#666}
+.template-link{display:inline-block;padding:10px 28px;background:var(--primary);color:var(--white);border-radius:100px;font-size:.85rem;font-weight:600;transition:all .2s}
+.template-link:hover{background:var(--dark)}
+
+.coming-soon{border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;min-height:420px;border-radius:16px}
+.coming-soon-inner{text-align:center;color:#aaa}
+.coming-soon-inner h3{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:8px;color:#999}
+
+.back{text-align:center;padding:0 24px 60px}
+.back a{color:var(--primary);font-weight:600;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">Template Gallery</div>
+  <h1>One Property. Multiple Styles.</h1>
+  <p>Every MTR Direct template is built for conversions. Pick the one that matches your property's personality.</p>
+</div>
+
+<div class="templates">
+  <div class="template-card">
+    <div class="template-preview">
+      <iframe src="../../airbnb-direct-booking/" loading="lazy"></iframe>
+    </div>
+    <div class="template-info">
+      <div class="template-name">The Craftsman</div>
+      <div class="template-desc">Warm, earthy terracotta tones. Perfect for historic homes, craftsman properties, and anything with character.</div>
+      <div class="template-tags">
+        <span>Warm</span><span>Earthy</span><span>Historic</span><span>Chatbot</span>
+      </div>
+      <a href="../../airbnb-direct-booking/" class="template-link">Preview →</a>
+    </div>
+  </div>
+
+  <div class="template-card">
+    <div class="template-preview">
+      <iframe src="modern-minimal/" loading="lazy"></iframe>
+    </div>
+    <div class="template-info">
+      <div class="template-name">Modern Minimal</div>
+      <div class="template-desc">Clean, typography-driven, luxurious whitespace. Let your photos do the talking. Ideal for upscale and urban properties.</div>
+      <div class="template-tags">
+        <span>Minimal</span><span>Luxury</span><span>Clean</span><span>Editorial</span>
+      </div>
+      <a href="modern-minimal/" class="template-link">Preview →</a>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <div class="coming-soon-inner">
+      <h3>Coastal Breeze</h3>
+      <p>Coming soon</p>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <div class="coming-soon-inner">
+      <h3>Urban Lux</h3>
+      <p>Coming soon</p>
+    </div>
+  </div>
+</div>
+
+<div class="back">
+  <a href="../">← Back to MTR Direct</a>
+</div>
+
+</body>
+</html>
