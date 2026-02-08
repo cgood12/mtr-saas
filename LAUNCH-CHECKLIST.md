@@ -38,6 +38,13 @@
 - [x] ✅ Open Graph / Twitter cards added
 - [x] ✅ Favicon and branding assets in place
 - [x] ✅ Deployed to Vercel (auto-deploys from GitHub)
+- [x] ✅ New mtr|direct logo + M-house symbol
+- [x] ✅ Custom OG images for social sharing
+- [x] ✅ robots.txt + sitemap.xml (SEO)
+- [x] ✅ manifest.json (PWA ready)
+- [x] ✅ 404 error page
+- [x] ✅ All nav links working
+- [x] ✅ All pages rebranded with new logo
 
 ### Content & Strategy
 - [x] ✅ Competitive analysis (`COMPETITIVE-ANALYSIS.md`)
@@ -94,6 +101,28 @@
 2. **Check mobile view** — most visitors will be on phones
 3. **Have a response ready** for inquiries
 4. **Don't overthink it** — ship and iterate
+
+---
+
+---
+
+## 🎨 Brand Assets Ready
+
+All in `projects/mtr-direct/brand/`:
+
+| Asset | File |
+|-------|------|
+| Logo (dark text) | `logo-primary.svg` |
+| Logo (white text) | `logo-white.svg` |
+| Symbol icon | `icon-symbol.svg`, `icon-symbol.png` |
+| Twitter profile | `twitter-profile.png` (400x400) |
+| Twitter header | `twitter-header.png` (1500x500) |
+| Brand sheet | `brand-sheet.png` |
+
+**Brand colors:**
+- Terracotta: `#A0583E`
+- Charcoal: `#333333`
+- Font: Rubik (Google Fonts)
 
 ---
 
