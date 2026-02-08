@@ -1,113 +1,100 @@
 # MTR Direct — Weekend Launch Checklist
+**Last updated:** February 8, 2026
+
+---
 
 ## 🔴 Chad Must Do (Can't Automate These)
 
 ### Domain & Hosting
-- [ ] **Buy a domain** — suggestions: `mtrdirect.com`, `mtrdirect.io`, `bookmtr.com`, `directmtr.com`, `staynohost.com`
-- [ ] **Set up DNS** — point domain to hosting (Vercel, Netlify, or Tailscale Funnel for now)
-- [ ] **SSL certificate** — auto if using Vercel/Netlify/Tailscale
+- [ ] **Buy a domain** — suggestions: `mtrdirect.io`, `mtrdirect.co`, `mtrhq.com`
+- [ ] **Set up DNS** — point domain to Vercel (auto SSL)
 
 ### Form & Email
-- [x] ~~**Create Formspree account**~~ — **DONE: Built custom form handler instead!** Inquiry form now emails you directly via Gmail. No setup needed.
-- [ ] **Set up email forwarding** — decide if `chadwick23.ai@gmail.com` is the right contact or get a branded email (e.g., `hello@mtrdirect.com`)
+- [x] ~~**Create Formspree account**~~ — **DONE: Built custom Vercel API!**
+- [ ] **Test waitlist signup** — submit test email, verify you receive notification
+- [ ] **Decide on branded email** — `hello@mtrdirect.com` vs Gmail
 
 ### Accounts Needed (For Full SaaS Later)
-- [ ] **Stripe account** — for payment processing (https://stripe.com)
-- [ ] **Facebook Business account** — for Marketing API / running ads
-- [ ] **TransUnion SmartMove** or **Certn** account — for tenant screening API
-- [ ] **DocuSign** or **HelloSign** account — for lease e-signatures
-- [ ] **SendGrid** account — for transactional emails (free tier: 100/day)
+- [ ] **Stripe account** — for payment processing
+- [ ] **Facebook Business account** — for Marketing API (see `docs/FACEBOOK-ADS-RESEARCH.md`)
+- [ ] **Tenant screening provider** — TransUnion SmartMove or Certn
+- [ ] **E-signature provider** — DocuSign or HelloSign
 
 ### Content
-- [ ] **Record a 60-second property walkthrough video** (iPhone is fine) — huge conversion booster
-- [ ] **Take a photo of you + Michelle** at/near the property for the host bio
-- [ ] **Write 2-3 sentences** about why you started MTR Direct (for the SaaS landing page founder story)
-
-### Legal (Before Accepting Real Bookings)
-- [ ] **Privacy policy** — use a generator (Termly, PrivacyPolicies.com — free)
-- [ ] **Terms of service** — basic template for now
-- [ ] **Lease template** — get your actual MTR lease reviewed (you already have one from Furnished Finder)
+- [ ] **Record 60-second property walkthrough** (iPhone is fine)
+- [ ] **Approve launch tweets** — see `content/LAUNCH-TWEETS.md`
+- [ ] **Approve email sequence** — see `content/WAITLIST-EMAILS.md`
 
 ---
 
-## 🟡 Gus Is Building (In Progress)
+## 🟢 Completed (Feb 8)
 
-### Direct Booking Site (Chad's Property)
-- [x] Core site built
-- [x] Real photos from Airbnb CDN
-- [x] Real reviews from Airbnb
-- [x] Terracotta color scheme
-- [x] Trust signals, "Perfect For" section
-- [x] Rule-based chatbot (Pearl)
-- [x] Full mobile responsiveness pass ✅
-- [x] SEO cleanup & structured data verification ✅
-- [x] Fix broken photo references & lightbox ✅
-- [x] Clean up orphaned CSS/HTML ✅
-- [x] Form validation & live form handler ✅
-- [x] Accessibility pass ✅
+### Site & Technical
+- [x] ✅ Waitlist API live (`/api/waitlist.js`)
+- [x] ✅ Form captures emails + sends notification to Gmail
+- [x] ✅ Code review completed (security, accessibility, SEO)
+- [x] ✅ Privacy Policy added (`/legal/privacy-policy.html`)
+- [x] ✅ Terms of Service added (`/legal/terms.html`)
+- [x] ✅ Open Graph / Twitter cards added
+- [x] ✅ Favicon and branding assets in place
+- [x] ✅ Deployed to Vercel (auto-deploys from GitHub)
 
-### SaaS Landing Page (MTR Direct)
-- [x] Landing page with waitlist ✅
-- [x] Email capture form ✅
-- [x] Pricing section ✅
-- [x] ROI calculator section ✅
-- [x] FAQ section ✅
+### Content & Strategy
+- [x] ✅ Competitive analysis (`COMPETITIVE-ANALYSIS.md`)
+- [x] ✅ Launch tweets drafted (`content/LAUNCH-TWEETS.md`)
+- [x] ✅ Email sequence drafted (`content/WAITLIST-EMAILS.md`)
+- [x] ✅ Marketing opportunities documented (`MARKETING-OPPORTUNITIES.md`)
+- [x] ✅ Facebook ads research (`docs/FACEBOOK-ADS-RESEARCH.md`)
+- [x] ✅ Pre-launch considerations (`THINGS-TO-CONSIDER.md`)
 
-### Pitch Materials
-- [x] Business plan (BUSINESS-PLAN.md)
-- [x] Customer journey map (customer-journey.html)
-- [x] Dashboard mockup (dashboard-mockup.html)
-- [x] One-pager / pitch summary (pitch-onepager.html) ✅
-
----
-
-## 🟢 Ready to Go (Done)
-
-- [x] Property photos downloaded (24 photos)
-- [x] Real Airbnb reviews integrated (14 reviews)
-- [x] Chatbot built (Pearl — rule-based, no API cost)
-- [x] Business plan written
-- [x] Customer journey map designed
-- [x] Host dashboard mockup designed
-- [x] Tailscale Funnel serving site
-- [x] Static server running on port 3456
+### Previously Completed
+- [x] ✅ Landing page with waitlist
+- [x] ✅ Pricing section
+- [x] ✅ ROI calculator
+- [x] ✅ FAQ section
+- [x] ✅ Business plan
+- [x] ✅ Customer journey map
+- [x] ✅ Dashboard mockup
+- [x] ✅ Direct booking site (Chad's property)
 
 ---
 
 ## 📋 Launch Day Sequence
 
-### For the Direct Booking Site:
-1. Buy domain → point DNS
-2. Set up Formspree → test form submission
-3. Final site review on mobile
-4. Share in Furnished Finder listing (add direct booking URL to your profile)
-5. Post property on Facebook groups with direct link
-6. Monitor first inquiries
+### Saturday/Sunday (Feb 8-9)
+1. ✅ Site is live on Vercel
+2. ⏳ Buy domain → point to Vercel
+3. ⏳ Test waitlist signup yourself
+4. ⏳ Approve launch content
+5. 🚀 Soft launch — share link in DMs first
 
-### For the SaaS (Phase 2 — After Proof of Concept):
-1. Launch landing page with waitlist
-2. Post in Furnished Finder Facebook groups
-3. Share on Twitter / BiggerPockets
-4. Start collecting emails
-5. Build MVP template system based on feedback
+### Week After Launch
+1. Post in BiggerPockets MTR forum (see `MARKETING-OPPORTUNITIES.md`)
+2. Share on Twitter (#buildinpublic)
+3. Monitor signups and feedback
+4. Iterate based on responses
 
 ---
 
-## 💡 Domain Name Ideas
+## 💡 Domain Recommendations
 
-| Domain | Vibe | Available? |
-|--------|------|-----------|
-| mtrdirect.com | Clear, category-defining | ❌ Taken |
-| mtrdirect.io | Clean alternative | ✅ Available |
-| mtrdirect.co | Startup feel | ✅ Available |
-| directmtr.com | Straightforward | ✅ Available |
-| mtrhq.com | Short, punchy | ✅ Available |
-| gomtrdirect.com | Action-oriented | ✅ Available |
-| getmtrdirect.com | CTA-style | ✅ Available |
-| bookmtr.com | Action-oriented | ❌ Taken |
+| Domain | Status | Price |
+|--------|--------|-------|
+| `mtrdirect.io` | ✅ Available | ~$15/yr |
+| `mtrdirect.co` | ✅ Available | ~$12/yr |
+| `mtrhq.com` | ✅ Available | ~$12/yr |
 
-**Gus's pick:** `mtrdirect.io` — clean, memorable, startup-appropriate. Or `mtrhq.com` if you want short and punchy.
+**Gus's pick:** `mtrdirect.io` — clean, memorable, professional.
 
 ---
 
-*Last updated: February 7, 2026*
+## 🚨 Pre-Launch Reminders
+
+1. **Test the form yourself** before sharing
+2. **Check mobile view** — most visitors will be on phones
+3. **Have a response ready** for inquiries
+4. **Don't overthink it** — ship and iterate
+
+---
+
+*The site is ready. Just need domain + your approval on content.*
