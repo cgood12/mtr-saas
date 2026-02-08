@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTR Direct — Customer Journey</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --terracotta: #A0583E;
+  --terracotta-light: #C4886E;
+  --terracotta-dark: #7A3F2A;
+  --cream: #FAF8F5;
+  --cream-dark: #F0EDE8;
+  --charcoal: #2D2D2D;
+  --charcoal-light: #5A5A5A;
+  --green: #3A7D44;
+  --green-bg: #E8F5E9;
+  --blue: #3D6B9E;
+  --blue-bg: #E3EDF7;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, var(--terracotta-dark) 0%, var(--terracotta) 50%, var(--terracotta-light) 100%);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.08) 0%, transparent 50%);
+}
+.header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  position: relative;
+  letter-spacing: -0.02em;
+}
+.header p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+  position: relative;
+  font-weight: 400;
+}
+.header .subtitle {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.4rem 1.2rem;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-bottom: 1px solid var(--cream-dark);
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 3px;
+}
+.legend-dot.auto { background: var(--green); }
+.legend-dot.manual { background: var(--blue); }
+
+/* Timeline container */
+.timeline-wrapper {
+  padding: 3rem 2rem 2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.timeline {
+  display: flex;
+  gap: 0;
+  min-width: max-content;
+  position: relative;
+  padding: 1rem 0 2rem;
+}
+
+/* Stage card */
+.stage {
+  width: 300px;
+  min-width: 300px;
+  position: relative;
+  padding: 0 0.75rem;
+}
+.stage-connector {
+  position: absolute;
+  top: 28px;
+  right: -1px;
+  width: calc(100% - 300px + 2px);
+  display: none;
+}
+
+.stage-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.04);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.stage-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.08);
+}
+
+/* Stage number */
+.stage-number {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, var(--terracotta), var(--terracotta-light));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  margin: 0 auto 1rem;
+  box-shadow: 0 4px 12px rgba(160,88,62,0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.stage-icon {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.stage-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  color: var(--charcoal);
+}
+.stage-time {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--charcoal-light);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* Steps */
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--charcoal);
+}
+.step-badge {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.step-badge.auto {
+  background: var(--green-bg);
+  color: var(--green);
+}
+.step-badge.manual {
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+/* Arrow between cards */
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  width: 32px;
+  align-self: stretch;
+  padding-top: 28px;
+}
+.arrow svg {
+  width: 20px;
+  height: 20px;
+  color: var(--terracotta-light);
+  flex-shrink: 0;
+}
+
+/* Summary */
+.summary {
+  max-width: 800px;
+  margin: 2rem auto 3rem;
+  padding: 2rem 2.5rem;
+  background: white;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+  border: 2px solid var(--terracotta);
+  position: relative;
+}
+.summary::before {
+  content: '✨';
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 0 0.75rem;
+  font-size: 1.5rem;
+}
+.summary h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--terracotta);
+  margin-bottom: 0.5rem;
+}
+.summary p {
+  font-size: 1.05rem;
+  color: var(--charcoal-light);
+}
+.summary .highlight {
+  color: var(--terracotta);
+  font-weight: 700;
+}
+.summary .stat-row {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+}
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--terracotta);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--charcoal-light);
+  margin-top: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 { font-size: 2rem; }
+  .timeline-wrapper { padding: 2rem 1rem; }
+  .timeline {
+    flex-direction: column;
+    min-width: auto;
+    gap: 0;
+  }
+  .stage {
+    width: 100%;
+    min-width: auto;
+    padding: 0;
+  }
+  .arrow {
+    min-width: auto;
+    width: auto;
+    min-height: 32px;
+    padding-top: 0;
+  }
+  .arrow svg { transform: rotate(90deg); }
+  .summary { margin: 2rem 1rem; }
+}
+
+/* Print */
+@media print {
+  body { background: white; }
+  .header {
+    background: var(--terracotta) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    padding: 1.5rem;
+  }
+  .timeline-wrapper {
+    overflow: visible;
+    padding: 1rem 0;
+  }
+  .timeline {
+    flex-wrap: wrap;
+    min-width: auto;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .stage {
+    width: 30%;
+    min-width: 200px;
+    page-break-inside: avoid;
+  }
+  .arrow { display: none; }
+  .stage-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  .stage-card:hover { transform: none; }
+  .summary {
+    page-break-inside: avoid;
+    box-shadow: none;
+  }
+  .stage-number {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .step-badge {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Scroll hint */
+.scroll-hint {
+  text-align: center;
+  padding: 0 2rem;
+  color: var(--charcoal-light);
+  font-size: 0.85rem;
+  display: none;
+}
+@media (min-width: 769px) {
+  .scroll-hint { display: block; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>MTR Direct</h1>
+  <p>Customer Journey — Host Perspective</p>
+  <span class="subtitle">From Discovery to Recurring Revenue</span>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot auto"></div> Automated by MTR Direct</div>
+  <div class="legend-item"><div class="legend-dot manual"></div> Host Action (Manual)</div>
+</div>
+
+<p class="scroll-hint">← Scroll horizontally to explore the full journey →</p>
+
+<div class="timeline-wrapper">
+<div class="timeline">
+
+<!-- Stage 1 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">1</div>
+  <div class="stage-icon">🔍</div>
+  <div class="stage-title">Discovery</div>
+  <div class="stage-time">Day 0</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge manual">Host</span> Finds MTR Direct via Google, Facebook, or word of mouth</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Landing page with ROI pitch: "Save $500+/mo vs Airbnb"</li>
+    <li class="step"><span class="step-badge manual">Host</span> Signs up for free trial</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 2 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">2</div>
+  <div class="stage-icon">🚀</div>
+  <div class="stage-title">Onboarding</div>
+  <div class="stage-time">10 minutes</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge manual">Host</span> Answers 10 questions about property</li>
+    <li class="step"><span class="step-badge manual">Host</span> Uploads property photos</li>
+    <li class="step"><span class="step-badge auto">Auto</span> AI generates direct booking site (copy, SEO, design)</li>
+    <li class="step"><span class="step-badge manual">Host</span> Preview, tweak, publish with one click</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Calendar syncs with Airbnb & Furnished Finder</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 3 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">3</div>
+  <div class="stage-icon">📣</div>
+  <div class="stage-title">Marketing</div>
+  <div class="stage-time">Ongoing · Automated</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge auto">Auto</span> AI generates Facebook & Instagram ad creative from photos</li>
+    <li class="step"><span class="step-badge manual">Host</span> Sets daily ad budget ($5–20/day)</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Ads target traveling nurses, relocators, corporate travelers</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Traffic flows to direct booking site</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 4 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">4</div>
+  <div class="stage-icon">📩</div>
+  <div class="stage-title">Lead Capture</div>
+  <div class="stage-time">Instant</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge auto">Auto</span> Guest submits inquiry with dates, guest count, pets</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Host notified instantly via email, SMS & dashboard</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Auto-response with property details + "Ready to apply?" link</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 5 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">5</div>
+  <div class="stage-icon">✅</div>
+  <div class="stage-title">Screening & Approval</div>
+  <div class="stage-time">Minutes</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge auto">Auto</span> Guest applies → credit + background check runs</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Results on dashboard: ✅ Approved / ❌ Flagged</li>
+    <li class="step"><span class="step-badge manual">Host</span> Approves guest with one tap</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 6 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">6</div>
+  <div class="stage-icon">📝</div>
+  <div class="stage-title">Lease & Payment</div>
+  <div class="stage-time">Automated</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge auto">Auto</span> Lease generates with guest info, dates & terms pre-filled</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Sent for e-signature via DocuSign / HelloSign</li>
+    <li class="step"><span class="step-badge auto">Auto</span> First month + deposit charged via Stripe</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Recurring monthly billing activated</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 7 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">7</div>
+  <div class="stage-icon">🏠</div>
+  <div class="stage-title">Move-In</div>
+  <div class="stage-time">24h before check-in</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge auto">Auto</span> Move-in packet sent 24h before arrival</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Smart lock code generated & sent to guest</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Welcome guide: WiFi, house manual, local tips</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Host notified: "Your guest has arrived"</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 8 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">8</div>
+  <div class="stage-icon">🛋️</div>
+  <div class="stage-title">During Stay</div>
+  <div class="stage-time">1–6 months</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge auto">Auto</span> Monthly rent auto-charges</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Guest messaging through platform</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Maintenance requests via dashboard</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Mid-stay check-in sent automatically</li>
+  </ul>
+</div>
+</div>
+
+<div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+<!-- Stage 9 -->
+<div class="stage">
+<div class="stage-card">
+  <div class="stage-number">9</div>
+  <div class="stage-icon">🔄</div>
+  <div class="stage-title">Move-Out & Repeat</div>
+  <div class="stage-time">Automated · Cycle Repeats</div>
+  <ul class="steps">
+    <li class="step"><span class="step-badge auto">Auto</span> Move-out instructions sent 48h before</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Lock code deactivated</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Cleaning scheduled automatically</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Guest prompted to leave review</li>
+    <li class="step"><span class="step-badge auto">Auto</span> Property relisted, ads resume → cycle repeats</li>
+  </ul>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- Summary -->
+<div class="summary">
+  <h2>The Bottom Line</h2>
+  <p>
+    <span class="highlight">Host touches: 3</span> — upload photos, set budget, approve guest.<br>
+    Everything else is automated.
+  </p>
+  <div class="stat-row">
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Manual Actions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Automated Steps</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$0</div>
+      <div class="stat-label">Booking Fees</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10min</div>
+      <div class="stat-label">Setup Time</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

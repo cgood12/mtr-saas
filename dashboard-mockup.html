@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTR Direct — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --terracotta: #A0583E;
+  --terracotta-light: #C4795A;
+  --terracotta-bg: rgba(160,88,62,.08);
+  --sidebar: #1a1a1a;
+  --sidebar-hover: #2a2a2a;
+  --cream: #FAF8F5;
+  --charcoal: #2D2D2D;
+  --border: #E8E4DF;
+  --green: #2D9F6F;
+  --green-bg: rgba(45,159,111,.1);
+  --yellow: #D4A017;
+  --yellow-bg: rgba(212,160,23,.1);
+  --blue: #3B82F6;
+  --blue-bg: rgba(59,130,246,.1);
+  --red: #E54D4D;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.07);
+  --radius: 12px;
+}
+html { font-size: 14px; }
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--cream); color: var(--charcoal); display: flex; min-height: 100vh; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+h1,h2,h3,h4 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+
+/* ─── Sidebar ─── */
+.sidebar { width: 240px; background: var(--sidebar); color: #fff; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 100; }
+.sidebar-logo { padding: 24px 20px 20px; display: flex; align-items: center; gap: 10px; font-family: 'DM Serif Display', serif; font-size: 1.35rem; letter-spacing: -.02em; border-bottom: 1px solid rgba(255,255,255,.08); }
+.sidebar-logo .logo-icon { width: 32px; height: 32px; background: var(--terracotta); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+.sidebar nav { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: rgba(255,255,255,.55); font-size: .93rem; cursor: pointer; transition: all .15s; text-decoration: none; position: relative; }
+.nav-item:hover { background: var(--sidebar-hover); color: rgba(255,255,255,.85); }
+.nav-item.active { background: var(--sidebar-hover); color: #fff; }
+.nav-item.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 20px; background: var(--terracotta); border-radius: 0 3px 3px 0; }
+.nav-icon { width: 20px; text-align: center; font-size: 1rem; }
+.nav-badge { margin-left: auto; background: var(--terracotta); color: #fff; font-size: .7rem; font-weight: 600; padding: 1px 7px; border-radius: 10px; }
+.nav-spacer { flex: 1; }
+.sidebar-user { padding: 16px 14px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.sidebar-user:hover { background: var(--sidebar-hover); }
+.avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--terracotta); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: .8rem; color: #fff; flex-shrink: 0; }
+.sidebar-user .user-info { font-size: .85rem; line-height: 1.3; }
+.sidebar-user .user-name { color: #fff; font-weight: 500; }
+.sidebar-user .user-role { color: rgba(255,255,255,.4); font-size: .75rem; }
+
+/* ─── Main ─── */
+.main { margin-left: 240px; flex: 1; min-height: 100vh; }
+
+/* ─── Top Bar ─── */
+.topbar { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 50; }
+.property-select { font-family: 'DM Serif Display', serif; font-size: 1.15rem; background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px 32px 6px 12px; appearance: none; cursor: pointer; color: var(--charcoal); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%232D2D2D' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+.status-pill { display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; font-weight: 500; padding: 4px 12px; border-radius: 20px; }
+.status-pill.green { background: var(--green-bg); color: var(--green); }
+.status-pill.yellow { background: var(--yellow-bg); color: var(--yellow); }
+.status-pill.blue { background: var(--blue-bg); color: var(--blue); }
+.status-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.tenant-info { font-size: .85rem; color: #888; }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.topbar-time { font-size: .8rem; color: #999; font-variant-numeric: tabular-nums; }
+.bell { position: relative; cursor: pointer; font-size: 1.2rem; color: #888; transition: color .15s; }
+.bell:hover { color: var(--charcoal); }
+.bell-badge { position: absolute; top: -5px; right: -7px; background: var(--red); color: #fff; font-size: .6rem; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; }
+
+/* ─── Content ─── */
+.content { padding: 28px 32px 48px; max-width: 1280px; }
+.section-title { font-size: 1.15rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.section-title .count { font-family: 'DM Sans', sans-serif; font-size: .75rem; background: var(--terracotta-bg); color: var(--terracotta); padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+
+/* ─── Cards ─── */
+.card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); transition: box-shadow .2s; }
+.card:hover { box-shadow: var(--shadow-md); }
+
+/* ─── Stats ─── */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+.stat-card { text-align: left; }
+.stat-label { font-size: .78rem; color: #999; text-transform: uppercase; letter-spacing: .04em; font-weight: 500; margin-bottom: 6px; }
+.stat-value { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--charcoal); }
+.stat-sub { font-size: .75rem; color: var(--green); margin-top: 4px; }
+
+/* ─── Pipeline ─── */
+.pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 32px; }
+.pipeline-col { background: rgba(0,0,0,.02); border-radius: var(--radius); padding: 12px; min-height: 160px; }
+.pipeline-header { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #999; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.pipeline-header .num { background: var(--border); color: var(--charcoal); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .7rem; }
+.lead-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; cursor: pointer; transition: all .15s; }
+.lead-card:hover { border-color: var(--terracotta); box-shadow: 0 0 0 1px var(--terracotta); }
+.lead-name { font-weight: 600; font-size: .85rem; margin-bottom: 4px; }
+.lead-dates { font-size: .75rem; color: #888; }
+.lead-type { font-size: .7rem; color: var(--terracotta); background: var(--terracotta-bg); padding: 2px 7px; border-radius: 4px; display: inline-block; margin-top: 6px; }
+.lead-time { font-size: .7rem; color: #bbb; margin-top: 4px; }
+.pipeline-empty { font-size: .75rem; color: #ccc; text-align: center; padding: 24px 0; }
+
+/* ─── Two Col ─── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+
+/* ─── Table ─── */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: #999; font-weight: 500; padding: 0 0 10px; border-bottom: 1px solid var(--border); }
+td { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: .88rem; }
+tr:last-child td { border-bottom: none; }
+.link { color: var(--terracotta); font-size: .85rem; font-weight: 500; cursor: pointer; text-decoration: none; }
+.link:hover { text-decoration: underline; }
+
+/* ─── Marketing ─── */
+.ad-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.ad-stat { font-size: .85rem; color: #888; }
+.ad-stat strong { color: var(--charcoal); }
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 80px; margin: 16px 0; }
+.bar-chart .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bar-chart .bar { width: 100%; background: var(--terracotta); border-radius: 4px 4px 0 0; transition: height .3s; min-height: 4px; }
+.bar-chart .bar-label { font-size: .65rem; color: #999; }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.btn { padding: 7px 16px; border-radius: 8px; font-size: .8rem; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: #fff; color: var(--charcoal); transition: all .15s; font-family: 'DM Sans', sans-serif; }
+.btn:hover { border-color: var(--terracotta); color: var(--terracotta); }
+.btn-primary { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+.btn-primary:hover { background: var(--terracotta-light); border-color: var(--terracotta-light); }
+
+/* ─── Timeline ─── */
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 4px; bottom: 4px; width: 2px; background: var(--border); }
+.timeline-item { position: relative; padding-bottom: 16px; font-size: .88rem; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before { content: ''; position: absolute; left: -20px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--terracotta); border: 2px solid var(--cream); }
+.timeline-date { font-weight: 600; color: var(--charcoal); }
+.timeline-desc { color: #888; font-size: .82rem; }
+.timeline-auto { font-size: .72rem; color: var(--blue); background: var(--blue-bg); padding: 2px 7px; border-radius: 4px; display: inline-block; margin-top: 2px; }
+
+/* ─── Docs ─── */
+.doc-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: .88rem; }
+.doc-item:last-child { border-bottom: none; }
+.doc-icon { font-size: 1rem; }
+.doc-status { margin-left: auto; font-size: .8rem; }
+
+/* ─── Reviews ─── */
+.review-stars { color: #F59E0B; font-size: 1rem; margin-bottom: 4px; }
+.review-avg { font-family: 'DM Serif Display', serif; font-size: 1.5rem; }
+.review-count { font-size: .8rem; color: #999; }
+.review-quote { font-style: italic; color: #888; font-size: .85rem; margin: 12px 0 4px; border-left: 2px solid var(--terracotta); padding-left: 10px; }
+.review-author { font-size: .75rem; color: #bbb; }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">🏡</div>
+    MTR Direct
+  </div>
+  <nav>
+    <a class="nav-item active"><span class="nav-icon">🏠</span> Properties</a>
+    <a class="nav-item"><span class="nav-icon">📥</span> Leads <span class="nav-badge">3</span></a>
+    <a class="nav-item"><span class="nav-icon">📄</span> Leases</a>
+    <a class="nav-item"><span class="nav-icon">💳</span> Payments</a>
+    <a class="nav-item"><span class="nav-icon">📢</span> Marketing</a>
+    <a class="nav-item"><span class="nav-icon">📅</span> Calendar</a>
+    <a class="nav-item"><span class="nav-icon">⭐</span> Reviews</a>
+    <div class="nav-spacer"></div>
+    <a class="nav-item"><span class="nav-icon">⚙️</span> Settings</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="avatar">CG</div>
+    <div class="user-info">
+      <div class="user-name">Chad G.</div>
+      <div class="user-role">Host · Pro Plan</div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="main">
+  <!-- Top Bar -->
+  <header class="topbar">
+    <select class="property-select">
+      <option>123 Leigh St, San Antonio, TX</option>
+      <option>456 Pearl Pkwy, San Antonio, TX</option>
+    </select>
+    <span class="status-pill green"><span class="dot"></span> Occupied</span>
+    <span class="tenant-info">Stephanie Rodriguez · Apr 1 – Jun 30, 2026</span>
+    <div class="topbar-right">
+      <span class="topbar-time" id="clock"></span>
+      <div class="bell">
+        🔔
+        <span class="bell-badge">2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="card stat-card">
+        <div class="stat-label">Monthly Rent</div>
+        <div class="stat-value">$4,500</div>
+        <div class="stat-sub">↑ Collected on time</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-label">Occupancy Rate</div>
+        <div class="stat-value">94%</div>
+        <div class="stat-sub">↑ 3% vs last year</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-label">Active Leads</div>
+        <div class="stat-value">3</div>
+        <div class="stat-sub">2 new this week</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-label">YTD Revenue</div>
+        <div class="stat-value">$12,400</div>
+        <div class="stat-sub">↑ 12% vs last year</div>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <h2 class="section-title">Lead Pipeline</h2>
+    <div class="pipeline">
+      <div class="pipeline-col">
+        <div class="pipeline-header">New <span class="num">2</span></div>
+        <div class="lead-card">
+          <div class="lead-name">James T.</div>
+          <div class="lead-dates">May 1 – Jul 31</div>
+          <div class="lead-type">Traveling Nurse</div>
+          <div class="lead-time">2h ago</div>
+        </div>
+        <div class="lead-card">
+          <div class="lead-name">Rita L.</div>
+          <div class="lead-dates">Apr 15 – Jun 15</div>
+          <div class="lead-type">Corporate Relocation</div>
+          <div class="lead-time">5h ago</div>
+        </div>
+      </div>
+      <div class="pipeline-col">
+        <div class="pipeline-header">Screening <span class="num">1</span></div>
+        <div class="lead-card">
+          <div class="lead-name">Sarah M.</div>
+          <div class="lead-dates">Jul 1 – Sep 30</div>
+          <div class="lead-type">Remote Worker</div>
+          <div class="lead-time" style="color:var(--blue)">Credit check running…</div>
+        </div>
+      </div>
+      <div class="pipeline-col">
+        <div class="pipeline-header">Approved <span class="num">1</span></div>
+        <div class="lead-card">
+          <div class="lead-name">David K.</div>
+          <div class="lead-dates">Aug 1 – Oct 31</div>
+          <div class="lead-type">Military PCS</div>
+          <div class="lead-time" style="color:var(--green)">✅ Passed</div>
+        </div>
+      </div>
+      <div class="pipeline-col">
+        <div class="pipeline-header">Lease Sent <span class="num">0</span></div>
+        <div class="pipeline-empty">No leads</div>
+      </div>
+      <div class="pipeline-col">
+        <div class="pipeline-header">Booked <span class="num">0</span></div>
+        <div class="pipeline-empty">No leads</div>
+      </div>
+    </div>
+
+    <!-- Payments + Marketing -->
+    <div class="two-col">
+      <!-- Payments -->
+      <div class="card">
+        <h2 class="section-title">Recent Payments</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Period</th><th>Tenant</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody>
+              <tr><td>Mar 2026</td><td>Stephanie R.</td><td><strong>$4,500</strong></td><td><span class="status-pill green" style="font-size:.72rem;padding:2px 8px">✅ Paid</span></td><td>Mar 1</td></tr>
+              <tr><td>Feb 2026</td><td>Stephanie R.</td><td><strong>$4,500</strong></td><td><span class="status-pill green" style="font-size:.72rem;padding:2px 8px">✅ Paid</span></td><td>Feb 1</td></tr>
+              <tr><td>Security Dep.</td><td>Stephanie R.</td><td><strong>$2,000</strong></td><td><span class="status-pill blue" style="font-size:.72rem;padding:2px 8px">🔒 Held</span></td><td>Jan 28</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:12px"><a class="link" href="#">View All Payments →</a></div>
+      </div>
+
+      <!-- Marketing -->
+      <div class="card">
+        <h2 class="section-title">Marketing Performance</h2>
+        <div class="ad-header">
+          <span class="status-pill green" style="font-size:.72rem;padding:2px 8px"><span class="dot"></span> Active</span>
+          <span class="ad-stat">Budget: <strong>$15/day</strong></span>
+        </div>
+        <div class="ad-stat" style="margin-bottom:8px">This week: <strong>1,247</strong> impressions · <strong>23</strong> clicks · <strong>3</strong> inquiries</div>
+        <div class="bar-chart">
+          <div class="bar-wrap"><div class="bar" style="height:45%"></div><div class="bar-label">Mon</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:62%"></div><div class="bar-label">Tue</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:78%"></div><div class="bar-label">Wed</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:55%"></div><div class="bar-label">Thu</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:90%"></div><div class="bar-label">Fri</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:100%"></div><div class="bar-label">Sat</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:70%"></div><div class="bar-label">Sun</div></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn">Adjust Budget</button>
+          <button class="btn">Pause Ads</button>
+          <button class="btn">View Ad Creative</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events + Docs + Reviews -->
+    <div class="three-col">
+      <!-- Events -->
+      <div class="card">
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-date">🔑 Apr 1</span> — Sarah M. move-in
+            <br><span class="timeline-auto">auto: lock code + welcome guide sent</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">🧹 Jun 28</span> — Schedule cleaning
+            <br><span class="timeline-desc">Stephanie R. move-out prep</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">🚪 Jun 30</span> — Stephanie R. move-out
+            <br><span class="timeline-auto">auto: lock code deactivated</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">📢 Jul 1</span> — Ads auto-resume
+            <br><span class="timeline-desc">Vacancy period begins</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documents -->
+      <div class="card">
+        <h2 class="section-title">Documents</h2>
+        <div class="doc-item"><span class="doc-icon">📄</span> Lease — Stephanie R. <span class="doc-status" style="color:var(--green)">Signed ✅</span></div>
+        <div class="doc-item"><span class="doc-icon">🔍</span> Screening — Sarah M. <span class="doc-status" style="color:var(--yellow)">In Progress ⏳</span></div>
+        <div class="doc-item"><span class="doc-icon">📄</span> Lease — David K. <span class="doc-status" style="color:var(--blue)">Ready to Send 📩</span></div>
+        <div style="margin-top:16px"><button class="btn btn-primary">Generate New Lease</button></div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="card">
+        <h2 class="section-title">Reviews</h2>
+        <div class="review-stars">★★★★★</div>
+        <span class="review-avg">4.93</span> <span class="review-count">· 167 reviews</span>
+        <div class="review-quote">"Amazing stay! The hot tub was incredible and the location was perfect for our assignment."</div>
+        <div class="review-author">— Natalie, Jan 2026</div>
+        <div style="margin-top:16px"><button class="btn">Request Review</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) + ' · ' + now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+}
+updateClock();
+setInterval(updateClock, 30000);
+</script>
+</body>
+</html>
