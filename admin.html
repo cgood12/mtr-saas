@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — MTR Direct Waitlist</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#A0583E;--primary-dark:#7A3F2B;--bg:#FAF8F5;--text:#2D2D2D;--white:#FFFFFF;--gray-100:#EDE9E4;--gray-200:#D9D3CC;--gray-400:#9E9689;--gray-600:#6B6560;--radius:12px}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:var(--primary);text-decoration:none}
+
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.header{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--gray-200);margin-bottom:32px;flex-wrap:wrap;gap:16px}
+.header h1{font-family:'DM Sans',sans-serif;font-size:1.4rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.header .logo{font-family:'Rubik',sans-serif;font-size:1rem;color:var(--primary);font-weight:700}
+.header-actions{display:flex;gap:12px;align-items:center}
+
+/* Login */
+.login-box{max-width:400px;margin:120px auto;text-align:center;padding:48px;background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200)}
+.login-box h2{font-family:'DM Sans',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:8px}
+.login-box p{font-size:.9rem;color:var(--gray-600);margin-bottom:24px}
+.login-box input{width:100%;padding:14px 18px;border:1.5px solid var(--gray-200);border-radius:100px;font-size:1rem;font-family:inherit;outline:none;margin-bottom:16px}
+.login-box input:focus{border-color:var(--primary)}
+.login-box .error{color:#dc3545;font-size:.85rem;margin-bottom:12px;display:none}
+
+/* Buttons */
+.btn{padding:12px 24px;border:none;border-radius:100px;font-size:.9rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,transform .1s}
+.btn-primary{background:var(--primary);color:var(--white)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.btn-outline:hover{background:var(--primary);color:var(--white)}
+.btn-sm{padding:8px 16px;font-size:.8rem}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:32px}
+.stat-card{background:var(--white);padding:24px;border-radius:var(--radius);border:1px solid var(--gray-100);text-align:center}
+.stat-card .num{font-size:2rem;font-weight:700;color:var(--primary)}
+.stat-card .label{font-size:.8rem;color:var(--gray-600);margin-top:4px}
+
+/* Table */
+.table-wrap{overflow-x:auto;background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-100)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:var(--bg);padding:12px 16px;text-align:left;font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-600);border-bottom:1px solid var(--gray-200);white-space:nowrap}
+td{padding:12px 16px;border-bottom:1px solid var(--gray-100);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(160,88,62,.03)}
+.badge{display:inline-block;padding:2px 10px;border-radius:100px;font-size:.75rem;font-weight:600}
+.badge-hero{background:#EDE9E4;color:var(--gray-600)}
+.badge-host{background:rgba(160,88,62,.12);color:var(--primary-dark,#7A3F2B)}
+.badge-cta{background:rgba(81,183,73,.12);color:#2d8a25}
+.empty{text-align:center;padding:60px 24px;color:var(--gray-400)}
+.empty .icon{font-size:3rem;margin-bottom:16px}
+
+@media(max-width:640px){
+  th,td{padding:8px 10px;font-size:.8rem}
+  .header{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- Login Screen -->
+<div id="login-screen">
+<div class="login-box">
+<h2>🔒 Waitlist Admin</h2>
+<p>Enter the admin password to view signups.</p>
+<div class="error" id="login-error">Incorrect password. Try again.</div>
+<input type="password" id="password-input" placeholder="Password" autofocus>
+<button class="btn btn-primary" style="width:100%" onclick="login()">Log In</button>
+</div>
+</div>
+
+<!-- Admin Dashboard (hidden until auth) -->
+<div id="admin-screen" style="display:none">
+
+<div class="header">
+<h1><span class="logo">mtr|direct</span> — Waitlist Admin</h1>
+<div class="header-actions">
+<button class="btn btn-outline btn-sm" onclick="exportCSV()">📥 Export CSV</button>
+<button class="btn btn-outline btn-sm" onclick="loadData()">🔄 Refresh</button>
+<a href="/" class="btn btn-outline btn-sm">← Back to Site</a>
+</div>
+</div>
+
+<div class="stats-row">
+<div class="stat-card">
+<div class="num" id="stat-total">—</div>
+<div class="label">Total Signups</div>
+</div>
+<div class="stat-card">
+<div class="num" id="stat-hero">—</div>
+<div class="label">From Hero</div>
+</div>
+<div class="stat-card">
+<div class="num" id="stat-host">—</div>
+<div class="label">From Host Page</div>
+</div>
+<div class="stat-card">
+<div class="num" id="stat-today">—</div>
+<div class="label">Today</div>
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Email</th>
+<th>Name</th>
+<th>City</th>
+<th>Source</th>
+<th>Property</th>
+<th>Pain Points</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody id="table-body">
+<tr><td colspan="8" class="empty"><div class="icon">📋</div>Loading...</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+<script>
+var adminPassword = '';
+var entries = [];
+
+document.getElementById('password-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') login();
+});
+
+function login() {
+  adminPassword = document.getElementById('password-input').value;
+  loadData().then(function(ok) {
+    if (ok) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-screen').style.display = 'block';
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('password-input').value = '';
+      document.getElementById('password-input').focus();
+    }
+  });
+}
+
+async function loadData() {
+  try {
+    var res = await fetch('/api/admin?password=' + encodeURIComponent(adminPassword));
+    if (!res.ok) return false;
+    var data = await res.json();
+    entries = data.entries || [];
+    renderTable();
+    renderStats();
+    return true;
+  } catch (err) {
+    console.error('Failed to load data:', err);
+    return false;
+  }
+}
+
+function renderStats() {
+  var today = new Date().toISOString().slice(0, 10);
+  document.getElementById('stat-total').textContent = entries.length;
+  document.getElementById('stat-hero').textContent = entries.filter(function(e) { return e.source === 'hero' || e.source === 'cta'; }).length;
+  document.getElementById('stat-host').textContent = entries.filter(function(e) { return e.source === 'host'; }).length;
+  document.getElementById('stat-today').textContent = entries.filter(function(e) { return e.timestamp && e.timestamp.startsWith(today); }).length;
+}
+
+function sourceBadge(source) {
+  var cls = 'badge-hero';
+  if (source === 'host') cls = 'badge-host';
+  if (source === 'cta') cls = 'badge-cta';
+  return '<span class="badge ' + cls + '">' + (source || 'unknown') + '</span>';
+}
+
+function renderTable() {
+  var tbody = document.getElementById('table-body');
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="empty"><div class="icon">📭</div>No signups yet. Share your landing page!</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(function(e, i) {
+    var pain = e.painPoints ? (Array.isArray(e.painPoints) ? e.painPoints.join(', ') : e.painPoints) : '—';
+    var prop = e.propertyType ? (e.propertyType + (e.propertyCount ? ' (' + e.propertyCount + ')' : '')) : '—';
+    var date = e.timestamp ? new Date(e.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
+    return '<tr>' +
+      '<td>' + (i + 1) + '</td>' +
+      '<td>' + escHtml(e.email) + '</td>' +
+      '<td>' + escHtml(e.name || '—') + '</td>' +
+      '<td>' + escHtml(e.city || '—') + '</td>' +
+      '<td>' + sourceBadge(e.source) + '</td>' +
+      '<td>' + escHtml(prop) + '</td>' +
+      '<td>' + escHtml(pain) + '</td>' +
+      '<td style="white-space:nowrap">' + date + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
+function escHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function exportCSV() {
+  if (!entries.length) return alert('No data to export.');
+  var headers = ['Email', 'Name', 'City', 'Source', 'Property Type', 'Property Count', 'Pain Points', 'Date'];
+  var rows = entries.map(function(e) {
+    return [
+      e.email,
+      e.name || '',
+      e.city || '',
+      e.source || '',
+      e.propertyType || '',
+      e.propertyCount || '',
+      Array.isArray(e.painPoints) ? e.painPoints.join('; ') : (e.painPoints || ''),
+      e.timestamp || ''
+    ].map(function(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+  });
+  var csv = headers.join(',') + '\n' + rows.join('\n');
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'mtr-waitlist-' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

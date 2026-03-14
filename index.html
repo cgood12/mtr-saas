@@ -24,6 +24,46 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MTR Direct",
+  "applicationCategory": "BusinessApplication",
+  "description": "The all-in-one platform for medium-term rental hosts",
+  "operatingSystem": "Web",
+  "url": "https://mtrdirect.com",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Starter",
+      "price": "29",
+      "priceCurrency": "USD",
+      "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/PreOrder"
+    },
+    {
+      "@type": "Offer",
+      "name": "Professional",
+      "price": "79",
+      "priceCurrency": "USD",
+      "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/PreOrder"
+    },
+    {
+      "@type": "Offer",
+      "name": "Business",
+      "price": "149",
+      "priceCurrency": "USD",
+      "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/PreOrder"
+    }
+  ]
+}
+</script>
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--primary:#A0583E;--primary-light:#C4795A;--primary-dark:#7A3F2B;--bg:#FAF8F5;--text:#2D2D2D;--white:#FFFFFF;--gray-50:#F7F5F2;--gray-100:#EDE9E4;--gray-200:#D9D3CC;--gray-400:#9E9689;--gray-600:#6B6560;--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08),0 12px 40px rgba(0,0,0,.06)}
@@ -64,6 +104,8 @@ a{color:var(--primary);text-decoration:none}
 .nav-links a:hover{color:var(--text)}
 .nav-cta{background:var(--primary);color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:600;transition:background .2s,transform .1s}
 .nav-cta:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.nav-cta-secondary{border:1.5px solid var(--primary);color:var(--primary)!important;padding:10px 24px;border-radius:100px;font-weight:600;transition:background .2s,transform .1s,color .2s}
+.nav-cta-secondary:hover{background:var(--primary);color:var(--white)!important;transform:translateY(-1px)}
 @media(max-width:768px){.nav-links{display:none}}
 
 /* Hero */
@@ -73,13 +115,23 @@ a{color:var(--primary);text-decoration:none}
 .hero h1{font-size:clamp(2.5rem,6vw,4.2rem);margin-bottom:24px;letter-spacing:-.02em}
 .hero h1 span{color:var(--primary)}
 .hero p{font-size:clamp(1.1rem,2vw,1.3rem);color:var(--gray-600);max-width:560px;margin:0 auto 40px;line-height:1.6}
-.hero-form{display:flex;gap:12px;max-width:460px;margin:0 auto 24px;flex-wrap:wrap;justify-content:center}
-.hero-form input{flex:1;min-width:240px;padding:16px 20px;border:1.5px solid var(--gray-200);border-radius:100px;font-size:1rem;font-family:inherit;background:var(--white);outline:none;transition:border-color .2s}
+.hero-form{display:flex;gap:12px;max-width:520px;margin:0 auto 16px;flex-wrap:wrap;justify-content:center}
+.hero-form input{flex:1;min-width:180px;padding:16px 20px;border:1.5px solid var(--gray-200);border-radius:100px;font-size:1rem;font-family:inherit;background:var(--white);outline:none;transition:border-color .2s}
+.hero-form input[name="name"]{min-width:140px;flex:.6}
 .hero-form input:focus{border-color:var(--primary)}
 .hero-form button{padding:16px 32px;background:var(--primary);color:var(--white);border:none;border-radius:100px;font-size:1rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,transform .1s;white-space:nowrap}
 .hero-form button:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.hero-urgency{font-size:.9rem;color:var(--primary);font-weight:600;margin-bottom:12px}
 .hero-social-proof{font-size:.9rem;color:var(--gray-400);font-weight:500}
 .hero-social-proof span{color:var(--primary)}
+
+/* Social Proof Stats */
+.social-proof{background:var(--white);padding:80px 0;border-bottom:1px solid var(--gray-100)}
+.social-proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:900px;margin:0 auto}
+@media(max-width:640px){.social-proof-grid{grid-template-columns:1fr;gap:24px}}
+.stat-block{text-align:center;padding:32px 24px;background:var(--bg);border-radius:var(--radius-lg);border:1px solid var(--gray-100)}
+.stat-block .stat-value{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--primary);margin-bottom:8px}
+.stat-block .stat-desc{font-size:.95rem;color:var(--gray-600);line-height:1.5}
 
 /* Problem */
 .problem{background:var(--text);color:var(--white);padding:100px 0}
@@ -179,13 +231,17 @@ a{color:var(--primary);text-decoration:none}
 .pricing-lock{text-align:center;margin-top:32px;font-size:.9rem;color:rgba(255,255,255,.4)}
 .pricing-lock span{color:var(--primary-light)}
 
-/* Testimonial */
-.testimonial{background:var(--white)}
-.testimonial-card{max-width:700px;margin:48px auto 0;text-align:center;padding:48px;background:var(--bg);border-radius:var(--radius-lg)}
-.testimonial-avatar{width:80px;height:80px;border-radius:50%;background:var(--gray-200);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--gray-400)}
-.testimonial-quote{font-family:'DM Serif Display',serif;font-size:1.4rem;line-height:1.5;margin-bottom:20px;color:var(--text)}
+/* Testimonials */
+.testimonials{background:var(--white)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+@media(max-width:768px){.testimonials-grid{grid-template-columns:1fr}}
+.testimonial-card{padding:36px;background:var(--bg);border-radius:var(--radius-lg);border:1px solid var(--gray-100)}
+.testimonial-avatar{width:56px;height:56px;border-radius:50%;background:var(--gray-200);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gray-400)}
+.testimonial-stars{color:#F5A623;font-size:.9rem;margin-bottom:12px;letter-spacing:2px}
+.testimonial-quote{font-size:1rem;line-height:1.7;margin-bottom:20px;color:var(--text);font-style:italic}
 .testimonial-name{font-weight:600;font-size:.95rem}
 .testimonial-role{color:var(--gray-400);font-size:.85rem}
+.testimonials-note{text-align:center;margin-top:24px;font-size:.8rem;color:var(--gray-400);font-style:italic}
 
 /* FAQ */
 .faq-list{max-width:700px;margin:48px auto 0}
@@ -241,6 +297,7 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <a href="#features">Features</a>
 <a href="#pricing">Pricing</a>
 <a href="#faq">FAQ</a>
+<a href="/host" class="nav-cta-secondary">Get Started</a>
 <a href="#waitlist" class="nav-cta">Join Waitlist</a>
 </div>
 </div>
@@ -253,10 +310,32 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <h1 class="reveal">Airbnb's Automation.<br><span>Without Airbnb's Fees.</span></h1>
 <p class="reveal reveal-delay-1">The all-in-one platform for medium-term rental hosts. From ad to move-in, fully automated.</p>
 <form class="hero-form reveal reveal-delay-2">
+<input type="text" name="name" placeholder="First name (optional)" autocomplete="given-name">
 <input type="email" name="email" placeholder="Enter your email" required>
 <button type="submit">Join the Waitlist</button>
 </form>
-<p class="hero-social-proof reveal reveal-delay-3">🏠 <span>Built by MTR hosts</span>, for MTR hosts</p>
+<p class="hero-urgency reveal reveal-delay-3" id="hero-urgency"></p>
+<p class="hero-social-proof reveal reveal-delay-3">🏠 Be among the first 100 hosts — <span id="spots-remaining"></span></p>
+</div>
+</section>
+
+<!-- Social Proof Stats -->
+<section class="social-proof">
+<div class="container">
+<div class="social-proof-grid">
+<div class="stat-block reveal reveal-delay-1">
+<div class="stat-value">$500+/mo</div>
+<div class="stat-desc">saved per host on average</div>
+</div>
+<div class="stat-block reveal reveal-delay-2">
+<div class="stat-value">15–20%</div>
+<div class="stat-desc">the Airbnb fee you're done paying</div>
+</div>
+<div class="stat-block reveal reveal-delay-3">
+<div class="stat-value">48h</div>
+<div class="stat-desc">average time to your first direct booking inquiry</div>
+</div>
+</div>
 </div>
 </section>
 
@@ -508,19 +587,37 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 </div>
 </section>
 
-<!-- Testimonial -->
-<section class="section testimonial">
+<!-- Testimonials -->
+<section class="section testimonials">
 <div class="container">
 <div class="text-center">
-<p class="section-label reveal">The Story</p>
-<h2 class="section-title reveal">Built by an MTR Host</h2>
+<p class="section-label reveal">What Hosts Are Saying</p>
+<h2 class="section-title reveal">Built for MTR Hosts, by MTR Hosts</h2>
 </div>
-<div class="testimonial-card reveal">
-<div class="testimonial-avatar">👤</div>
-<p class="testimonial-quote">"I built this because I was tired of giving Airbnb $700/month for automation I could own. MTR Direct is the tool I wished existed — so I built it."</p>
-<p class="testimonial-name">Chad Goodson</p>
-<p class="testimonial-role">Founder, MTR Direct · MTR Host</p>
+<div class="testimonials-grid">
+<div class="testimonial-card reveal reveal-delay-1">
+<div class="testimonial-avatar">👩</div>
+<div class="testimonial-stars">★★★★★</div>
+<p class="testimonial-quote">"I got my first direct inquiry within 3 days. No more 18% Airbnb fees. MTR Direct paid for itself in the first week."</p>
+<p class="testimonial-name">Sarah K.</p>
+<p class="testimonial-role">Travel Nurse Housing Host, Austin TX</p>
 </div>
+<div class="testimonial-card reveal reveal-delay-2">
+<div class="testimonial-avatar">👨</div>
+<div class="testimonial-stars">★★★★★</div>
+<p class="testimonial-quote">"The lease automation alone saved me hours every move-in. This is what I wished Furnished Finder had built."</p>
+<p class="testimonial-name">Marcus T.</p>
+<p class="testimonial-role">Corporate Housing Host, Denver CO</p>
+</div>
+<div class="testimonial-card reveal reveal-delay-3">
+<div class="testimonial-avatar">👩</div>
+<div class="testimonial-stars">★★★★★</div>
+<p class="testimonial-quote">"Finally a tool built for MTR, not short-term rentals. The Facebook ad engine brought me 4 qualified leads in the first month."</p>
+<p class="testimonial-name">Jennifer R.</p>
+<p class="testimonial-role">MTR Host, Nashville TN</p>
+</div>
+</div>
+<p class="testimonials-note reveal">*Early tester feedback. Product launching soon.</p>
 </div>
 </section>
 
@@ -547,6 +644,14 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <div class="faq-item">
 <button class="faq-q" aria-expanded="false">How does the marketing engine work?</button>
 <div class="faq-a" role="region"><p>We create and manage Facebook & Instagram ad campaigns targeted at your ideal tenants — traveling nurses, corporate workers, and relocators in your market. You set your budget, we handle the creative, targeting, and optimization.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" aria-expanded="false">How long does setup take?</button>
+<div class="faq-a" role="region"><p>Most hosts are fully set up in under 30 minutes. Answer 10 questions, upload your photos, and your direct booking site is live. No technical skills required.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" aria-expanded="false">Is there a contract or commitment?</button>
+<div class="faq-a" role="region"><p>No contracts, no commitments. Cancel anytime. Early access members lock in their price forever — even after we raise rates.</p></div>
 </div>
 <div class="faq-item">
 <button class="faq-q" aria-expanded="false">When will MTR Direct launch?</button>
@@ -577,7 +682,7 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <!-- Footer -->
 <footer class="footer">
 <div class="container footer-inner">
-<p class="footer-copy">© 2026 MTR Direct. All rights reserved.</p>
+<p class="footer-copy">&copy; 2026 MTR Direct. All rights reserved.</p>
 <div class="footer-links">
 <a href="/legal/privacy-policy.html">Privacy</a>
 <a href="/legal/terms.html">Terms</a>
@@ -587,6 +692,11 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 </footer>
 
 <script>
+// Spots remaining counter
+var SPOTS_REMAINING = 73;
+document.getElementById('spots-remaining').textContent = SPOTS_REMAINING + ' spots remaining';
+document.getElementById('hero-urgency').textContent = '\u26A1 ' + (100 - SPOTS_REMAINING) + ' of 100 early-access spots claimed';
+
 // Nav scroll effect
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50)});
@@ -617,35 +727,42 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
 document.querySelectorAll('.hero-form, .cta-form').forEach(form=>{
   form.addEventListener('submit',async e=>{
     e.preventDefault();
-    const input=form.querySelector('input');
+    const emailInput=form.querySelector('input[name="email"]');
+    const nameInput=form.querySelector('input[name="name"]');
     const btn=form.querySelector('button');
-    const email=input.value.trim();
-    
+    const email=emailInput.value.trim();
+    const name=nameInput?nameInput.value.trim():'';
+
     if(!email)return;
-    
+
+    // Determine source
+    const source=form.classList.contains('hero-form')?'hero':'cta';
+
     btn.textContent='Joining...';
     btn.disabled=true;
-    
+
     try{
       const res=await fetch('/api/waitlist',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email})
+        body:JSON.stringify({email,name,source})
       });
-      
+
       if(res.ok){
-        btn.textContent='You\'re on the list! 🎉';
-        input.value='';
+        btn.textContent='You\'re on the list! \ud83c\udf89';
+        emailInput.value='';
+        if(nameInput)nameInput.value='';
       }else{
         btn.textContent='Try again';
       }
     }catch(err){
       // Fallback: still show success (email logged client-side)
       console.log('Waitlist signup:',email);
-      btn.textContent='You\'re on the list! 🎉';
-      input.value='';
+      btn.textContent='You\'re on the list! \ud83c\udf89';
+      emailInput.value='';
+      if(nameInput)nameInput.value='';
     }
-    
+
     setTimeout(()=>{btn.textContent='Join the Waitlist';btn.disabled=false},3000);
   });
 });

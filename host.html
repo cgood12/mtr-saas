@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Started — MTR Direct</title>
+<meta name="description" content="Tell us about your property and we'll build your direct booking site. Free during beta.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<meta name="theme-color" content="#A0583E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#A0583E;--primary-light:#C4795A;--primary-dark:#7A3F2B;--bg:#FAF8F5;--text:#2D2D2D;--white:#FFFFFF;--gray-50:#F7F5F2;--gray-100:#EDE9E4;--gray-200:#D9D3CC;--gray-400:#9E9689;--gray-600:#6B6560;--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08),0 12px 40px rgba(0,0,0,.06)}
+html{font-size:16px}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400;line-height:1.2}
+a{color:var(--primary);text-decoration:none}
+
+/* Nav */
+.nav{padding:16px 0;background:var(--bg);border-bottom:1px solid var(--gray-100)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Rubik',sans-serif;font-size:1.4rem;color:var(--text);display:flex;align-items:center;gap:2px}
+.nav-logo .mtr{font-weight:700}
+.nav-logo .bar{color:var(--primary);font-weight:500}
+.nav-logo .direct{font-weight:500}
+.nav-back{font-size:.9rem;font-weight:500;color:var(--gray-600);transition:color .2s}
+.nav-back:hover{color:var(--text)}
+
+/* Host page */
+.host-page{max-width:640px;margin:0 auto;padding:60px 24px 100px}
+.host-page h1{font-size:clamp(1.8rem,4vw,2.6rem);text-align:center;margin-bottom:12px}
+.host-page h1 span{color:var(--primary)}
+.host-subhead{text-align:center;color:var(--gray-600);font-size:1.1rem;margin-bottom:48px;line-height:1.6}
+
+/* Progress bar */
+.progress-bar{display:flex;gap:8px;margin-bottom:40px}
+.progress-step{flex:1;height:4px;border-radius:4px;background:var(--gray-200);transition:background .3s}
+.progress-step.active{background:var(--primary)}
+.progress-step.done{background:var(--primary)}
+
+/* Step labels */
+.step-label{font-size:.85rem;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px}
+
+/* Form card */
+.form-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow)}
+
+/* Form elements */
+.form-group{margin-bottom:24px}
+.form-group label{display:block;font-weight:600;font-size:.95rem;margin-bottom:8px}
+.form-group input,.form-group select{width:100%;padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius);font-size:1rem;font-family:inherit;background:var(--white);outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus{border-color:var(--primary)}
+.form-group select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239E9689' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+
+/* Radio group */
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.radio-group{grid-template-columns:1fr}}
+.radio-option{position:relative}
+.radio-option input{position:absolute;opacity:0;pointer-events:none}
+.radio-option label{display:block;padding:16px;border:1.5px solid var(--gray-200);border-radius:var(--radius);text-align:center;cursor:pointer;font-weight:500;transition:border-color .2s,background .2s}
+.radio-option input:checked+label{border-color:var(--primary);background:rgba(160,88,62,.06);color:var(--primary)}
+.radio-option label:hover{border-color:var(--gray-400)}
+
+/* Checkbox group */
+.checkbox-group{display:flex;flex-direction:column;gap:12px}
+.checkbox-option{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius);cursor:pointer;transition:border-color .2s,background .2s}
+.checkbox-option:hover{border-color:var(--gray-400)}
+.checkbox-option.checked{border-color:var(--primary);background:rgba(160,88,62,.06)}
+.checkbox-option input{width:18px;height:18px;accent-color:var(--primary);cursor:pointer;flex-shrink:0}
+.checkbox-option span{font-weight:500;font-size:.95rem}
+
+/* Buttons */
+.form-actions{display:flex;gap:12px;margin-top:32px}
+.btn-primary{flex:1;padding:16px 32px;background:var(--primary);color:var(--white);border:none;border-radius:100px;font-size:1rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,transform .1s}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-secondary{padding:16px 24px;background:transparent;color:var(--gray-600);border:1.5px solid var(--gray-200);border-radius:100px;font-size:1rem;font-weight:500;font-family:inherit;cursor:pointer;transition:border-color .2s}
+.btn-secondary:hover{border-color:var(--gray-400)}
+
+/* Steps visibility */
+.step-content{display:none}
+.step-content.active{display:block}
+
+/* Thank you */
+.thank-you{text-align:center;padding:60px 20px}
+.thank-you .icon{font-size:4rem;margin-bottom:24px}
+.thank-you h2{font-size:1.8rem;margin-bottom:12px}
+.thank-you p{color:var(--gray-600);font-size:1.1rem;line-height:1.7;margin-bottom:32px}
+.thank-you .back-link{display:inline-block;padding:14px 32px;background:var(--primary);color:var(--white);border-radius:100px;font-weight:600;transition:background .2s}
+.thank-you .back-link:hover{background:var(--primary-dark)}
+
+/* Focus */
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-inner">
+<a href="/" class="nav-logo"><span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span></a>
+<a href="/" class="nav-back">&larr; Back to Home</a>
+</div>
+</nav>
+
+<div class="host-page">
+<h1>Get Your MTR Direct Site in <span>24 Hours</span></h1>
+<p class="host-subhead">Tell us about your property and we'll build your direct booking site. Free during beta.</p>
+
+<div class="progress-bar">
+<div class="progress-step active" id="prog-1"></div>
+<div class="progress-step" id="prog-2"></div>
+<div class="progress-step" id="prog-3"></div>
+</div>
+
+<div class="form-card">
+<!-- Step 1: Contact Info -->
+<div class="step-content active" id="step-1">
+<div class="step-label">Step 1 of 3 — About You</div>
+<div class="form-group">
+<label for="host-name">Your Name</label>
+<input type="text" id="host-name" name="name" placeholder="First and last name" required>
+</div>
+<div class="form-group">
+<label for="host-email">Email Address</label>
+<input type="email" id="host-email" name="email" placeholder="you@example.com" required>
+</div>
+<div class="form-group">
+<label for="host-city">City / Market</label>
+<input type="text" id="host-city" name="city" placeholder="e.g. Austin, TX" required>
+</div>
+<div class="form-actions">
+<button type="button" class="btn-primary" onclick="nextStep(1)">Continue</button>
+</div>
+</div>
+
+<!-- Step 2: Property Info -->
+<div class="step-content" id="step-2">
+<div class="step-label">Step 2 of 3 — Your Property</div>
+<div class="form-group">
+<label>Property Type</label>
+<div class="radio-group">
+<div class="radio-option">
+<input type="radio" name="propertyType" id="pt-apartment" value="Furnished Apartment">
+<label for="pt-apartment">Furnished Apartment</label>
+</div>
+<div class="radio-option">
+<input type="radio" name="propertyType" id="pt-house" value="House">
+<label for="pt-house">House</label>
+</div>
+<div class="radio-option">
+<input type="radio" name="propertyType" id="pt-condo" value="Condo">
+<label for="pt-condo">Condo</label>
+</div>
+<div class="radio-option">
+<input type="radio" name="propertyType" id="pt-other" value="Other">
+<label for="pt-other">Other</label>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>Number of Properties</label>
+<div class="radio-group">
+<div class="radio-option">
+<input type="radio" name="propertyCount" id="pc-1" value="1">
+<label for="pc-1">1</label>
+</div>
+<div class="radio-option">
+<input type="radio" name="propertyCount" id="pc-23" value="2-3">
+<label for="pc-23">2–3</label>
+</div>
+<div class="radio-option">
+<input type="radio" name="propertyCount" id="pc-4plus" value="4+">
+<label for="pc-4plus">4+</label>
+</div>
+</div>
+</div>
+<div class="form-actions">
+<button type="button" class="btn-secondary" onclick="prevStep(2)">Back</button>
+<button type="button" class="btn-primary" onclick="nextStep(2)">Continue</button>
+</div>
+</div>
+
+<!-- Step 3: Pain Points -->
+<div class="step-content" id="step-3">
+<div class="step-label">Step 3 of 3 — Your Challenges</div>
+<div class="form-group">
+<label>What's your biggest pain point? (Select all that apply)</label>
+<div class="checkbox-group">
+<label class="checkbox-option">
+<input type="checkbox" name="painPoints" value="Platform fees">
+<span>Platform fees</span>
+</label>
+<label class="checkbox-option">
+<input type="checkbox" name="painPoints" value="Lead quality">
+<span>Lead quality</span>
+</label>
+<label class="checkbox-option">
+<input type="checkbox" name="painPoints" value="Screening tenants">
+<span>Screening tenants</span>
+</label>
+<label class="checkbox-option">
+<input type="checkbox" name="painPoints" value="Lease management">
+<span>Lease management</span>
+</label>
+<label class="checkbox-option">
+<input type="checkbox" name="painPoints" value="Marketing">
+<span>Marketing</span>
+</label>
+</div>
+</div>
+<div class="form-actions">
+<button type="button" class="btn-secondary" onclick="prevStep(3)">Back</button>
+<button type="button" class="btn-primary" id="submit-btn" onclick="submitForm()">Get My Site</button>
+</div>
+</div>
+
+<!-- Thank You -->
+<div class="step-content" id="step-done">
+<div class="thank-you">
+<div class="icon">🎉</div>
+<h2>You're All Set!</h2>
+<p>We'll reach out within 24 hours with your property site preview. Keep an eye on your inbox.</p>
+<a href="/" class="back-link">Back to MTR Direct</a>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+var currentStep = 1;
+
+function showStep(step) {
+  document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+  var stepId = step === 4 ? 'step-done' : 'step-' + step;
+  document.getElementById(stepId).classList.add('active');
+
+  // Update progress bar
+  for (var i = 1; i <= 3; i++) {
+    var prog = document.getElementById('prog-' + i);
+    prog.classList.remove('active', 'done');
+    if (i < step) prog.classList.add('done');
+    else if (i === step) prog.classList.add('active');
+  }
+  if (step === 4) {
+    for (var j = 1; j <= 3; j++) {
+      document.getElementById('prog-' + j).classList.add('done');
+    }
+  }
+  currentStep = step;
+}
+
+function nextStep(from) {
+  // Validate step 1
+  if (from === 1) {
+    var name = document.getElementById('host-name').value.trim();
+    var email = document.getElementById('host-email').value.trim();
+    var city = document.getElementById('host-city').value.trim();
+    if (!name || !email || !city) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    if (!email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+  }
+  // Validate step 2
+  if (from === 2) {
+    var propType = document.querySelector('input[name="propertyType"]:checked');
+    var propCount = document.querySelector('input[name="propertyCount"]:checked');
+    if (!propType || !propCount) {
+      alert('Please select a property type and number of properties.');
+      return;
+    }
+  }
+  showStep(from + 1);
+}
+
+function prevStep(from) {
+  showStep(from - 1);
+}
+
+// Checkbox styling
+document.querySelectorAll('.checkbox-option input').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    this.closest('.checkbox-option').classList.toggle('checked', this.checked);
+  });
+});
+
+async function submitForm() {
+  var btn = document.getElementById('submit-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  var painPoints = [];
+  document.querySelectorAll('input[name="painPoints"]:checked').forEach(function(cb) {
+    painPoints.push(cb.value);
+  });
+
+  var propTypeEl = document.querySelector('input[name="propertyType"]:checked');
+  var propCountEl = document.querySelector('input[name="propertyCount"]:checked');
+
+  var data = {
+    name: document.getElementById('host-name').value.trim(),
+    email: document.getElementById('host-email').value.trim(),
+    city: document.getElementById('host-city').value.trim(),
+    propertyType: propTypeEl ? propTypeEl.value : '',
+    propertyCount: propCountEl ? propCountEl.value : '',
+    painPoints: painPoints,
+    source: 'host'
+  };
+
+  try {
+    var res = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    showStep(4);
+  } catch (err) {
+    console.log('Host signup:', data);
+    showStep(4);
+  }
+}
+</script>
+</body>
+</html>
