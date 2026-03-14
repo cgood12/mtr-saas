@@ -1,5 +1,5 @@
 # MTR Direct — Competitive Analysis
-**Updated:** 2026-02-08
+**Updated:** 2026-03-14
 
 ---
 
@@ -117,12 +117,23 @@ The MTR (medium-term rental) market is growing 25%+ YoY but remains **underserve
 
 ---
 
+### New Entrants (2026 Update)
+
+| Platform | Focus | Note |
+|----------|-------|------|
+| **MiniStays** | MTR marketplace | Claims verified bookings, direct on-platform payment. Positioning vs Furnished Finder. Watch closely — most direct competitor. |
+| **Truvi** | Multi-channel listing | Aggregator approach, lists across 10+ MTR platforms. Different angle but overlapping audience. |
+| **Baselane** | Free landlord banking | Published "Best MTR Software 2026" guide. Positioning themselves as the financial layer. Could partner or compete. |
+
+**Assessment:** No one is building what MTR Direct is building — the full-stack from marketing → booking → screening → lease → payment. MiniStays is closest but is a marketplace (takes a cut), not a host empowerment tool.
+
 ## Threats
 
 1. **Furnished Finder launches automation tools** — They have the audience
 2. **Hostaway/Guesty add MTR features** — They have the infrastructure
-3. **Airbnb improves MTR experience** — They have the brand
-4. **Economic downturn** — MTR demand could shift
+3. **MiniStays gains traction** — Direct competitor in MTR-specific tooling
+4. **Airbnb improves MTR experience** — They have the brand
+5. **Economic downturn** — MTR demand could shift
 
 ## Opportunities
 
@@ -130,6 +141,8 @@ The MTR (medium-term rental) market is growing 25%+ YoY but remains **underserve
 2. **Traveling nurse demand growing** — Healthcare staffing shortages
 3. **Remote work normalization** — More digital nomads, corporate relocations
 4. **Platform fee backlash** — Hosts actively seeking alternatives
+5. **Baselane partnership** — They handle banking, we handle everything else. Natural fit.
+6. **BiggerPockets MTR community** — 50K+ hosts discussing MTR strategies daily
 
 ---
 
