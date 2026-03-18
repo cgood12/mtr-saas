@@ -113,8 +113,8 @@ a { color: var(--primary); text-decoration: none; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
 /* ============================================
-   ANIMATIONS — CSS-ONLY (no broken JS observers)
-   All content visible by default with graceful fade-in
+   SCROLL-DRIVEN ANIMATIONS
+   .js-loaded body class approach: elements hidden only when JS runs
    ============================================ */
 
 @keyframes fadeUp {
@@ -137,11 +137,6 @@ a { color: var(--primary); text-decoration: none; }
   to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes countPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
 @keyframes glowPulse {
   0%, 100% { box-shadow: 0 0 20px rgba(160, 88, 62, 0.3), 0 0 60px rgba(160, 88, 62, 0.1); }
   50% { box-shadow: 0 0 30px rgba(160, 88, 62, 0.5), 0 0 80px rgba(160, 88, 62, 0.15); }
@@ -152,43 +147,251 @@ a { color: var(--primary); text-decoration: none; }
   50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.1); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
 
-.fade-up {
-  animation: fadeUp 0.8s ease both;
-}
-
+/* Hero entrance animations — always play on load */
+.fade-up { animation: fadeUp 0.8s ease both; }
 .fade-up-d1 { animation: fadeUp 0.8s 0.1s ease both; }
 .fade-up-d2 { animation: fadeUp 0.8s 0.2s ease both; }
 .fade-up-d3 { animation: fadeUp 0.8s 0.3s ease both; }
 .fade-up-d4 { animation: fadeUp 0.8s 0.4s ease both; }
 .fade-up-d5 { animation: fadeUp 0.8s 0.5s ease both; }
 
-/* Scroll-triggered animations using animation-timeline (progressive enhancement) */
-@supports (animation-timeline: view()) {
-  .scroll-reveal {
-    animation: fadeUp 0.6s ease both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 30%;
-  }
-  .scroll-reveal-left {
-    animation: slideInLeft 0.6s ease both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 30%;
-  }
-  .scroll-reveal-right {
-    animation: slideInRight 0.6s ease both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 30%;
-  }
+/* Scroll reveal — only when JS loads. Elements fully visible without JS. */
+body.js-loaded .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+body.js-loaded .reveal.from-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.js-loaded .reveal.from-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.js-loaded .reveal.visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+/* Stagger children */
+body.js-loaded .reveal.stagger-children .reveal-child {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.js-loaded .reveal.stagger-children.visible .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3D tilt hover for cards */
+.tilt-card {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.3s;
+}
+.tilt-card:hover {
+  transform: perspective(800px) rotateY(2deg) rotateX(-2deg) translateY(-6px);
+}
+
+/* ============================================
+   HERO CHAT DEMO
+   ============================================ */
+
+.hero-chat-demo {
+  margin-top: 64px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.chat-window {
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05), 0 0 60px rgba(160,88,62,0.12);
+}
+
+.chat-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.chat-toolbar-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.chat-toolbar-dot:nth-child(1) { background: #ff5f57; }
+.chat-toolbar-dot:nth-child(2) { background: #febc2e; }
+.chat-toolbar-dot:nth-child(3) { background: #28c840; }
+
+.chat-toolbar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  font-family: 'DM Sans', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.chat-toolbar-status {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.chat-body {
+  padding: 24px 20px 20px;
+  min-height: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Chat bubbles */
+.chat-msg {
+  max-width: 88%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: chatBubbleIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  margin-bottom: 8px;
+}
+
+@keyframes chatBubbleIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg.guest {
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.8);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-msg.agent {
+  background: rgba(160, 88, 62, 0.2);
+  border: 1px solid rgba(160, 88, 62, 0.25);
+  color: rgba(255,255,255,0.9);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg .msg-sender {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-msg.guest .msg-sender { color: rgba(255,255,255,0.4); }
+.chat-msg.agent .msg-sender { color: var(--primary-light); }
+
+.chat-msg .msg-sender .agent-badge-sm {
+  font-size: 0.62rem;
+  background: rgba(160, 88, 62, 0.3);
+  color: var(--primary-light);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 18px;
+  background: rgba(160, 88, 62, 0.15);
+  border: 1px solid rgba(160, 88, 62, 0.2);
+  border-radius: 16px;
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: chatBubbleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* Summary bar */
+.chat-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 14px 20px;
+  background: rgba(34, 197, 94, 0.06);
+  border-top: 1px solid rgba(34, 197, 94, 0.12);
+  flex-wrap: wrap;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.chat-summary.visible { opacity: 1; }
+
+.chat-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+
+.chat-summary-item .check-green {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+@media (max-width: 500px) {
+  .chat-summary { gap: 10px; padding: 12px 16px; }
+  .chat-summary-item { font-size: 0.72rem; }
 }
 
 /* ============================================
@@ -449,134 +652,6 @@ a { color: var(--primary); text-decoration: none; }
   color: rgba(255,255,255,0.4);
 }
 
-/* Agent Dashboard Mockup */
-.hero-mockup {
-  margin-top: 72px;
-  max-width: 880px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-}
-
-.mockup-window {
-  background: var(--bg-dark-card);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
-}
-
-.mockup-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 20px;
-  background: rgba(255,255,255,0.03);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-.mockup-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-}
-
-.mockup-dot:nth-child(1) { background: #ff5f57; }
-.mockup-dot:nth-child(2) { background: #febc2e; }
-.mockup-dot:nth-child(3) { background: #28c840; }
-
-.mockup-url {
-  flex: 1;
-  text-align: center;
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.3);
-  font-family: 'DM Sans', monospace;
-}
-
-.mockup-content {
-  padding: 32px;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 24px;
-  min-height: 280px;
-}
-
-@media (max-width: 640px) {
-  .mockup-content { grid-template-columns: 1fr; min-height: 200px; }
-}
-
-.mockup-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mockup-stat-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  background: rgba(255,255,255,0.03);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.mockup-stat-label {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.4);
-}
-
-.mockup-stat-value {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.1rem;
-  color: var(--primary-light);
-}
-
-.mockup-chat {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.mockup-chat-header {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 4px;
-}
-
-.mockup-msg {
-  padding: 10px 16px;
-  border-radius: 12px;
-  font-size: 0.82rem;
-  line-height: 1.5;
-  max-width: 85%;
-}
-
-.mockup-msg.guest {
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.7);
-  align-self: flex-start;
-  border-bottom-left-radius: 4px;
-}
-
-.mockup-msg.agent {
-  background: rgba(160, 88, 62, 0.2);
-  border: 1px solid rgba(160, 88, 62, 0.3);
-  color: rgba(255,255,255,0.85);
-  align-self: flex-end;
-  border-bottom-right-radius: 4px;
-}
-
-.mockup-msg .msg-time {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.25);
-  margin-top: 4px;
-}
-
 /* Gradient fade at bottom of hero */
 .hero-fade {
   position: absolute;
@@ -589,7 +664,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   PAIN SECTION — Dark with punch
+   PAIN SECTION
    ============================================ */
 
 .pain {
@@ -697,7 +772,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   HOW IT WORKS — Clean horizontal timeline
+   HOW IT WORKS
    ============================================ */
 
 .how-it-works {
@@ -711,7 +786,6 @@ a { color: var(--primary); text-decoration: none; }
   position: relative;
 }
 
-/* Connecting line */
 .steps-line {
   display: none;
 }
@@ -798,7 +872,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   AGENT CAPABILITIES — Premium tier cards
+   AGENT CAPABILITIES
    ============================================ */
 
 .agents-section {
@@ -845,7 +919,7 @@ a { color: var(--primary); text-decoration: none; }
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: var(--radius-xl);
   padding: 44px 32px;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.3s;
   position: relative;
   overflow: hidden;
 }
@@ -863,13 +937,14 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 .agent-card:hover {
-  transform: translateY(-6px);
+  transform: perspective(800px) rotateY(2deg) rotateX(-2deg) translateY(-6px);
   border-color: rgba(255,255,255,0.1);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
 }
 
 .agent-card:hover::before { opacity: 1; }
 
-/* Featured Agent Card — Revenue Agent */
+/* Featured Agent Card */
 .agent-card.featured-agent {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   border: 1px solid rgba(255,255,255,0.15);
@@ -984,7 +1059,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   MARKETING ENGINE — Alternating layout
+   MARKETING ENGINE
    ============================================ */
 
 .marketing {
@@ -1004,8 +1079,6 @@ a { color: var(--primary); text-decoration: none; }
 @media (max-width: 768px) {
   .marketing-grid { grid-template-columns: 1fr; gap: 48px; }
 }
-
-.marketing-copy { }
 
 .marketing-copy .section-title {
   margin-bottom: 20px;
@@ -1062,11 +1135,11 @@ a { color: var(--primary); text-decoration: none; }
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.3s;
 }
 
 .mkt-channel:hover {
-  transform: translateY(-3px);
+  transform: perspective(800px) rotateY(-2deg) rotateX(2deg) translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
@@ -1164,7 +1237,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   PERFORMANCE STATS — Dark, bold numbers
+   PERFORMANCE STATS
    ============================================ */
 
 .stats-section {
@@ -1238,7 +1311,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   PRICING — Clean, structured
+   PRICING
    ============================================ */
 
 .pricing-section {
@@ -1463,7 +1536,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   TESTIMONIALS — Featured quote
+   TESTIMONIALS
    ============================================ */
 
 .testimonials-section {
@@ -1487,7 +1560,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 .testimonial-quote-large::before {
-  content: '"';
+  content: '\201C';
   font-family: 'DM Serif Display', serif;
   font-size: 5rem;
   color: var(--primary);
@@ -1604,7 +1677,7 @@ a { color: var(--primary); text-decoration: none; }
 }
 
 /* ============================================
-   FOOTER CTA — Big bold push
+   FOOTER CTA
    ============================================ */
 
 .footer-cta {
@@ -1814,20 +1887,25 @@ button:focus-visible,
   .section { padding: 80px 0; }
   .hero { padding: 140px 0 80px; }
   .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
-  .hero-mockup { margin-top: 48px; }
-  .mockup-content { padding: 20px; }
+  .hero-chat-demo { margin-top: 48px; }
   .agent-status .meta { display: none; }
   .hero-cta-group { flex-direction: column; align-items: center; }
   .btn-primary, .btn-secondary { width: 100%; max-width: 320px; justify-content: center; }
   .pain { padding: 80px 0; }
   .agents-section, .stats-section, .pricing-section, .testimonials-section, .how-it-works, .marketing { padding: 80px 0; }
   .footer-cta { padding: 80px 0; }
+  .chat-body { min-height: 280px; max-height: 380px; }
+  .chat-msg { font-size: 0.82rem; }
 }
 
 @media (max-width: 480px) {
   .hero h1 br { display: none; }
   .pain-amount { font-size: 2.4rem; }
+  .chat-body { padding: 16px 14px 14px; }
 }
+
+/* Noscript fallback */
+noscript .reveal { opacity: 1 !important; transform: none !important; }
 </style>
 </head>
 <body>
@@ -1885,57 +1963,25 @@ button:focus-visible,
 
     <p class="hero-sub fade-up-d4">Performance-based pricing. We only get paid when you save money.</p>
 
-    <!-- Dashboard Mockup -->
-    <div class="hero-mockup fade-up-d5">
-      <div class="mockup-window">
-        <div class="mockup-toolbar">
-          <span class="mockup-dot"></span>
-          <span class="mockup-dot"></span>
-          <span class="mockup-dot"></span>
-          <span class="mockup-url">mtrdirect.com/dashboard</span>
+    <!-- Interactive Chat Demo -->
+    <div class="hero-chat-demo fade-up-d5">
+      <div class="chat-window">
+        <div class="chat-toolbar">
+          <span class="chat-toolbar-dot"></span>
+          <span class="chat-toolbar-dot"></span>
+          <span class="chat-toolbar-dot"></span>
+          <span class="chat-toolbar-title">
+            <span class="chat-toolbar-status"></span>
+            mtr|direct agent — live conversation
+          </span>
         </div>
-        <div class="mockup-content">
-          <div class="mockup-sidebar">
-            <div class="mockup-stat-row">
-              <span class="mockup-stat-label">Active Inquiries</span>
-              <span class="mockup-stat-value">12</span>
-            </div>
-            <div class="mockup-stat-row">
-              <span class="mockup-stat-label">Bookings This Month</span>
-              <span class="mockup-stat-value">4</span>
-            </div>
-            <div class="mockup-stat-row">
-              <span class="mockup-stat-label">Fees Saved</span>
-              <span class="mockup-stat-value">$2,847</span>
-            </div>
-            <div class="mockup-stat-row">
-              <span class="mockup-stat-label">Avg Response Time</span>
-              <span class="mockup-stat-value">47s</span>
-            </div>
-            <div class="mockup-stat-row">
-              <span class="mockup-stat-label">Agent Status</span>
-              <span class="mockup-stat-value" style="color:#22c55e;">● Online</span>
-            </div>
-          </div>
-          <div class="mockup-chat">
-            <div class="mockup-chat-header">Live Agent Conversation</div>
-            <div class="mockup-msg guest">
-              Hi, I'm looking for a 3-month furnished rental near the medical center. Do you have anything available starting April 1?
-              <div class="msg-time">11:47 PM</div>
-            </div>
-            <div class="mockup-msg agent">
-              Great news — we have a beautifully furnished 2BR available starting April 1st. It's 8 minutes from the medical center. Monthly rate is $4,200. Would you like to see photos and floor plan?
-              <div class="msg-time">11:47 PM · Agent</div>
-            </div>
-            <div class="mockup-msg guest">
-              Yes please! Also, is there parking included?
-              <div class="msg-time">11:48 PM</div>
-            </div>
-            <div class="mockup-msg agent">
-              Absolutely — one covered parking spot is included. I've just sent you the full listing with photos, a virtual tour, and our direct booking link. Book direct and save 15% vs. Airbnb. 🏠
-              <div class="msg-time">11:48 PM · Agent</div>
-            </div>
-          </div>
+        <div class="chat-body" id="chat-body">
+          <!-- Messages injected by JS -->
+        </div>
+        <div class="chat-summary" id="chat-summary">
+          <span class="chat-summary-item"><span class="check-green">✓</span> Inquiry responded in 8 seconds</span>
+          <span class="chat-summary-item"><span class="check-green">✓</span> $420 saved vs. Airbnb</span>
+          <span class="chat-summary-item"><span class="check-green">✓</span> Lease signed in 4 minutes</span>
         </div>
       </div>
     </div>
@@ -1946,42 +1992,42 @@ button:focus-visible,
 <!-- ============================================
      PAIN SECTION
      ============================================ -->
-<section class="pain scroll-reveal">
+<section class="pain">
   <div class="container text-center">
-    <p class="section-label">The Real Cost of Doing It Yourself</p>
-    <h2 class="section-title">You're losing money and time.<br>Every single month.</h2>
-    <p class="pain-intro">Platforms don't just take your revenue — they eat your calendar. Most MTR hosts are running a second job they never signed up for.</p>
+    <p class="section-label reveal">The Real Cost of Doing It Yourself</p>
+    <h2 class="section-title reveal">You're losing money and time.<br>Every single month.</h2>
+    <p class="pain-intro reveal">Platforms don't just take your revenue — they eat your calendar. Most MTR hosts are running a second job they never signed up for.</p>
 
-    <div class="pain-cols">
-      <div class="pain-col">
+    <div class="pain-cols reveal stagger-children">
+      <div class="pain-col reveal-child">
         <div class="pain-col-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
         </div>
         <h3>The Money Problem</h3>
-        <div class="pain-amount" id="pain-money">$8,000<span style="font-size:1.2rem;color:var(--text-muted);font-family:'DM Sans',sans-serif">/year</span></div>
+        <div class="pain-amount"><span class="count-up" data-target="8000" data-prefix="$" data-suffix="/year">$8,000/year</span></div>
         <p>On a $4,500/month rental, you're handing $675–$900 per booking to Airbnb. Every single booking. That's your profit walking out the door.</p>
       </div>
-      <div class="pain-col">
+      <div class="pain-col reveal-child">
         <div class="pain-col-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         </div>
         <h3>The Time Problem</h3>
-        <div class="pain-amount" id="pain-time">10+ hrs<span style="font-size:1.2rem;color:var(--text-muted);font-family:'DM Sans',sans-serif">/week</span></div>
+        <div class="pain-amount"><span class="count-up" data-target="10" data-prefix="" data-suffix="+ hrs/week">10+ hrs/week</span></div>
         <p>Fielding inquiries, screening guests, negotiating stays, coordinating move-ins. Medium-term rentals require constant back-and-forth — while you have a day job.</p>
       </div>
     </div>
 
-    <div class="pain-stats">
-      <div class="pain-stat">
-        <div class="num">15–20%</div>
+    <div class="pain-stats reveal stagger-children">
+      <div class="pain-stat reveal-child">
+        <div class="num"><span class="count-up" data-target="20" data-prefix="15–" data-suffix="%">15–20%</span></div>
         <div class="desc">Airbnb's cut of every booking</div>
       </div>
-      <div class="pain-stat">
-        <div class="num">4+ hrs</div>
+      <div class="pain-stat reveal-child">
+        <div class="num"><span class="count-up" data-target="4" data-prefix="" data-suffix="+ hrs">4+ hrs</span></div>
         <div class="desc">Average response time for manual inquiries</div>
       </div>
-      <div class="pain-stat">
-        <div class="num">$0</div>
+      <div class="pain-stat reveal-child">
+        <div class="num"><span class="count-up" data-target="0" data-prefix="$" data-suffix="">$0</span></div>
         <div class="desc">Platform fees on direct bookings</div>
       </div>
     </div>
@@ -1994,26 +2040,27 @@ button:focus-visible,
 <section class="how-it-works" id="how-it-works">
   <div class="container">
     <div class="text-center">
-      <p class="section-label scroll-reveal">How It Works</p>
-      <h2 class="section-title scroll-reveal">Your agent is live in 3 steps.</h2>
-      <p class="section-subtitle mx-auto scroll-reveal">No code. No configuration. Your agent starts working immediately.</p>
+      <p class="section-label reveal">How It Works</p>
+      <h2 class="section-title reveal">Your agent is live in 3 steps.</h2>
+      <p class="section-subtitle mx-auto reveal">No code. No configuration. Your agent starts working immediately.</p>
     </div>
+
     <div class="steps-container">
       <div class="steps-line"></div>
-      <div class="steps-grid">
-        <div class="step-card scroll-reveal">
+      <div class="steps-grid reveal stagger-children">
+        <div class="step-card reveal-child">
           <div class="step-num">1</div>
           <h3>Connect your listings</h3>
           <p>Link your Airbnb, Furnished Finder, and VRBO profiles. Your agent syncs availability, pricing, and listing details automatically.</p>
           <p class="step-detail">Takes about 5 minutes. We handle the rest.</p>
         </div>
-        <div class="step-card scroll-reveal">
+        <div class="step-card reveal-child">
           <div class="step-num">2</div>
           <h3>Your agent starts working</h3>
           <p>From that moment, your agent monitors every inquiry channel, responds in under a minute, qualifies guests, and nudges the right ones toward direct booking.</p>
           <p class="step-detail">24/7. No exceptions. No missed messages.</p>
         </div>
-        <div class="step-card scroll-reveal">
+        <div class="step-card reveal-child">
           <div class="step-num">3</div>
           <h3>Watch bookings come in</h3>
           <p>Your agent negotiates, sends contracts, collects deposits via Stripe, and follows up on stale leads — all without you lifting a finger.</p>
@@ -2030,12 +2077,12 @@ button:focus-visible,
 <section class="agents-section" id="agents">
   <div class="container">
     <div class="text-center">
-      <p class="section-label scroll-reveal">Your Agent</p>
-      <h2 class="section-title scroll-reveal">Three agents. One rental<br>that runs itself.</h2>
-      <p class="section-subtitle mx-auto scroll-reveal">Start with the Booking Agent. Add capabilities as you grow. Every tier is fully autonomous.</p>
+      <p class="section-label reveal">Your Agent</p>
+      <h2 class="section-title reveal">Three agents. One rental<br>that runs itself.</h2>
+      <p class="section-subtitle mx-auto reveal">Start with the Booking Agent. Add capabilities as you grow. Every tier is fully autonomous.</p>
     </div>
-    <div class="agents-grid">
-      <div class="agent-card scroll-reveal">
+    <div class="agents-grid reveal stagger-children">
+      <div class="agent-card tilt-card reveal-child">
         <div class="agent-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-light)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         </div>
@@ -2052,7 +2099,7 @@ button:focus-visible,
         </ul>
       </div>
 
-      <div class="agent-card featured-agent scroll-reveal">
+      <div class="agent-card featured-agent tilt-card reveal-child">
         <div class="agent-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,0.9)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
         </div>
@@ -2070,7 +2117,7 @@ button:focus-visible,
         <span class="agent-badge">Coming Soon</span>
       </div>
 
-      <div class="agent-card scroll-reveal">
+      <div class="agent-card tilt-card reveal-child">
         <div class="agent-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-light)"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
         </div>
@@ -2096,7 +2143,7 @@ button:focus-visible,
 <section class="marketing" id="marketing">
   <div class="container">
     <div class="marketing-grid">
-      <div class="marketing-copy scroll-reveal-left">
+      <div class="marketing-copy reveal from-left">
         <p class="section-label">Marketing Engine</p>
         <h2 class="section-title">Your agent doesn't just close leads.<br>It finds them.</h2>
         <p class="section-subtitle">Most hosts wait for inquiries. Your agent actively markets your property — running targeted ads, optimizing listings, and driving demand to your direct booking page.</p>
@@ -2120,9 +2167,9 @@ button:focus-visible,
         </div>
       </div>
 
-      <div class="scroll-reveal-right">
-        <div class="marketing-channels">
-          <div class="mkt-channel facebook">
+      <div class="reveal from-right">
+        <div class="marketing-channels reveal stagger-children">
+          <div class="mkt-channel facebook tilt-card reveal-child">
             <div class="mkt-channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </div>
@@ -2131,7 +2178,7 @@ button:focus-visible,
               <p>Targeted campaigns for traveling nurses, relocators, and corporate travelers.</p>
             </div>
           </div>
-          <div class="mkt-channel google">
+          <div class="mkt-channel google tilt-card reveal-child">
             <div class="mkt-channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
             </div>
@@ -2140,7 +2187,7 @@ button:focus-visible,
               <p>Capture high-intent searches like "furnished rental in [your city]."</p>
             </div>
           </div>
-          <div class="mkt-channel instagram">
+          <div class="mkt-channel instagram tilt-card reveal-child">
             <div class="mkt-channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
             </div>
@@ -2149,7 +2196,7 @@ button:focus-visible,
               <p>Story and feed ads showcasing your property. Retargets visitors who didn't book.</p>
             </div>
           </div>
-          <div class="mkt-channel seo">
+          <div class="mkt-channel seo tilt-card reveal-child">
             <div class="mkt-channel-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </div>
@@ -2161,7 +2208,7 @@ button:focus-visible,
         </div>
 
         <!-- Marketing Flow -->
-        <div class="marketing-flow">
+        <div class="marketing-flow reveal">
           <div class="flow-label">The Agent Pipeline</div>
           <div class="flow-steps">
             <span class="flow-step">Ad Seen</span>
@@ -2184,28 +2231,28 @@ button:focus-visible,
 <section class="stats-section">
   <div class="container">
     <div class="text-center">
-      <p class="section-label scroll-reveal">Agent Performance</p>
-      <h2 class="section-title scroll-reveal">Numbers no human host<br>can match.</h2>
-      <p class="section-subtitle mx-auto scroll-reveal">Your agent doesn't sleep, doesn't get distracted, and doesn't miss a lead.</p>
+      <p class="section-label reveal">Agent Performance</p>
+      <h2 class="section-title reveal">Numbers no human host<br>can match.</h2>
+      <p class="section-subtitle mx-auto reveal">Your agent doesn't sleep, doesn't get distracted, and doesn't miss a lead.</p>
     </div>
-    <div class="stats-grid">
-      <div class="stat-card scroll-reveal">
-        <div class="stat-num" data-count="47">&lt;1 min</div>
+    <div class="stats-grid reveal stagger-children">
+      <div class="stat-card reveal-child">
+        <div class="stat-num">&lt;1 min</div>
         <div class="stat-label">Average inquiry<br>response time</div>
         <span class="stat-compare">vs. 4+ hours industry avg</span>
       </div>
-      <div class="stat-card scroll-reveal">
+      <div class="stat-card reveal-child">
         <div class="stat-num">24/7</div>
         <div class="stat-label">Always available,<br>always closing</div>
         <span class="stat-compare">No holidays. No sick days.</span>
       </div>
-      <div class="stat-card scroll-reveal">
-        <div class="stat-num">$675+</div>
+      <div class="stat-card reveal-child">
+        <div class="stat-num"><span class="count-up" data-target="675" data-prefix="$" data-suffix="+">$675+</span></div>
         <div class="stat-label">Saved per<br>direct booking</div>
         <span class="stat-compare">On a typical $4,500/mo rental</span>
       </div>
-      <div class="stat-card scroll-reveal">
-        <div class="stat-num">0%</div>
+      <div class="stat-card reveal-child">
+        <div class="stat-num"><span class="count-up" data-target="0" data-prefix="" data-suffix="%">0%</span></div>
         <div class="stat-label">Platform fees on<br>direct bookings</div>
         <span class="stat-compare">Every dollar goes to you</span>
       </div>
@@ -2219,18 +2266,18 @@ button:focus-visible,
 <section class="pricing-section" id="pricing">
   <div class="container">
     <div class="text-center">
-      <div class="pricing-banner scroll-reveal">
+      <div class="pricing-banner reveal">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         60-day free trial · No credit card required
       </div>
-      <p class="section-label scroll-reveal">Pricing</p>
-      <h2 class="section-title scroll-reveal">We only get paid when<br>you save money.</h2>
-      <p class="section-subtitle mx-auto scroll-reveal">Performance-based pricing means our incentives are perfectly aligned with yours. No savings, no fee.</p>
+      <p class="section-label reveal">Pricing</p>
+      <h2 class="section-title reveal">We only get paid when<br>you save money.</h2>
+      <p class="section-subtitle mx-auto reveal">Performance-based pricing means our incentives are perfectly aligned with yours. No savings, no fee.</p>
     </div>
 
-    <div class="pricing-grid">
+    <div class="pricing-grid reveal stagger-children">
       <!-- Booking Agent -->
-      <div class="price-card scroll-reveal">
+      <div class="price-card reveal-child">
         <div class="price-tier">Booking Agent</div>
         <div class="price-row">
           <span class="price-amount">$49</span>
@@ -2249,7 +2296,7 @@ button:focus-visible,
       </div>
 
       <!-- Revenue Agent — Featured -->
-      <div class="price-card featured scroll-reveal">
+      <div class="price-card featured reveal-child">
         <span class="price-popular">Most Popular</span>
         <div class="price-tier">Revenue Agent</div>
         <div class="price-row">
@@ -2269,7 +2316,7 @@ button:focus-visible,
       </div>
 
       <!-- Operations Agent -->
-      <div class="price-card scroll-reveal">
+      <div class="price-card reveal-child">
         <div class="price-tier">Operations Agent</div>
         <div class="price-row">
           <span class="price-amount">$199</span>
@@ -2288,7 +2335,7 @@ button:focus-visible,
       </div>
     </div>
 
-    <p class="pricing-note scroll-reveal">60-day free trial. No credit card required. Cancel anytime.</p>
+    <p class="pricing-note reveal">60-day free trial. No credit card required. Cancel anytime.</p>
   </div>
 </section>
 
@@ -2298,12 +2345,12 @@ button:focus-visible,
 <section class="testimonials-section">
   <div class="container">
     <div class="text-center">
-      <p class="section-label scroll-reveal">Early Results</p>
-      <h2 class="section-title scroll-reveal">Hosts who let the agent work.</h2>
+      <p class="section-label reveal">Early Results</p>
+      <h2 class="section-title reveal">Hosts who let the agent work.</h2>
     </div>
 
     <!-- Featured Testimonial -->
-    <div class="testimonials-featured scroll-reveal">
+    <div class="testimonials-featured reveal">
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-quote-large">
         I manage 3 corporate rentals. I used to spend Sunday nights doing inquiry triage. Now the agent handles it all. I've saved over $2,400 a month in platform fees. It paid for itself with the first booking.
@@ -2318,8 +2365,8 @@ button:focus-visible,
     </div>
 
     <!-- Supporting Testimonials -->
-    <div class="testimonials-support">
-      <div class="testimonial-mini scroll-reveal">
+    <div class="testimonials-support reveal stagger-children">
+      <div class="testimonial-mini reveal-child">
         <p class="testimonial-mini-quote">"A travel nurse messaged at 11pm. By 11:02 the agent had qualified her, answered every question, and sent a direct booking link. She booked the next morning. I was asleep the whole time."</p>
         <div class="testimonial-mini-author">
           <div class="testimonial-mini-avatar">SK</div>
@@ -2329,7 +2376,7 @@ button:focus-visible,
           </div>
         </div>
       </div>
-      <div class="testimonial-mini scroll-reveal">
+      <div class="testimonial-mini reveal-child">
         <p class="testimonial-mini-quote">"I was skeptical an AI could negotiate a $5,000/month rental. It did. Qualified the guest, countered their offer, confirmed the stay — and sent me a summary. I approved it in 30 seconds."</p>
         <div class="testimonial-mini-author">
           <div class="testimonial-mini-avatar">JR</div>
@@ -2341,7 +2388,7 @@ button:focus-visible,
       </div>
     </div>
 
-    <p class="testimonials-note scroll-reveal">*Early tester feedback. Agent in active beta.</p>
+    <p class="testimonials-note reveal">*Early tester feedback. Agent in active beta.</p>
   </div>
 </section>
 
@@ -2350,22 +2397,22 @@ button:focus-visible,
      ============================================ -->
 <section class="footer-cta" id="get-agent">
   <div class="footer-cta-content container">
-    <h2 class="section-title scroll-reveal">Your rental runs itself.<br>Starting now.</h2>
-    <p class="footer-cta-desc scroll-reveal">Stop managing your rental. Your agent handles inquiries, qualifies guests, and closes bookings — 24/7. You keep every dollar.</p>
+    <h2 class="section-title reveal">Your rental runs itself.<br>Starting now.</h2>
+    <p class="footer-cta-desc reveal">Stop managing your rental. Your agent handles inquiries, qualifies guests, and closes bookings — 24/7. You keep every dollar.</p>
 
-    <div class="footer-cta-actions scroll-reveal">
+    <div class="footer-cta-actions reveal">
       <a href="/onboard" class="btn-primary">
         Get Your Agent
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
     </div>
 
-    <form class="footer-cta-form scroll-reveal" id="waitlist-form">
+    <form class="footer-cta-form reveal" id="waitlist-form">
       <input type="email" name="email" placeholder="Or enter email for early access" required aria-label="Email address for early access">
       <button type="submit">Start Free</button>
     </form>
 
-    <div class="trust-signals scroll-reveal">
+    <div class="trust-signals reveal">
       <span class="trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Secure &amp; encrypted
@@ -2407,81 +2454,265 @@ button:focus-visible,
 
 <script>
 // ============================================
-// MINIMAL JS — nav scroll + form handler only
-// All animations are CSS-only (no IntersectionObserver bugs)
+// MTR DIRECT — JS: Scroll animations, chat demo, count-up
 // ============================================
 
-// Nav scroll effect
-var nav = document.getElementById('nav');
-window.addEventListener('scroll', function() {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
+(function() {
+  'use strict';
 
-// Count-up animation for pain numbers (progressive enhancement)
-function animateCountUp() {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        var target = el.getAttribute('data-target');
-        var suffix = el.getAttribute('data-suffix') || '';
-        var prefix = el.getAttribute('data-prefix') || '';
-        var duration = 1500;
-        var start = 0;
-        var startTime = null;
+  // Mark body as JS-loaded (enables scroll reveal CSS)
+  document.body.classList.add('js-loaded');
 
-        function step(timestamp) {
-          if (!startTime) startTime = timestamp;
-          var progress = Math.min((timestamp - startTime) / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 3);
-          var current = Math.floor(eased * target);
-          el.textContent = prefix + current.toLocaleString() + suffix;
-          if (progress < 1) requestAnimationFrame(step);
+  // ============================================
+  // 1. NAV SCROLL EFFECT
+  // ============================================
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // ============================================
+  // 2. INTERSECTION OBSERVER — Scroll Reveal
+  // ============================================
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          el.classList.add('visible');
+
+          // Staggered children
+          if (el.classList.contains('stagger-children')) {
+            var children = el.querySelectorAll('.reveal-child');
+            children.forEach(function(child, i) {
+              child.style.transitionDelay = (i * 0.12) + 's';
+            });
+          }
+
+          revealObserver.unobserve(el);
         }
-
-        requestAnimationFrame(step);
-        observer.unobserve(el);
-      }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px'
     });
-  }, { threshold: 0.3 });
 
-  document.querySelectorAll('[data-count-up]').forEach(function(el) {
-    observer.observe(el);
-  });
-}
-
-// Only run count-up if IntersectionObserver exists
-if ('IntersectionObserver' in window) {
-  animateCountUp();
-}
-
-// Waitlist / early access form
-document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  var input = this.querySelector('input[name="email"]');
-  var btn = this.querySelector('button');
-  var email = input.value.trim();
-  if (!email) return;
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  try {
-    await fetch('/api/waitlist', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, source: 'footer-cta' })
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
     });
-    btn.textContent = "You're in!";
-    input.value = '';
-  } catch (err) {
-    console.log('Early access signup:', email);
-    btn.textContent = "You're in!";
-    input.value = '';
+  } else {
+    // Fallback: show everything
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      el.classList.add('visible');
+    });
   }
-  setTimeout(function() {
-    btn.textContent = 'Start Free';
-    btn.disabled = false;
-  }, 3000);
-});
+
+  // ============================================
+  // 3. COUNT-UP ANIMATIONS
+  // ============================================
+  if ('IntersectionObserver' in window) {
+    var countObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          var prefix = el.getAttribute('data-prefix') || '';
+          var suffix = el.getAttribute('data-suffix') || '';
+          var duration = 1500;
+          var startTime = null;
+
+          // Special case: target is 0 — just show immediately
+          if (target === 0) {
+            el.textContent = prefix + '0' + suffix;
+            countObserver.unobserve(el);
+            return;
+          }
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            // Ease out cubic
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = Math.floor(eased * target);
+            el.textContent = prefix + current.toLocaleString() + suffix;
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              el.textContent = prefix + target.toLocaleString() + suffix;
+            }
+          }
+
+          requestAnimationFrame(step);
+          countObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.count-up').forEach(function(el) {
+      countObserver.observe(el);
+    });
+  }
+
+  // ============================================
+  // 4. HERO CHAT DEMO — Auto-playing conversation
+  // ============================================
+  var chatBody = document.getElementById('chat-body');
+  var chatSummary = document.getElementById('chat-summary');
+
+  var conversation = [
+    {
+      type: 'guest',
+      sender: 'Sarah M.',
+      text: 'Hi, I saw your listing on Furnished Finder. I\'m a travel nurse starting a 13-week assignment in Austin on April 1st. Is the unit available?',
+      delay: 1200
+    },
+    {
+      type: 'typing',
+      delay: 1800
+    },
+    {
+      type: 'agent',
+      sender: 'MTR Direct Agent',
+      badge: 'AI',
+      text: 'Hi Sarah! Yes, The Pearl Craftsman is available from April 1st through June 30th.\n\nHere\'s what I can tell you:\n• Monthly rate: $2,800 (direct booking — saves you $420 vs. Airbnb)\n• Fully furnished, all utilities included\n• 5 min from St. David\'s Medical Center\n• Pet-friendly (we see you have a small dog!)\n\nWould you like to secure the dates? I can send you a lease agreement right now.',
+      delay: 2200
+    },
+    {
+      type: 'guest',
+      sender: 'Sarah M.',
+      text: 'That sounds perfect! Yes, let\'s do it.',
+      delay: 1500
+    },
+    {
+      type: 'typing',
+      delay: 1400
+    },
+    {
+      type: 'agent',
+      sender: 'MTR Direct Agent',
+      badge: 'AI',
+      text: 'Done! I\'ve sent the lease agreement to your email. Digital signature takes ~2 minutes. Once signed, I\'ll send your move-in guide with smart lock codes, parking info, and local recommendations.\n\nWelcome to Austin, Sarah! 🎉',
+      delay: 2000
+    }
+  ];
+
+  var chatAnimationId = null;
+
+  function clearChat() {
+    chatBody.innerHTML = '';
+    chatSummary.classList.remove('visible');
+  }
+
+  function createMessage(item) {
+    if (item.type === 'typing') {
+      var indicator = document.createElement('div');
+      indicator.className = 'typing-indicator';
+      indicator.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+      return indicator;
+    }
+
+    var msg = document.createElement('div');
+    msg.className = 'chat-msg ' + item.type;
+
+    var senderHtml = '<div class="msg-sender">' + item.sender;
+    if (item.badge) {
+      senderHtml += ' <span class="agent-badge-sm">' + item.badge + '</span>';
+    }
+    senderHtml += '</div>';
+
+    // Convert newlines and bullet points to HTML
+    var textHtml = item.text
+      .replace(/\n/g, '<br>')
+      .replace(/•/g, '&bull;');
+
+    msg.innerHTML = senderHtml + textHtml;
+    return msg;
+  }
+
+  function runChatSequence() {
+    clearChat();
+    var index = 0;
+
+    function next() {
+      if (index >= conversation.length) {
+        // Show summary bar
+        setTimeout(function() {
+          chatSummary.classList.add('visible');
+        }, 600);
+
+        // Loop after pause
+        chatAnimationId = setTimeout(function() {
+          runChatSequence();
+        }, 5000);
+        return;
+      }
+
+      var item = conversation[index];
+      var el = createMessage(item);
+      chatBody.appendChild(el);
+
+      // Auto-scroll to bottom
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      // If typing indicator, remove it before next message
+      if (item.type === 'typing') {
+        index++;
+        chatAnimationId = setTimeout(function() {
+          // Remove typing indicator
+          if (el.parentNode) {
+            el.style.opacity = '0';
+            setTimeout(function() {
+              if (el.parentNode) el.parentNode.removeChild(el);
+              next();
+            }, 200);
+          } else {
+            next();
+          }
+        }, item.delay);
+      } else {
+        index++;
+        chatAnimationId = setTimeout(next, item.delay);
+      }
+    }
+
+    // Start with a small delay
+    chatAnimationId = setTimeout(next, 800);
+  }
+
+  // Start chat demo after page load animation settles
+  setTimeout(runChatSequence, 1500);
+
+  // ============================================
+  // 5. WAITLIST FORM HANDLER
+  // ============================================
+  document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var input = this.querySelector('input[name="email"]');
+    var btn = this.querySelector('button');
+    var email = input.value.trim();
+    if (!email) return;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, source: 'footer-cta' })
+      });
+      btn.textContent = "You're in!";
+      input.value = '';
+    } catch (err) {
+      console.log('Early access signup:', email);
+      btn.textContent = "You're in!";
+      input.value = '';
+    }
+    setTimeout(function() {
+      btn.textContent = 'Start Free';
+      btn.disabled = false;
+    }, 3000);
+  });
+
+})();
 </script>
 </body>
 </html>
