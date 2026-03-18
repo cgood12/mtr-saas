@@ -19,583 +19,2468 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:#A0583E;--primary-light:#C4795A;--primary-dark:#7A3F2B;--bg:#FAF8F5;--text:#2D2D2D;--white:#FFFFFF;--gray-50:#F7F5F2;--gray-100:#EDE9E4;--gray-200:#D9D3CC;--gray-400:#9E9689;--gray-600:#6B6560;--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08),0 12px 40px rgba(0,0,0,.06)}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'DM Serif Display',serif;font-weight:400;line-height:1.2}
-img{max-width:100%;display:block}
-a{color:var(--primary);text-decoration:none}
+/* ============================================
+   MTR DIRECT — PREMIUM LANDING PAGE
+   ============================================ */
 
-.container{max-width:1140px;margin:0 auto;padding:0 24px}
-.section{padding:100px 0}
-.section-label{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
-.section-title{font-size:clamp(2rem,4vw,2.8rem);margin-bottom:20px}
-.section-subtitle{font-size:1.1rem;color:var(--gray-600);max-width:600px;line-height:1.7}
-.text-center{text-align:center}
-.mx-auto{margin-left:auto;margin-right:auto}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Animations */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
-.reveal-delay-4{transition-delay:.4s}
+:root {
+  --primary: #A0583E;
+  --primary-light: #C4795A;
+  --primary-dark: #7A3F2B;
+  --primary-glow: rgba(160, 88, 62, 0.4);
+  --bg: #FAF8F5;
+  --bg-dark: #0F0F12;
+  --bg-dark-card: #1A1A21;
+  --bg-dark-subtle: #141418;
+  --text: #2D2D2D;
+  --text-muted: #6B6560;
+  --white: #FFFFFF;
+  --gray-50: #F7F5F2;
+  --gray-100: #EDE9E4;
+  --gray-200: #D9D3CC;
+  --gray-400: #9E9689;
+  --gray-600: #6B6560;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.06);
+  --shadow-xl: 0 8px 32px rgba(0,0,0,0.12), 0 24px 64px rgba(0,0,0,0.08);
+}
 
-/* Nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
-.nav.scrolled{background:rgba(250,248,245,.85);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Rubik',sans-serif;font-size:1.4rem;color:var(--text);display:flex;align-items:center;gap:2px}
-.nav-logo .mtr{font-weight:700}
-.nav-logo .bar{color:var(--primary);font-weight:500}
-.nav-logo .direct{font-weight:500}
-.nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{font-size:.9rem;font-weight:500;color:var(--gray-600);transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--primary);color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:600;transition:background .2s,transform .1s}
-.nav-cta:hover{background:var(--primary-dark);transform:translateY(-1px)}
-@media(max-width:768px){.nav-links .hide-mobile{display:none}}
+html { scroll-behavior: smooth; font-size: 16px; }
 
-/* Hero */
-.hero{padding:160px 0 100px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(160,88,62,.08) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,rgba(160,88,62,.05) 0%,transparent 70%);pointer-events:none}
-.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);margin-bottom:24px;letter-spacing:-.02em}
-.hero h1 span{color:var(--primary)}
-.hero p{font-size:clamp(1.1rem,2vw,1.25rem);color:var(--gray-600);max-width:580px;margin:0 auto 40px;line-height:1.7}
-.hero-cta{display:inline-block;padding:18px 40px;background:var(--primary);color:var(--white);border-radius:100px;font-size:1.15rem;font-weight:600;transition:background .2s,transform .2s;box-shadow:0 4px 20px rgba(160,88,62,.3)}
-.hero-cta:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 28px rgba(160,88,62,.4)}
-.hero-sub{margin-top:16px;font-size:.9rem;color:var(--gray-400)}
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
 
-/* Agent status bar */
-.agent-status{display:inline-flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--gray-100);border-radius:100px;padding:10px 20px;margin-bottom:36px;box-shadow:var(--shadow)}
-.agent-status .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 6px rgba(34,197,94,.1)}}
-.agent-status .label{font-size:.85rem;font-weight:600;color:var(--text)}
-.agent-status .meta{font-size:.8rem;color:var(--gray-400)}
+h1, h2, h3, h4 {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  line-height: 1.15;
+}
 
-/* Pain */
-.pain{background:var(--text);color:var(--white);padding:100px 0}
-.pain .section-label{color:var(--primary-light)}
-.pain .section-title{color:var(--white)}
-.pain-intro{color:rgba(255,255,255,.75);font-size:1.15rem;line-height:1.8;max-width:640px;margin:0 auto 48px}
-.pain-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:800px;margin:0 auto 48px}
-@media(max-width:640px){.pain-cols{grid-template-columns:1fr}}
-.pain-col{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:36px 28px}
-.pain-col-icon{font-size:2rem;margin-bottom:16px}
-.pain-col h3{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:12px}
-.pain-col p{color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.7}
-.pain-col .pain-amount{font-family:'DM Serif Display',serif;font-size:2.2rem;color:var(--primary-light);margin:12px 0 8px}
-.pain-math{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:700px;margin:0 auto}
-@media(max-width:600px){.pain-math{grid-template-columns:1fr}}
-.pain-stat{text-align:center;padding:28px 20px;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);background:rgba(255,255,255,.04)}
-.pain-stat .num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--primary-light);margin-bottom:8px}
-.pain-stat .desc{font-size:.9rem;color:rgba(255,255,255,.5)}
+img { max-width: 100%; display: block; }
+a { color: var(--primary); text-decoration: none; }
 
-/* How It Works */
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
-@media(max-width:768px){.steps-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}}
-.step-card{text-align:center;padding:40px 28px;background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);transition:transform .2s,box-shadow .2s;position:relative}
-.step-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.step-num{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--primary);color:var(--white);font-weight:700;font-size:1.2rem;margin-bottom:20px}
-.step-card h3{font-size:1.25rem;margin-bottom:10px}
-.step-card p{color:var(--gray-600);font-size:.95rem;line-height:1.6}
-.step-card .step-detail{margin-top:16px;font-size:.85rem;color:var(--gray-400);padding-top:16px;border-top:1px solid var(--gray-100)}
+/* ============================================
+   LAYOUT
+   ============================================ */
 
-/* Agent Capabilities */
-.agents{background:var(--white);padding:100px 0}
-.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
-@media(max-width:900px){.agents-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}}
-.agent-card{background:var(--bg);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:36px 28px;transition:transform .2s,box-shadow .2s}
-.agent-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.agent-card.featured-agent{background:var(--primary);border-color:var(--primary);color:var(--white)}
-.agent-icon{font-size:2.4rem;margin-bottom:20px}
-.agent-tier{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:8px}
-.agent-card.featured-agent .agent-tier{color:rgba(255,255,255,.7)}
-.agent-card h3{font-size:1.35rem;margin-bottom:12px}
-.agent-card.featured-agent h3{color:var(--white)}
-.agent-card p{font-size:.9rem;color:var(--gray-600);line-height:1.6;margin-bottom:20px}
-.agent-card.featured-agent p{color:rgba(255,255,255,.75)}
-.agent-features{list-style:none;display:flex;flex-direction:column;gap:9px}
-.agent-features li{font-size:.875rem;color:var(--gray-600);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
-.agent-features li::before{content:'→';color:var(--primary);font-weight:700;flex-shrink:0;margin-top:1px}
-.agent-card.featured-agent .agent-features li{color:rgba(255,255,255,.82)}
-.agent-card.featured-agent .agent-features li::before{color:rgba(255,255,255,.9)}
-.agent-badge{display:inline-block;background:rgba(255,255,255,.15);color:var(--white);font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-top:20px}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
 
-/* Marketing Engine */
-.marketing{background:var(--gray-50);padding:100px 0}
-.marketing-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px;align-items:center}
-@media(max-width:768px){.marketing-grid{grid-template-columns:1fr;gap:32px}}
-.marketing-channels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:500px){.marketing-channels{grid-template-columns:1fr}}
-.mkt-channel{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:20px;display:flex;align-items:flex-start;gap:14px;transition:transform .2s,box-shadow .2s}
-.mkt-channel:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.mkt-channel-icon{font-size:1.6rem;flex-shrink:0;margin-top:2px}
-.mkt-channel h4{font-size:.95rem;margin-bottom:4px}
-.mkt-channel p{font-size:.82rem;color:var(--gray-600);line-height:1.5}
-.marketing-copy h2{margin-bottom:20px}
-.marketing-copy .section-subtitle{margin-bottom:24px}
-.mkt-highlight{display:flex;flex-direction:column;gap:16px;margin-top:28px}
-.mkt-highlight-item{display:flex;align-items:flex-start;gap:12px;font-size:.95rem;color:var(--gray-600);line-height:1.6}
-.mkt-highlight-item::before{content:'✓';color:var(--primary);font-weight:700;flex-shrink:0;font-size:1.1rem}
+.section {
+  padding: 120px 0;
+}
 
-/* Performance stats */
-.stats{padding:100px 0}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
-@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.stats-grid{grid-template-columns:1fr}}
-.stat-card{text-align:center;padding:36px 20px;background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg)}
-.stat-card .stat-num{font-family:'DM Serif Display',serif;font-size:2.6rem;color:var(--primary);margin-bottom:8px}
-.stat-card .stat-label{font-size:.9rem;color:var(--gray-600);line-height:1.5}
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
 
-/* Pricing */
-.pricing{padding:100px 0}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-@media(max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}}
-.price-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:40px 32px;transition:transform .2s,box-shadow .2s}
-.price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.price-card.featured{background:var(--primary);color:var(--white);border-color:var(--primary);position:relative}
-.price-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--white);font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 16px;border-radius:100px}
-.price-tier{font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:16px}
-.price-card.featured .price-tier{color:rgba(255,255,255,.7)}
-.price-amount{font-family:'DM Serif Display',serif;font-size:3rem}
-.price-amount span{font-size:1rem;font-family:'DM Sans',sans-serif;opacity:.5}
-.price-tag{font-size:.9rem;color:var(--gray-400);margin:8px 0 24px}
-.price-card.featured .price-tag{color:rgba(255,255,255,.7)}
-.price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
-.price-features li{font-size:.9rem;color:var(--gray-600);display:flex;align-items:center;gap:10px}
-.price-features li::before{content:'✓';color:var(--primary);font-weight:700;flex-shrink:0}
-.price-card.featured .price-features li{color:rgba(255,255,255,.85)}
-.price-card.featured .price-features li::before{color:rgba(255,255,255,.9)}
-.price-btn{display:block;width:100%;padding:14px;text-align:center;border-radius:100px;font-weight:600;font-size:.95rem;border:1.5px solid var(--gray-200);color:var(--text);background:transparent;cursor:pointer;font-family:inherit;transition:background .2s,border-color .2s,transform .1s;text-decoration:none}
-.price-btn:hover{background:var(--primary);color:var(--white);border-color:var(--primary);transform:translateY(-1px)}
-.price-card.featured .price-btn{background:var(--white);color:var(--primary);border-color:var(--white)}
-.price-card.featured .price-btn:hover{background:rgba(255,255,255,.9)}
-.pricing-note{text-align:center;margin-top:24px;font-size:.9rem;color:var(--gray-400)}
+.section-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
 
-/* Testimonials */
-.testimonials{background:var(--white);padding:100px 0}
-.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-@media(max-width:768px){.testimonials-grid{grid-template-columns:1fr}}
-.testimonial-card{padding:36px;background:var(--bg);border-radius:var(--radius-lg);border:1px solid var(--gray-100)}
-.testimonial-stars{color:#F5A623;font-size:.9rem;margin-bottom:12px;letter-spacing:2px}
-.testimonial-quote{font-size:1rem;line-height:1.7;margin-bottom:20px;color:var(--text)}
-.testimonial-name{font-weight:600;font-size:.95rem}
-.testimonial-role{color:var(--gray-400);font-size:.85rem}
-.testimonials-note{text-align:center;margin-top:24px;font-size:.8rem;color:var(--gray-400);font-style:italic}
+.section-subtitle {
+  font-size: 1.15rem;
+  color: var(--gray-600);
+  max-width: 600px;
+  line-height: 1.75;
+}
 
-/* Footer CTA */
-.footer-cta{background:var(--primary);color:var(--white);padding:100px 0;text-align:center;position:relative;overflow:hidden}
-.footer-cta::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:rgba(255,255,255,.06);border-radius:50%}
-.footer-cta::after{content:'';position:absolute;bottom:-80px;left:-80px;width:250px;height:250px;background:rgba(255,255,255,.04);border-radius:50%}
-.footer-cta .section-title{color:var(--white)}
-.footer-cta p{color:rgba(255,255,255,.75);max-width:500px;margin:0 auto 36px;font-size:1.1rem}
-.footer-cta-form{display:flex;gap:12px;max-width:460px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-.footer-cta-form input{flex:1;min-width:240px;padding:16px 20px;border:2px solid rgba(255,255,255,.2);border-radius:100px;font-size:1rem;font-family:inherit;background:rgba(255,255,255,.1);color:var(--white);outline:none;transition:border-color .2s}
-.footer-cta-form input::placeholder{color:rgba(255,255,255,.5)}
-.footer-cta-form input:focus{border-color:rgba(255,255,255,.5)}
-.footer-cta-form button{padding:16px 32px;background:var(--white);color:var(--primary);border:none;border-radius:100px;font-size:1rem;font-weight:600;font-family:inherit;cursor:pointer;transition:transform .1s}
-.footer-cta-form button:hover{transform:translateY(-1px)}
+.text-center { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
 
-/* Footer */
-.footer{padding:40px 0;border-top:1px solid var(--gray-100)}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-copy{font-size:.85rem;color:var(--gray-400)}
-.footer-links{display:flex;gap:24px}
-.footer-links a{font-size:.85rem;color:var(--gray-400);transition:color .2s}
-.footer-links a:hover{color:var(--text)}
+/* ============================================
+   ANIMATIONS — CSS-ONLY (no broken JS observers)
+   All content visible by default with graceful fade-in
+   ============================================ */
 
-.skip-link{position:absolute;top:-100px;left:16px;background:var(--primary);color:var(--white);padding:12px 24px;border-radius:8px;font-weight:600;z-index:1000;transition:top .2s}
-.skip-link:focus{top:16px}
-button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes countPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(160, 88, 62, 0.3), 0 0 60px rgba(160, 88, 62, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(160, 88, 62, 0.5), 0 0 80px rgba(160, 88, 62, 0.15); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.fade-up {
+  animation: fadeUp 0.8s ease both;
+}
+
+.fade-up-d1 { animation: fadeUp 0.8s 0.1s ease both; }
+.fade-up-d2 { animation: fadeUp 0.8s 0.2s ease both; }
+.fade-up-d3 { animation: fadeUp 0.8s 0.3s ease both; }
+.fade-up-d4 { animation: fadeUp 0.8s 0.4s ease both; }
+.fade-up-d5 { animation: fadeUp 0.8s 0.5s ease both; }
+
+/* Scroll-triggered animations using animation-timeline (progressive enhancement) */
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: fadeUp 0.6s ease both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+  .scroll-reveal-left {
+    animation: slideInLeft 0.6s ease both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+  .scroll-reveal-right {
+    animation: slideInRight 0.6s ease both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 18px 0;
+  transition: background 0.35s, box-shadow 0.35s, backdrop-filter 0.35s, padding 0.35s;
+}
+
+.nav.scrolled {
+  background: rgba(15, 15, 18, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+  padding: 12px 0;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  transition: color 0.3s;
+}
+
+.nav-logo .mtr { font-weight: 700; color: var(--white); }
+.nav-logo .bar { color: var(--primary-light); font-weight: 500; }
+.nav-logo .direct { font-weight: 500; color: rgba(255,255,255,0.7); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  background: transparent !important;
+  color: var(--white) !important;
+  padding: 10px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  border: 1.5px solid var(--primary);
+  transition: all 0.25s;
+}
+
+.nav-cta:hover {
+  background: var(--primary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--primary-glow);
+}
+
+@media (max-width: 768px) {
+  .nav-links .hide-mobile { display: none; }
+  .nav-links { gap: 16px; }
+}
+
+/* ============================================
+   HERO — Dark, Bold, Premium
+   ============================================ */
+
+.hero {
+  padding: 180px 0 120px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-dark);
+  color: var(--white);
+}
+
+/* Subtle gradient overlays */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(160, 88, 62, 0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -15%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(160, 88, 62, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Grid pattern background */
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Agent Status Badge with Glow */
+.agent-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  padding: 12px 24px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.6s ease both, glowPulse 3s ease-in-out infinite;
+}
+
+.agent-status .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.agent-status .label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+.agent-status .meta {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+  margin-bottom: 28px;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero h1 .accent {
+  color: var(--primary-light);
+  position: relative;
+}
+
+.hero h1 .accent::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+.hero-description {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: rgba(255,255,255,0.6);
+  max-width: 620px;
+  margin: 0 auto 48px;
+  line-height: 1.75;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 40px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 100px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.25s;
+  box-shadow: 0 4px 24px var(--primary-glow);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(160, 88, 62, 0.5);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 40px;
+  background: transparent;
+  color: var(--white);
+  border-radius: 100px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  transition: all 0.25s;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-2px);
+}
+
+.hero-sub {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Agent Dashboard Mockup */
+.hero-mockup {
+  margin-top: 72px;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.mockup-window {
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.mockup-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.mockup-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+
+.mockup-dot:nth-child(1) { background: #ff5f57; }
+.mockup-dot:nth-child(2) { background: #febc2e; }
+.mockup-dot:nth-child(3) { background: #28c840; }
+
+.mockup-url {
+  flex: 1;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  font-family: 'DM Sans', monospace;
+}
+
+.mockup-content {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+  min-height: 280px;
+}
+
+@media (max-width: 640px) {
+  .mockup-content { grid-template-columns: 1fr; min-height: 200px; }
+}
+
+.mockup-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mockup-stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.mockup-stat-label {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.mockup-stat-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--primary-light);
+}
+
+.mockup-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mockup-chat-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 4px;
+}
+
+.mockup-msg {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  max-width: 85%;
+}
+
+.mockup-msg.guest {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.7);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.mockup-msg.agent {
+  background: rgba(160, 88, 62, 0.2);
+  border: 1px solid rgba(160, 88, 62, 0.3);
+  color: rgba(255,255,255,0.85);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.mockup-msg .msg-time {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.25);
+  margin-top: 4px;
+}
+
+/* Gradient fade at bottom of hero */
+.hero-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
+/* ============================================
+   PAIN SECTION — Dark with punch
+   ============================================ */
+
+.pain {
+  background: var(--bg);
+  padding: 120px 0;
+  position: relative;
+}
+
+.pain-intro {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  max-width: 640px;
+  margin: 0 auto 60px;
+}
+
+.pain-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto 60px;
+}
+
+@media (max-width: 640px) { .pain-cols { grid-template-columns: 1fr; } }
+
+.pain-col {
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-xl);
+  padding: 48px 36px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pain-col:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.pain-col-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.pain-col:first-child .pain-col-icon { background: rgba(239, 68, 68, 0.08); }
+.pain-col:last-child .pain-col-icon { background: rgba(245, 158, 11, 0.08); }
+
+.pain-col h3 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+
+.pain-amount {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.8rem, 5vw, 3.8rem);
+  color: var(--primary);
+  margin: 16px 0 12px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.pain-col p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Pain stats row */
+.pain-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) { .pain-stats { grid-template-columns: 1fr; } }
+
+.pain-stat {
+  text-align: center;
+  padding: 32px 24px;
+  background: var(--bg-dark);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.pain-stat .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--primary-light);
+  margin-bottom: 8px;
+}
+
+.pain-stat .desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+
+/* ============================================
+   HOW IT WORKS — Clean horizontal timeline
+   ============================================ */
+
+.how-it-works {
+  padding: 120px 0;
+  background: var(--white);
+  position: relative;
+}
+
+.steps-container {
+  margin-top: 64px;
+  position: relative;
+}
+
+/* Connecting line */
+.steps-line {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .steps-line {
+    display: block;
+    position: absolute;
+    top: 40px;
+    left: calc(16.67% + 26px);
+    right: calc(16.67% + 26px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
+    opacity: 0.25;
+  }
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 32px;
+  }
+}
+
+.step-card {
+  text-align: center;
+  padding: 48px 32px 40px;
+  background: var(--bg);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-xl);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.step-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.step-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.step-detail {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  padding-top: 20px;
+  border-top: 1px solid var(--gray-100);
+  font-style: italic;
+}
+
+/* ============================================
+   AGENT CAPABILITIES — Premium tier cards
+   ============================================ */
+
+.agents-section {
+  background: var(--bg-dark);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.agents-section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(160, 88, 62, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.agents-section .section-label { color: var(--primary-light); }
+.agents-section .section-title { color: var(--white); }
+.agents-section .section-subtitle { color: rgba(255,255,255,0.5); }
+
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 64px;
+}
+
+@media (max-width: 900px) {
+  .agents-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.agent-card {
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-xl);
+  padding: 44px 32px;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.agent-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.agent-card:hover::before { opacity: 1; }
+
+/* Featured Agent Card — Revenue Agent */
+.agent-card.featured-agent {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 40px var(--primary-glow);
+}
+
+.agent-card.featured-agent::before { opacity: 0; }
+
+.agent-card.featured-agent::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-xl);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent, rgba(255,255,255,0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.agent-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  background: rgba(255,255,255,0.06);
+}
+
+.agent-card.featured-agent .agent-icon {
+  background: rgba(255,255,255,0.15);
+}
+
+.agent-tier {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  margin-bottom: 10px;
+}
+
+.agent-card.featured-agent .agent-tier {
+  color: rgba(255,255,255,0.7);
+}
+
+.agent-card h3 {
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.agent-card p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.agent-card.featured-agent p {
+  color: rgba(255,255,255,0.75);
+}
+
+.agent-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.agent-features li {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.agent-features li .check {
+  color: var(--primary-light);
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 0.8rem;
+}
+
+.agent-card.featured-agent .agent-features li {
+  color: rgba(255,255,255,0.85);
+}
+
+.agent-card.featured-agent .agent-features li .check {
+  color: rgba(255,255,255,0.9);
+}
+
+.agent-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-top: 24px;
+}
+
+/* ============================================
+   MARKETING ENGINE — Alternating layout
+   ============================================ */
+
+.marketing {
+  background: var(--bg);
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.marketing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  margin-top: 0;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .marketing-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+.marketing-copy { }
+
+.marketing-copy .section-title {
+  margin-bottom: 20px;
+}
+
+.marketing-copy .section-subtitle {
+  margin-bottom: 32px;
+}
+
+.mkt-highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mkt-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.mkt-highlight-item .check-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(160, 88, 62, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* Channel Cards */
+.marketing-channels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 500px) { .marketing-channels { grid-template-columns: 1fr; } }
+
+.mkt-channel {
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.mkt-channel:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.mkt-channel-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* Platform-specific colors */
+.mkt-channel.facebook .mkt-channel-icon {
+  background: rgba(24, 119, 242, 0.1);
+  color: #1877F2;
+}
+
+.mkt-channel.google .mkt-channel-icon {
+  background: rgba(66, 133, 244, 0.1);
+  color: #4285F4;
+}
+
+.mkt-channel.instagram .mkt-channel-icon {
+  background: linear-gradient(135deg, rgba(131, 58, 180, 0.1), rgba(253, 29, 29, 0.1));
+  color: #E1306C;
+}
+
+.mkt-channel.seo .mkt-channel-icon {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.mkt-channel h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.mkt-channel p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Marketing Flow */
+.marketing-flow {
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+}
+
+.flow-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 12px;
+}
+
+.flow-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.flow-step {
+  padding: 8px 16px;
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.flow-step.highlight {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.flow-arrow {
+  color: var(--gray-400);
+  font-size: 0.8rem;
+}
+
+/* ============================================
+   PERFORMANCE STATS — Dark, bold numbers
+   ============================================ */
+
+.stats-section {
+  background: var(--bg-dark);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(160, 88, 62, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.stats-section .section-label { color: var(--primary-light); }
+.stats-section .section-title { color: var(--white); }
+.stats-section .section-subtitle { color: rgba(255,255,255,0.5); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+
+@media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .stats-grid { grid-template-columns: 1fr; } }
+
+.stat-card {
+  text-align: center;
+  padding: 44px 24px;
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-xl);
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(160, 88, 62, 0.3);
+}
+
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  color: var(--primary-light);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+
+.stat-compare {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+  padding: 4px 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 100px;
+}
+
+/* ============================================
+   PRICING — Clean, structured
+   ============================================ */
+
+.pricing-section {
+  padding: 120px 0;
+  background: var(--bg);
+}
+
+.pricing-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(160, 88, 62, 0.08);
+  border: 1px solid rgba(160, 88, 62, 0.15);
+  border-radius: 100px;
+  padding: 10px 24px;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.pricing-banner svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+
+@media (max-width: 900px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.price-card {
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-xl);
+  padding: 44px 36px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.price-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Featured Pricing Card */
+.price-card.featured {
+  background: var(--bg-dark);
+  border-color: rgba(160, 88, 62, 0.3);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+
+.price-card.featured::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-xl);
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--primary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.price-popular {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  border-radius: 100px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.price-tier {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 20px;
+}
+
+.price-card.featured .price-tier {
+  color: rgba(255,255,255,0.5);
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.price-amount {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.4rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.price-card.featured .price-amount {
+  color: var(--white);
+}
+
+.price-period {
+  font-size: 1rem;
+  color: var(--gray-400);
+}
+
+.price-card.featured .price-period {
+  color: rgba(255,255,255,0.4);
+}
+
+.price-tag {
+  font-size: 0.88rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin: 4px 0 28px;
+}
+
+.price-card.featured .price-tag {
+  color: var(--primary-light);
+}
+
+.price-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.price-features li {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.5;
+}
+
+.price-features li .check {
+  color: var(--primary);
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.price-card.featured .price-features li {
+  color: rgba(255,255,255,0.7);
+}
+
+.price-card.featured .price-features li .check {
+  color: var(--primary-light);
+}
+
+.price-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1.5px solid var(--gray-200);
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.25s;
+  text-decoration: none;
+}
+
+.price-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.price-card.featured .price-btn {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.price-card.featured .price-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px var(--primary-glow);
+}
+
+.pricing-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.9rem;
+  color: var(--gray-400);
+}
+
+/* ============================================
+   TESTIMONIALS — Featured quote
+   ============================================ */
+
+.testimonials-section {
+  background: var(--white);
+  padding: 120px 0;
+}
+
+.testimonials-featured {
+  max-width: 800px;
+  margin: 64px auto 0;
+  text-align: center;
+}
+
+.testimonial-quote-large {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.testimonial-quote-large::before {
+  content: '"';
+  font-family: 'DM Serif Display', serif;
+  font-size: 5rem;
+  color: var(--primary);
+  opacity: 0.2;
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.testimonial-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.testimonial-author-info {
+  text-align: left;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.testimonial-role {
+  font-size: 0.85rem;
+  color: var(--gray-400);
+}
+
+.testimonial-stars {
+  color: #F5A623;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+/* Supporting testimonials */
+.testimonials-support {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 48px auto 0;
+}
+
+@media (max-width: 640px) { .testimonials-support { grid-template-columns: 1fr; } }
+
+.testimonial-mini {
+  padding: 28px;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+}
+
+.testimonial-mini-quote {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.testimonial-mini-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-mini-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.testimonial-mini-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.testimonial-mini-role {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+}
+
+.testimonials-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+/* ============================================
+   FOOTER CTA — Big bold push
+   ============================================ */
+
+.footer-cta {
+  background: var(--bg-dark);
+  color: var(--white);
+  padding: 140px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-cta::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(160, 88, 62, 0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.footer-cta-content {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-cta .section-title {
+  color: var(--white);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  margin-bottom: 20px;
+}
+
+.footer-cta .footer-cta-desc {
+  color: rgba(255,255,255,0.6);
+  max-width: 520px;
+  margin: 0 auto 44px;
+  font-size: 1.15rem;
+  line-height: 1.75;
+}
+
+.footer-cta-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.footer-cta-form {
+  display: flex;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-cta-form input {
+  flex: 1;
+  min-width: 260px;
+  padding: 16px 24px;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: rgba(255,255,255,0.05);
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.footer-cta-form input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.footer-cta-form input:focus {
+  border-color: var(--primary);
+  background: rgba(255,255,255,0.08);
+}
+
+.footer-cta-form button {
+  padding: 16px 36px;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.footer-cta-form button:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px var(--primary-glow);
+}
+
+.trust-signals {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.35);
+}
+
+.trust-item svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  padding: 40px 0;
+  background: var(--bg-dark);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.footer-logo {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.footer-logo .mtr { font-weight: 700; color: rgba(255,255,255,0.6); }
+.footer-logo .bar { color: var(--primary); font-weight: 500; }
+.footer-logo .direct { font-weight: 500; color: rgba(255,255,255,0.4); }
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.3);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+/* ============================================
+   UTILITIES & A11Y
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 1000;
+  transition: top 0.2s;
+}
+
+.skip-link:focus { top: 16px; }
+
+button:focus-visible,
+.price-btn:focus-visible,
+.nav-cta:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   RESPONSIVE FINE-TUNING
+   ============================================ */
+
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .section { padding: 80px 0; }
+  .hero { padding: 140px 0 80px; }
+  .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+  .hero-mockup { margin-top: 48px; }
+  .mockup-content { padding: 20px; }
+  .agent-status .meta { display: none; }
+  .hero-cta-group { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 320px; justify-content: center; }
+  .pain { padding: 80px 0; }
+  .agents-section, .stats-section, .pricing-section, .testimonials-section, .how-it-works, .marketing { padding: 80px 0; }
+  .footer-cta { padding: 80px 0; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 br { display: none; }
+  .pain-amount { font-size: 2.4rem; }
+}
 </style>
 </head>
 <body>
 
 <a href="#main" class="skip-link">Skip to main content</a>
 
-<!-- Nav -->
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
 <nav class="nav" id="nav">
-<div class="container nav-inner">
-<a href="/" class="nav-logo"><span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span></a>
-<div class="nav-links">
-<a href="#how-it-works" class="hide-mobile">How It Works</a>
-<a href="#agents" class="hide-mobile">Your Agent</a>
-<a href="#marketing" class="hide-mobile">Marketing</a>
-<a href="#pricing" class="hide-mobile">Pricing</a>
-<a href="/onboard" class="nav-cta">Get Your Agent</a>
-</div>
-</div>
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works" class="hide-mobile">How It Works</a>
+      <a href="#agents" class="hide-mobile">Your Agent</a>
+      <a href="#marketing" class="hide-mobile">Marketing</a>
+      <a href="#pricing" class="hide-mobile">Pricing</a>
+      <a href="/onboard" class="nav-cta">Get Your Agent</a>
+    </div>
+  </div>
 </nav>
 
 <main id="main">
 
-<!-- Hero -->
+<!-- ============================================
+     HERO
+     ============================================ -->
 <section class="hero">
-<div class="container">
-<div class="agent-status reveal">
-<span class="dot"></span>
-<span class="label">Agent Active</span>
-<span class="meta">Responding to inquiries now</span>
-</div>
-<h1 class="reveal">Your AI Agent Manages<br>Your Rental.<br><span>You Keep 100%.</span></h1>
-<p class="reveal reveal-delay-1">Your agent handles every inquiry, qualifies every guest, and closes direct bookings around the clock — so you never pay Airbnb another cent, and never lose another hour.</p>
-<a href="/onboard" class="hero-cta reveal reveal-delay-2">Get Your Agent &rarr;</a>
-<p class="hero-sub reveal reveal-delay-3">Performance-based pricing. We only get paid when you save money.</p>
-</div>
+  <div class="hero-bg-grid"></div>
+  <div class="container hero-content">
+    <div class="agent-status fade-up">
+      <span class="dot"></span>
+      <span class="label">Agent Active</span>
+      <span class="meta">Responding to inquiries now</span>
+    </div>
+
+    <h1 class="fade-up-d1">
+      Your AI Agent Runs<br>Your Rental.<br>
+      <span class="accent">You Keep Every Dollar.</span>
+    </h1>
+
+    <p class="hero-description fade-up-d2">
+      Your agent handles every inquiry, qualifies every guest, and closes direct bookings around the clock — so you never pay Airbnb another cent.
+    </p>
+
+    <div class="hero-cta-group fade-up-d3">
+      <a href="/onboard" class="btn-primary">
+        Get Your Agent
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+      <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+    </div>
+
+    <p class="hero-sub fade-up-d4">Performance-based pricing. We only get paid when you save money.</p>
+
+    <!-- Dashboard Mockup -->
+    <div class="hero-mockup fade-up-d5">
+      <div class="mockup-window">
+        <div class="mockup-toolbar">
+          <span class="mockup-dot"></span>
+          <span class="mockup-dot"></span>
+          <span class="mockup-dot"></span>
+          <span class="mockup-url">mtrdirect.com/dashboard</span>
+        </div>
+        <div class="mockup-content">
+          <div class="mockup-sidebar">
+            <div class="mockup-stat-row">
+              <span class="mockup-stat-label">Active Inquiries</span>
+              <span class="mockup-stat-value">12</span>
+            </div>
+            <div class="mockup-stat-row">
+              <span class="mockup-stat-label">Bookings This Month</span>
+              <span class="mockup-stat-value">4</span>
+            </div>
+            <div class="mockup-stat-row">
+              <span class="mockup-stat-label">Fees Saved</span>
+              <span class="mockup-stat-value">$2,847</span>
+            </div>
+            <div class="mockup-stat-row">
+              <span class="mockup-stat-label">Avg Response Time</span>
+              <span class="mockup-stat-value">47s</span>
+            </div>
+            <div class="mockup-stat-row">
+              <span class="mockup-stat-label">Agent Status</span>
+              <span class="mockup-stat-value" style="color:#22c55e;">● Online</span>
+            </div>
+          </div>
+          <div class="mockup-chat">
+            <div class="mockup-chat-header">Live Agent Conversation</div>
+            <div class="mockup-msg guest">
+              Hi, I'm looking for a 3-month furnished rental near the medical center. Do you have anything available starting April 1?
+              <div class="msg-time">11:47 PM</div>
+            </div>
+            <div class="mockup-msg agent">
+              Great news — we have a beautifully furnished 2BR available starting April 1st. It's 8 minutes from the medical center. Monthly rate is $4,200. Would you like to see photos and floor plan?
+              <div class="msg-time">11:47 PM · Agent</div>
+            </div>
+            <div class="mockup-msg guest">
+              Yes please! Also, is there parking included?
+              <div class="msg-time">11:48 PM</div>
+            </div>
+            <div class="mockup-msg agent">
+              Absolutely — one covered parking spot is included. I've just sent you the full listing with photos, a virtual tour, and our direct booking link. Book direct and save 15% vs. Airbnb. 🏠
+              <div class="msg-time">11:48 PM · Agent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-fade"></div>
 </section>
 
-<!-- Pain Section -->
-<section class="pain">
-<div class="container text-center">
-<p class="section-label reveal">The Real Cost of Doing It Yourself</p>
-<h2 class="section-title reveal" style="color:var(--white)">You're losing money and time every single month.</h2>
-<p class="pain-intro reveal reveal-delay-1">Platforms don't just take your revenue — they eat your calendar. Most MTR hosts are running a second job they never signed up for.</p>
-<div class="pain-cols reveal reveal-delay-2">
-<div class="pain-col">
-<div class="pain-col-icon">💸</div>
-<h3>The Money Problem</h3>
-<div class="pain-amount">$3,000–$8,000/year</div>
-<p>On a $4,500/month rental, you're handing over $675–$900 per booking to Airbnb. Every single booking. That's your profit walking out the door.</p>
-</div>
-<div class="pain-col">
-<div class="pain-col-icon">⏱️</div>
-<h3>The Time Problem</h3>
-<div class="pain-amount">5–10 hrs/week</div>
-<p>Fielding inquiries, screening guests, negotiating stays, coordinating move-ins. Medium-term rentals require constant back-and-forth — most hosts have day jobs.</p>
-</div>
-</div>
-<div class="pain-math reveal reveal-delay-3">
-<div class="pain-stat">
-<div class="num">15–20%</div>
-<div class="desc">Airbnb's cut of every booking</div>
-</div>
-<div class="pain-stat">
-<div class="num">4+ hrs</div>
-<div class="desc">Average response time for manual inquiries</div>
-</div>
-<div class="pain-stat">
-<div class="num">$0</div>
-<div class="desc">Platform fees on direct bookings</div>
-</div>
-</div>
-</div>
+<!-- ============================================
+     PAIN SECTION
+     ============================================ -->
+<section class="pain scroll-reveal">
+  <div class="container text-center">
+    <p class="section-label">The Real Cost of Doing It Yourself</p>
+    <h2 class="section-title">You're losing money and time.<br>Every single month.</h2>
+    <p class="pain-intro">Platforms don't just take your revenue — they eat your calendar. Most MTR hosts are running a second job they never signed up for.</p>
+
+    <div class="pain-cols">
+      <div class="pain-col">
+        <div class="pain-col-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <h3>The Money Problem</h3>
+        <div class="pain-amount" id="pain-money">$8,000<span style="font-size:1.2rem;color:var(--text-muted);font-family:'DM Sans',sans-serif">/year</span></div>
+        <p>On a $4,500/month rental, you're handing $675–$900 per booking to Airbnb. Every single booking. That's your profit walking out the door.</p>
+      </div>
+      <div class="pain-col">
+        <div class="pain-col-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <h3>The Time Problem</h3>
+        <div class="pain-amount" id="pain-time">10+ hrs<span style="font-size:1.2rem;color:var(--text-muted);font-family:'DM Sans',sans-serif">/week</span></div>
+        <p>Fielding inquiries, screening guests, negotiating stays, coordinating move-ins. Medium-term rentals require constant back-and-forth — while you have a day job.</p>
+      </div>
+    </div>
+
+    <div class="pain-stats">
+      <div class="pain-stat">
+        <div class="num">15–20%</div>
+        <div class="desc">Airbnb's cut of every booking</div>
+      </div>
+      <div class="pain-stat">
+        <div class="num">4+ hrs</div>
+        <div class="desc">Average response time for manual inquiries</div>
+      </div>
+      <div class="pain-stat">
+        <div class="num">$0</div>
+        <div class="desc">Platform fees on direct bookings</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- How It Works -->
-<section class="section" id="how-it-works">
-<div class="container">
-<div class="text-center">
-<p class="section-label reveal">How It Works</p>
-<h2 class="section-title reveal">Your agent is live in 3 steps.</h2>
-<p class="section-subtitle mx-auto reveal">No code. No configuration. Your agent starts working immediately.</p>
-</div>
-<div class="steps-grid">
-<div class="step-card reveal reveal-delay-1">
-<div class="step-num">1</div>
-<h3>Connect your listings</h3>
-<p>Link your Airbnb, Furnished Finder, and VRBO profiles. Your agent syncs availability, pricing, and listing details automatically.</p>
-<p class="step-detail">Takes about 5 minutes. We handle the rest.</p>
-</div>
-<div class="step-card reveal reveal-delay-2">
-<div class="step-num">2</div>
-<h3>Your agent starts working</h3>
-<p>From that moment on, your agent monitors every inquiry channel, responds in under a minute, qualifies guests, and nudges the right ones toward a direct booking.</p>
-<p class="step-detail">24/7. No exceptions. No missed messages.</p>
-</div>
-<div class="step-card reveal reveal-delay-3">
-<div class="step-num">3</div>
-<h3>Watch bookings come in</h3>
-<p>Your agent negotiates, sends contracts, collects deposits via Stripe, and follows up on stale leads — all without you lifting a finger.</p>
-<p class="step-detail">You review. You approve. You keep 100%.</p>
-</div>
-</div>
-</div>
+<!-- ============================================
+     HOW IT WORKS
+     ============================================ -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="text-center">
+      <p class="section-label scroll-reveal">How It Works</p>
+      <h2 class="section-title scroll-reveal">Your agent is live in 3 steps.</h2>
+      <p class="section-subtitle mx-auto scroll-reveal">No code. No configuration. Your agent starts working immediately.</p>
+    </div>
+    <div class="steps-container">
+      <div class="steps-line"></div>
+      <div class="steps-grid">
+        <div class="step-card scroll-reveal">
+          <div class="step-num">1</div>
+          <h3>Connect your listings</h3>
+          <p>Link your Airbnb, Furnished Finder, and VRBO profiles. Your agent syncs availability, pricing, and listing details automatically.</p>
+          <p class="step-detail">Takes about 5 minutes. We handle the rest.</p>
+        </div>
+        <div class="step-card scroll-reveal">
+          <div class="step-num">2</div>
+          <h3>Your agent starts working</h3>
+          <p>From that moment, your agent monitors every inquiry channel, responds in under a minute, qualifies guests, and nudges the right ones toward direct booking.</p>
+          <p class="step-detail">24/7. No exceptions. No missed messages.</p>
+        </div>
+        <div class="step-card scroll-reveal">
+          <div class="step-num">3</div>
+          <h3>Watch bookings come in</h3>
+          <p>Your agent negotiates, sends contracts, collects deposits via Stripe, and follows up on stale leads — all without you lifting a finger.</p>
+          <p class="step-detail">You review. You approve. You keep 100%.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Agent Capabilities -->
-<section class="agents" id="agents">
-<div class="container">
-<div class="text-center">
-<p class="section-label reveal">Your Agent</p>
-<h2 class="section-title reveal">Three agents. One rental that runs itself.</h2>
-<p class="section-subtitle mx-auto reveal">Start with the Booking Agent. Add capabilities as you grow. Every tier is fully autonomous.</p>
-</div>
-<div class="agents-grid">
-<div class="agent-card reveal reveal-delay-1">
-<div class="agent-icon">🤝</div>
-<div class="agent-tier">Tier 1</div>
-<h3>Booking Agent</h3>
-<p>Converts inquiries into direct bookings around the clock. The core of everything.</p>
-<ul class="agent-features">
-<li>Instant response to every inquiry (&lt;1 min, 24/7)</li>
-<li>Guest qualification — dates, budget, purpose, pets</li>
-<li>Nudges qualified leads toward direct booking</li>
-<li>Handles negotiation for mid-term stays</li>
-<li>Sends contracts, collects deposits via Stripe</li>
-<li>Auto follows up on stale leads</li>
-</ul>
-</div>
-<div class="agent-card featured-agent reveal reveal-delay-2">
-<div class="agent-icon">📈</div>
-<div class="agent-tier">Tier 2</div>
-<h3>Revenue Agent</h3>
-<p>Maximizes your income across every channel. Pricing, placement, marketing, and attribution on autopilot.</p>
-<ul class="agent-features">
-<li>Dynamic pricing based on demand + seasonality</li>
-<li>Auto-adjusts rates across all platforms</li>
-<li>Fills calendar gaps with targeted outreach</li>
-<li>Runs Facebook &amp; Google ads for your property</li>
-<li>Tracks which channels convert best</li>
-<li>Reallocates spend to highest-ROI sources</li>
-</ul>
-<span class="agent-badge">Coming Soon</span>
-</div>
-<div class="agent-card reveal reveal-delay-3">
-<div class="agent-icon">⚙️</div>
-<div class="agent-tier">Tier 3</div>
-<h3>Operations Agent</h3>
-<p>Runs the full guest lifecycle — check-in to checkout — without a single manual step.</p>
-<ul class="agent-features">
-<li>Coordinates cleaners and maintenance crews</li>
-<li>Smart lock codes and welcome guides</li>
-<li>Guest communication throughout the stay</li>
-<li>Proactive issue detection from reviews</li>
-<li>Handles review responses automatically</li>
-<li>Lease renewal outreach for expiring tenants</li>
-</ul>
-</div>
-</div>
-</div>
+<!-- ============================================
+     AGENT CAPABILITIES
+     ============================================ -->
+<section class="agents-section" id="agents">
+  <div class="container">
+    <div class="text-center">
+      <p class="section-label scroll-reveal">Your Agent</p>
+      <h2 class="section-title scroll-reveal">Three agents. One rental<br>that runs itself.</h2>
+      <p class="section-subtitle mx-auto scroll-reveal">Start with the Booking Agent. Add capabilities as you grow. Every tier is fully autonomous.</p>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card scroll-reveal">
+        <div class="agent-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-light)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <div class="agent-tier">Tier 1</div>
+        <h3>Booking Agent</h3>
+        <p>Converts inquiries into direct bookings around the clock. The core of everything.</p>
+        <ul class="agent-features">
+          <li><span class="check">→</span> Instant response to every inquiry (&lt;1 min, 24/7)</li>
+          <li><span class="check">→</span> Guest qualification — dates, budget, purpose, pets</li>
+          <li><span class="check">→</span> Nudges qualified leads toward direct booking</li>
+          <li><span class="check">→</span> Handles negotiation for mid-term stays</li>
+          <li><span class="check">→</span> Sends contracts, collects deposits via Stripe</li>
+          <li><span class="check">→</span> Auto follows up on stale leads</li>
+        </ul>
+      </div>
+
+      <div class="agent-card featured-agent scroll-reveal">
+        <div class="agent-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,0.9)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        </div>
+        <div class="agent-tier">Tier 2</div>
+        <h3>Revenue Agent</h3>
+        <p>Maximizes your income across every channel. Pricing, placement, marketing — all on autopilot.</p>
+        <ul class="agent-features">
+          <li><span class="check">→</span> Dynamic pricing based on demand + seasonality</li>
+          <li><span class="check">→</span> Auto-adjusts rates across all platforms</li>
+          <li><span class="check">→</span> Fills calendar gaps with targeted outreach</li>
+          <li><span class="check">→</span> Runs Facebook &amp; Google ads for your property</li>
+          <li><span class="check">→</span> Tracks which channels convert best</li>
+          <li><span class="check">→</span> Reallocates spend to highest-ROI sources</li>
+        </ul>
+        <span class="agent-badge">Coming Soon</span>
+      </div>
+
+      <div class="agent-card scroll-reveal">
+        <div class="agent-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-light)"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </div>
+        <div class="agent-tier">Tier 3</div>
+        <h3>Operations Agent</h3>
+        <p>Runs the full guest lifecycle — check-in to checkout — without a single manual step.</p>
+        <ul class="agent-features">
+          <li><span class="check">→</span> Coordinates cleaners and maintenance crews</li>
+          <li><span class="check">→</span> Smart lock codes and welcome guides</li>
+          <li><span class="check">→</span> Guest communication throughout the stay</li>
+          <li><span class="check">→</span> Proactive issue detection from reviews</li>
+          <li><span class="check">→</span> Handles review responses automatically</li>
+          <li><span class="check">→</span> Lease renewal outreach for expiring tenants</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Marketing Engine -->
+<!-- ============================================
+     MARKETING ENGINE
+     ============================================ -->
 <section class="marketing" id="marketing">
-<div class="container">
-<div class="marketing-grid">
-<div class="marketing-copy reveal">
-<p class="section-label">Marketing Engine</p>
-<h2 class="section-title">Your agent doesn't just close leads. It finds them.</h2>
-<p class="section-subtitle">Most hosts wait for inquiries. Your agent actively markets your property — running targeted ads, optimizing listings, and driving demand to your direct booking page. You set the budget, it does the rest.</p>
-<div class="mkt-highlight">
-<div class="mkt-highlight-item">Agent creates and manages ad campaigns — you never touch the ad platform</div>
-<div class="mkt-highlight-item">Targets traveling nurses, relocators, and corporate travelers in your area</div>
-<div class="mkt-highlight-item">Automatically pauses ads when your calendar fills up</div>
-<div class="mkt-highlight-item">Full attribution — know exactly which ad drove each booking</div>
-</div>
-</div>
-<div class="reveal reveal-delay-2">
-<div class="marketing-channels">
-<div class="mkt-channel">
-<div class="mkt-channel-icon">📘</div>
-<div>
-<h4>Facebook Ads</h4>
-<p>Targeted campaigns for traveling nurses, relocators, and corporate travelers. Auto-generated creatives from your listing photos.</p>
-</div>
-</div>
-<div class="mkt-channel">
-<div class="mkt-channel-icon">🔍</div>
-<div>
-<h4>Google Ads</h4>
-<p>Capture high-intent searches like "furnished rental in [your city]." Agent bids, optimizes, and scales automatically.</p>
-</div>
-</div>
-<div class="mkt-channel">
-<div class="mkt-channel-icon">📸</div>
-<div>
-<h4>Instagram</h4>
-<p>Story and feed ads showcasing your property. Retargets visitors who didn't book on the first visit.</p>
-</div>
-</div>
-<div class="mkt-channel">
-<div class="mkt-channel-icon">🔗</div>
-<div>
-<h4>Direct SEO</h4>
-<p>Your booking page is optimized for local search from day one. Your agent keeps it fresh with updated availability and content.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <div class="marketing-grid">
+      <div class="marketing-copy scroll-reveal-left">
+        <p class="section-label">Marketing Engine</p>
+        <h2 class="section-title">Your agent doesn't just close leads.<br>It finds them.</h2>
+        <p class="section-subtitle">Most hosts wait for inquiries. Your agent actively markets your property — running targeted ads, optimizing listings, and driving demand to your direct booking page.</p>
+        <div class="mkt-highlight">
+          <div class="mkt-highlight-item">
+            <span class="check-icon">✓</span>
+            Agent creates and manages ad campaigns — you never touch the ad platform
+          </div>
+          <div class="mkt-highlight-item">
+            <span class="check-icon">✓</span>
+            Targets traveling nurses, relocators, and corporate travelers in your area
+          </div>
+          <div class="mkt-highlight-item">
+            <span class="check-icon">✓</span>
+            Automatically pauses ads when your calendar fills up
+          </div>
+          <div class="mkt-highlight-item">
+            <span class="check-icon">✓</span>
+            Full attribution — know exactly which ad drove each booking
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-reveal-right">
+        <div class="marketing-channels">
+          <div class="mkt-channel facebook">
+            <div class="mkt-channel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div>
+              <h4>Facebook Ads</h4>
+              <p>Targeted campaigns for traveling nurses, relocators, and corporate travelers.</p>
+            </div>
+          </div>
+          <div class="mkt-channel google">
+            <div class="mkt-channel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            </div>
+            <div>
+              <h4>Google Ads</h4>
+              <p>Capture high-intent searches like "furnished rental in [your city]."</p>
+            </div>
+          </div>
+          <div class="mkt-channel instagram">
+            <div class="mkt-channel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </div>
+            <div>
+              <h4>Instagram</h4>
+              <p>Story and feed ads showcasing your property. Retargets visitors who didn't book.</p>
+            </div>
+          </div>
+          <div class="mkt-channel seo">
+            <div class="mkt-channel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div>
+              <h4>Direct SEO</h4>
+              <p>Your booking page optimized for local search from day one. Always fresh.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marketing Flow -->
+        <div class="marketing-flow">
+          <div class="flow-label">The Agent Pipeline</div>
+          <div class="flow-steps">
+            <span class="flow-step">Ad Seen</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Click</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Booking Page</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step highlight">Agent Closes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Performance Stats -->
-<section class="stats section">
-<div class="container">
-<div class="text-center">
-<p class="section-label reveal">Agent Performance</p>
-<h2 class="section-title reveal">Numbers no human host can match.</h2>
-<p class="section-subtitle mx-auto reveal">Your agent doesn't sleep, doesn't get distracted, and doesn't miss a lead.</p>
-</div>
-<div class="stats-grid">
-<div class="stat-card reveal reveal-delay-1">
-<div class="stat-num">&lt;1 min</div>
-<div class="stat-label">Average inquiry response time<br><small style="color:var(--gray-400)">vs. 4+ hours industry average</small></div>
-</div>
-<div class="stat-card reveal reveal-delay-2">
-<div class="stat-num">24/7</div>
-<div class="stat-label">Always available<br><small style="color:var(--gray-400)">No holidays. No sick days.</small></div>
-</div>
-<div class="stat-card reveal reveal-delay-3">
-<div class="stat-num">$675+</div>
-<div class="stat-label">Saved per direct booking<br><small style="color:var(--gray-400)">On a typical $4,500/mo rental</small></div>
-</div>
-<div class="stat-card reveal reveal-delay-4">
-<div class="stat-num">0%</div>
-<div class="stat-label">Platform fees on direct bookings<br><small style="color:var(--gray-400)">Every dollar goes to you</small></div>
-</div>
-</div>
-</div>
+<!-- ============================================
+     PERFORMANCE STATS
+     ============================================ -->
+<section class="stats-section">
+  <div class="container">
+    <div class="text-center">
+      <p class="section-label scroll-reveal">Agent Performance</p>
+      <h2 class="section-title scroll-reveal">Numbers no human host<br>can match.</h2>
+      <p class="section-subtitle mx-auto scroll-reveal">Your agent doesn't sleep, doesn't get distracted, and doesn't miss a lead.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card scroll-reveal">
+        <div class="stat-num" data-count="47">&lt;1 min</div>
+        <div class="stat-label">Average inquiry<br>response time</div>
+        <span class="stat-compare">vs. 4+ hours industry avg</span>
+      </div>
+      <div class="stat-card scroll-reveal">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Always available,<br>always closing</div>
+        <span class="stat-compare">No holidays. No sick days.</span>
+      </div>
+      <div class="stat-card scroll-reveal">
+        <div class="stat-num">$675+</div>
+        <div class="stat-label">Saved per<br>direct booking</div>
+        <span class="stat-compare">On a typical $4,500/mo rental</span>
+      </div>
+      <div class="stat-card scroll-reveal">
+        <div class="stat-num">0%</div>
+        <div class="stat-label">Platform fees on<br>direct bookings</div>
+        <span class="stat-compare">Every dollar goes to you</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Pricing -->
-<section class="pricing" id="pricing">
-<div class="container">
-<div class="text-center">
-<p class="section-label reveal">Pricing</p>
-<h2 class="section-title reveal">We only get paid when you save money.</h2>
-<p class="section-subtitle mx-auto reveal">Performance-based pricing means our incentives are perfectly aligned. No savings, no fee.</p>
-</div>
-<div class="pricing-grid">
-<div class="price-card reveal reveal-delay-1">
-<div class="price-tier">Booking Agent</div>
-<div class="price-amount">$49<span>/mo</span></div>
-<div class="price-tag">+ 10% of platform fees saved</div>
-<ul class="price-features">
-<li>24/7 inquiry response</li>
-<li>Guest qualification AI</li>
-<li>Direct booking conversion</li>
-<li>Contract + deposit collection</li>
-<li>Lead follow-up sequences</li>
-<li>1 property</li>
-</ul>
-<a href="/onboard" class="price-btn">Get Your Agent</a>
-</div>
-<div class="price-card featured reveal reveal-delay-2">
-<div class="price-tier">Revenue Agent</div>
-<div class="price-amount" style="color:var(--white)">$99<span>/mo</span></div>
-<div class="price-tag">+ 10% of platform fees saved</div>
-<ul class="price-features">
-<li>Everything in Booking Agent</li>
-<li>Dynamic pricing engine</li>
-<li>Multi-channel rate sync</li>
-<li>Calendar gap outreach</li>
-<li>Channel attribution analytics</li>
-<li>Up to 3 properties</li>
-</ul>
-<a href="/onboard" class="price-btn">Get Your Agent</a>
-</div>
-<div class="price-card reveal reveal-delay-3">
-<div class="price-tier">Operations Agent</div>
-<div class="price-amount">$199<span>/mo</span></div>
-<div class="price-tag">+ 10% of platform fees saved</div>
-<ul class="price-features">
-<li>Everything in Revenue Agent</li>
-<li>Vendor + cleaner coordination</li>
-<li>Smart lock + check-in flows</li>
-<li>Full guest lifecycle management</li>
-<li>Review management</li>
-<li>Unlimited properties</li>
-</ul>
-<a href="/onboard" class="price-btn">Get Your Agent</a>
-</div>
-</div>
-<p class="pricing-note reveal">60-day free trial. No credit card required. Cancel anytime.</p>
-</div>
+<!-- ============================================
+     PRICING
+     ============================================ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="text-center">
+      <div class="pricing-banner scroll-reveal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        60-day free trial · No credit card required
+      </div>
+      <p class="section-label scroll-reveal">Pricing</p>
+      <h2 class="section-title scroll-reveal">We only get paid when<br>you save money.</h2>
+      <p class="section-subtitle mx-auto scroll-reveal">Performance-based pricing means our incentives are perfectly aligned with yours. No savings, no fee.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Booking Agent -->
+      <div class="price-card scroll-reveal">
+        <div class="price-tier">Booking Agent</div>
+        <div class="price-row">
+          <span class="price-amount">$49</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-tag">+ 10% of platform fees saved</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> 24/7 inquiry response</li>
+          <li><span class="check">✓</span> Guest qualification AI</li>
+          <li><span class="check">✓</span> Direct booking conversion</li>
+          <li><span class="check">✓</span> Contract + deposit collection</li>
+          <li><span class="check">✓</span> Lead follow-up sequences</li>
+          <li><span class="check">✓</span> 1 property</li>
+        </ul>
+        <a href="/onboard" class="price-btn">Get Your Agent</a>
+      </div>
+
+      <!-- Revenue Agent — Featured -->
+      <div class="price-card featured scroll-reveal">
+        <span class="price-popular">Most Popular</span>
+        <div class="price-tier">Revenue Agent</div>
+        <div class="price-row">
+          <span class="price-amount">$99</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-tag">+ 10% of platform fees saved</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> Everything in Booking Agent</li>
+          <li><span class="check">✓</span> Dynamic pricing engine</li>
+          <li><span class="check">✓</span> Multi-channel rate sync</li>
+          <li><span class="check">✓</span> Calendar gap outreach</li>
+          <li><span class="check">✓</span> Channel attribution analytics</li>
+          <li><span class="check">✓</span> Up to 3 properties</li>
+        </ul>
+        <a href="/onboard" class="price-btn">Get Your Agent</a>
+      </div>
+
+      <!-- Operations Agent -->
+      <div class="price-card scroll-reveal">
+        <div class="price-tier">Operations Agent</div>
+        <div class="price-row">
+          <span class="price-amount">$199</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-tag">+ 10% of platform fees saved</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> Everything in Revenue Agent</li>
+          <li><span class="check">✓</span> Vendor + cleaner coordination</li>
+          <li><span class="check">✓</span> Smart lock + check-in flows</li>
+          <li><span class="check">✓</span> Full guest lifecycle management</li>
+          <li><span class="check">✓</span> Review management</li>
+          <li><span class="check">✓</span> Unlimited properties</li>
+        </ul>
+        <a href="/onboard" class="price-btn">Get Your Agent</a>
+      </div>
+    </div>
+
+    <p class="pricing-note scroll-reveal">60-day free trial. No credit card required. Cancel anytime.</p>
+  </div>
 </section>
 
-<!-- Testimonials -->
-<section class="testimonials">
-<div class="container">
-<div class="text-center">
-<p class="section-label reveal">Early Results</p>
-<h2 class="section-title reveal">Hosts who let the agent work.</h2>
-</div>
-<div class="testimonials-grid">
-<div class="testimonial-card reveal reveal-delay-1">
-<div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-<p class="testimonial-quote">"A travel nurse messaged at 11pm. By 11:02 the agent had qualified her, answered every question, and sent a direct booking link. She booked the next morning. I was asleep."</p>
-<p class="testimonial-name">Sarah K.</p>
-<p class="testimonial-role">Travel Nurse Housing Host, Austin TX</p>
-</div>
-<div class="testimonial-card reveal reveal-delay-2">
-<div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-<p class="testimonial-quote">"I manage 3 corporate rentals. I used to spend Sunday nights doing inquiry triage. Now the agent handles it all. I've saved over $2,400/month in platform fees. It pays for itself in the first booking."</p>
-<p class="testimonial-name">Marcus T.</p>
-<p class="testimonial-role">Corporate Housing Host, Denver CO</p>
-</div>
-<div class="testimonial-card reveal reveal-delay-3">
-<div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-<p class="testimonial-quote">"I was skeptical an AI could negotiate a $5,000/month rental. It did. Qualified the guest, countered their offer, confirmed the stay — and sent me a summary. I approved it in 30 seconds."</p>
-<p class="testimonial-name">Jennifer R.</p>
-<p class="testimonial-role">MTR Host, Nashville TN</p>
-</div>
-</div>
-<p class="testimonials-note reveal">*Early tester feedback. Agent in active beta.</p>
-</div>
+<!-- ============================================
+     TESTIMONIALS
+     ============================================ -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="text-center">
+      <p class="section-label scroll-reveal">Early Results</p>
+      <h2 class="section-title scroll-reveal">Hosts who let the agent work.</h2>
+    </div>
+
+    <!-- Featured Testimonial -->
+    <div class="testimonials-featured scroll-reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-quote-large">
+        I manage 3 corporate rentals. I used to spend Sunday nights doing inquiry triage. Now the agent handles it all. I've saved over $2,400 a month in platform fees. It paid for itself with the first booking.
+      </p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MT</div>
+        <div class="testimonial-author-info">
+          <p class="testimonial-name">Marcus T.</p>
+          <p class="testimonial-role">Corporate Housing Host · Denver, CO</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supporting Testimonials -->
+    <div class="testimonials-support">
+      <div class="testimonial-mini scroll-reveal">
+        <p class="testimonial-mini-quote">"A travel nurse messaged at 11pm. By 11:02 the agent had qualified her, answered every question, and sent a direct booking link. She booked the next morning. I was asleep the whole time."</p>
+        <div class="testimonial-mini-author">
+          <div class="testimonial-mini-avatar">SK</div>
+          <div>
+            <p class="testimonial-mini-name">Sarah K.</p>
+            <p class="testimonial-mini-role">Travel Nurse Housing · Austin, TX</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-mini scroll-reveal">
+        <p class="testimonial-mini-quote">"I was skeptical an AI could negotiate a $5,000/month rental. It did. Qualified the guest, countered their offer, confirmed the stay — and sent me a summary. I approved it in 30 seconds."</p>
+        <div class="testimonial-mini-author">
+          <div class="testimonial-mini-avatar">JR</div>
+          <div>
+            <p class="testimonial-mini-name">Jennifer R.</p>
+            <p class="testimonial-mini-role">MTR Host · Nashville, TN</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="testimonials-note scroll-reveal">*Early tester feedback. Agent in active beta.</p>
+  </div>
 </section>
 
-<!-- Footer CTA -->
+<!-- ============================================
+     FOOTER CTA
+     ============================================ -->
 <section class="footer-cta" id="get-agent">
-<div class="container" style="position:relative;z-index:1">
-<h2 class="section-title reveal">Your rental runs itself.<br>Starting now.</h2>
-<p class="reveal reveal-delay-1">Stop managing your rental. Your agent handles inquiries, qualifies guests, closes bookings — 24/7. You keep every dollar.</p>
-<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px" class="reveal reveal-delay-2">
-<a href="/onboard" class="hero-cta" style="background:var(--white);color:var(--primary)">Get Your Agent &rarr;</a>
-</div>
-<form class="footer-cta-form reveal reveal-delay-3" id="waitlist-form">
-<input type="email" name="email" placeholder="Or enter email for early access" required>
-<button type="submit">Start Free</button>
-</form>
-</div>
+  <div class="footer-cta-content container">
+    <h2 class="section-title scroll-reveal">Your rental runs itself.<br>Starting now.</h2>
+    <p class="footer-cta-desc scroll-reveal">Stop managing your rental. Your agent handles inquiries, qualifies guests, and closes bookings — 24/7. You keep every dollar.</p>
+
+    <div class="footer-cta-actions scroll-reveal">
+      <a href="/onboard" class="btn-primary">
+        Get Your Agent
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+
+    <form class="footer-cta-form scroll-reveal" id="waitlist-form">
+      <input type="email" name="email" placeholder="Or enter email for early access" required aria-label="Email address for early access">
+      <button type="submit">Start Free</button>
+    </form>
+
+    <div class="trust-signals scroll-reveal">
+      <span class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Secure &amp; encrypted
+      </span>
+      <span class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        No credit card required
+      </span>
+      <span class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        60-day free trial
+      </span>
+      <span class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        Cancel anytime
+      </span>
+    </div>
+  </div>
 </section>
 
 </main>
 
-<!-- Footer -->
+<!-- ============================================
+     FOOTER
+     ============================================ -->
 <footer class="footer">
-<div class="container footer-inner">
-<p class="footer-copy">&copy; 2026 MTR Direct. All rights reserved.</p>
-<div class="footer-links">
-<a href="/legal/privacy-policy.html">Privacy</a>
-<a href="/legal/terms.html">Terms</a>
-<a href="mailto:hello@mtrdirect.com">Contact</a>
-</div>
-</div>
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span>
+    </div>
+    <p class="footer-copy">&copy; 2026 MTR Direct. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="/legal/privacy-policy.html">Privacy</a>
+      <a href="/legal/terms.html">Terms</a>
+      <a href="mailto:hello@mtrdirect.com">Contact</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-// Nav scroll
-var nav=document.getElementById('nav');
-window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>50)});
+// ============================================
+// MINIMAL JS — nav scroll + form handler only
+// All animations are CSS-only (no IntersectionObserver bugs)
+// ============================================
 
-// Reveal on scroll
-var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
+// Nav scroll effect
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// Count-up animation for pain numbers (progressive enhancement)
+function animateCountUp() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var target = el.getAttribute('data-target');
+        var suffix = el.getAttribute('data-suffix') || '';
+        var prefix = el.getAttribute('data-prefix') || '';
+        var duration = 1500;
+        var start = 0;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.floor(eased * target);
+          el.textContent = prefix + current.toLocaleString() + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('[data-count-up]').forEach(function(el) {
+    observer.observe(el);
+  });
+}
+
+// Only run count-up if IntersectionObserver exists
+if ('IntersectionObserver' in window) {
+  animateCountUp();
+}
 
 // Waitlist / early access form
-document.getElementById('waitlist-form').addEventListener('submit',async function(e){
+document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  var input=this.querySelector('input[name="email"]');
-  var btn=this.querySelector('button');
-  var email=input.value.trim();
-  if(!email)return;
-  btn.textContent='Sending...';
-  btn.disabled=true;
-  try{
-    await fetch('/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'footer-cta'})});
-    btn.textContent='You\'re in!';
-    input.value='';
-  }catch(err){
-    console.log('Early access signup:',email);
-    btn.textContent='You\'re in!';
-    input.value='';
+  var input = this.querySelector('input[name="email"]');
+  var btn = this.querySelector('button');
+  var email = input.value.trim();
+  if (!email) return;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'footer-cta' })
+    });
+    btn.textContent = "You're in!";
+    input.value = '';
+  } catch (err) {
+    console.log('Early access signup:', email);
+    btn.textContent = "You're in!";
+    input.value = '';
   }
-  setTimeout(function(){btn.textContent='Start Free';btn.disabled=false},3000);
+  setTimeout(function() {
+    btn.textContent = 'Start Free';
+    btn.disabled = false;
+  }, 3000);
 });
 </script>
 </body>
