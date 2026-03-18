@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MTR Direct — Your Own Booking Site. No Airbnb. No Fees.</title>
-<meta name="description" content="Create your own direct booking page for your medium-term rental in 5 minutes. Stop paying Airbnb 15-20%. Keep $3,000–$8,000/year.">
-<meta property="og:title" content="MTR Direct — Your Own Booking Site. No Airbnb. No Fees.">
-<meta property="og:description" content="Create your own direct booking page for your medium-term rental in 5 minutes. Stop paying Airbnb 15-20%.">
+<title>MTR Direct — Your Rental Runs Itself.</title>
+<meta name="description" content="Your AI agent manages inquiries, qualifies guests, and closes direct bookings 24/7. Stop paying Airbnb 15-20%. Your rental runs itself.">
+<meta property="og:title" content="MTR Direct — Your Rental Runs Itself.">
+<meta property="og:description" content="Your AI agent handles inquiries, qualifies guests, and closes direct bookings around the clock. You keep 100% of the revenue.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mtr-saas.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
@@ -41,6 +41,7 @@ a{color:var(--primary);text-decoration:none}
 .reveal-delay-1{transition-delay:.1s}
 .reveal-delay-2{transition-delay:.2s}
 .reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
 
 /* Nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
@@ -60,20 +61,34 @@ a{color:var(--primary);text-decoration:none}
 /* Hero */
 .hero{padding:160px 0 100px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(160,88,62,.08) 0%,transparent 70%);pointer-events:none}
-.hero h1{font-size:clamp(2.5rem,6vw,4.2rem);margin-bottom:24px;letter-spacing:-.02em}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,rgba(160,88,62,.05) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);margin-bottom:24px;letter-spacing:-.02em}
 .hero h1 span{color:var(--primary)}
-.hero p{font-size:clamp(1.1rem,2vw,1.3rem);color:var(--gray-600);max-width:560px;margin:0 auto 40px;line-height:1.6}
+.hero p{font-size:clamp(1.1rem,2vw,1.25rem);color:var(--gray-600);max-width:580px;margin:0 auto 40px;line-height:1.7}
 .hero-cta{display:inline-block;padding:18px 40px;background:var(--primary);color:var(--white);border-radius:100px;font-size:1.15rem;font-weight:600;transition:background .2s,transform .2s;box-shadow:0 4px 20px rgba(160,88,62,.3)}
 .hero-cta:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 28px rgba(160,88,62,.4)}
 .hero-sub{margin-top:16px;font-size:.9rem;color:var(--gray-400)}
+
+/* Agent status bar */
+.agent-status{display:inline-flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--gray-100);border-radius:100px;padding:10px 20px;margin-bottom:36px;box-shadow:var(--shadow)}
+.agent-status .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 6px rgba(34,197,94,.1)}}
+.agent-status .label{font-size:.85rem;font-weight:600;color:var(--text)}
+.agent-status .meta{font-size:.8rem;color:var(--gray-400)}
 
 /* Pain */
 .pain{background:var(--text);color:var(--white);padding:100px 0}
 .pain .section-label{color:var(--primary-light)}
 .pain .section-title{color:var(--white)}
-.pain-amount{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,5vw,4rem);color:var(--primary-light);margin:24px 0 16px}
-.pain-detail{color:rgba(255,255,255,.6);font-size:1.1rem;line-height:1.8;max-width:640px;margin:0 auto}
-.pain-math{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;max-width:700px;margin-left:auto;margin-right:auto}
+.pain-intro{color:rgba(255,255,255,.75);font-size:1.15rem;line-height:1.8;max-width:640px;margin:0 auto 48px}
+.pain-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:800px;margin:0 auto 48px}
+@media(max-width:640px){.pain-cols{grid-template-columns:1fr}}
+.pain-col{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:36px 28px}
+.pain-col-icon{font-size:2rem;margin-bottom:16px}
+.pain-col h3{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:12px}
+.pain-col p{color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.7}
+.pain-col .pain-amount{font-family:'DM Serif Display',serif;font-size:2.2rem;color:var(--primary-light);margin:12px 0 8px}
+.pain-math{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:700px;margin:0 auto}
 @media(max-width:600px){.pain-math{grid-template-columns:1fr}}
 .pain-stat{text-align:center;padding:28px 20px;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);background:rgba(255,255,255,.04)}
 .pain-stat .num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--primary-light);margin-bottom:8px}
@@ -82,18 +97,59 @@ a{color:var(--primary);text-decoration:none}
 /* How It Works */
 .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
 @media(max-width:768px){.steps-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}}
-.step-card{text-align:center;padding:40px 28px;background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);transition:transform .2s,box-shadow .2s}
+.step-card{text-align:center;padding:40px 28px;background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);transition:transform .2s,box-shadow .2s;position:relative}
 .step-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .step-num{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--primary);color:var(--white);font-weight:700;font-size:1.2rem;margin-bottom:20px}
 .step-card h3{font-size:1.25rem;margin-bottom:10px}
 .step-card p{color:var(--gray-600);font-size:.95rem;line-height:1.6}
+.step-card .step-detail{margin-top:16px;font-size:.85rem;color:var(--gray-400);padding-top:16px;border-top:1px solid var(--gray-100)}
 
-/* Demo CTA */
-.demo-cta{background:var(--white);padding:80px 0;text-align:center}
-.demo-cta h2{margin-bottom:16px}
-.demo-cta p{color:var(--gray-600);margin-bottom:32px;font-size:1.05rem}
-.demo-btn{display:inline-block;padding:16px 36px;border:2px solid var(--primary);color:var(--primary);border-radius:100px;font-weight:600;font-size:1rem;transition:background .2s,color .2s,transform .1s}
-.demo-btn:hover{background:var(--primary);color:var(--white);transform:translateY(-1px)}
+/* Agent Capabilities */
+.agents{background:var(--white);padding:100px 0}
+.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+@media(max-width:900px){.agents-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}}
+.agent-card{background:var(--bg);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:36px 28px;transition:transform .2s,box-shadow .2s}
+.agent-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.agent-card.featured-agent{background:var(--primary);border-color:var(--primary);color:var(--white)}
+.agent-icon{font-size:2.4rem;margin-bottom:20px}
+.agent-tier{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:8px}
+.agent-card.featured-agent .agent-tier{color:rgba(255,255,255,.7)}
+.agent-card h3{font-size:1.35rem;margin-bottom:12px}
+.agent-card.featured-agent h3{color:var(--white)}
+.agent-card p{font-size:.9rem;color:var(--gray-600);line-height:1.6;margin-bottom:20px}
+.agent-card.featured-agent p{color:rgba(255,255,255,.75)}
+.agent-features{list-style:none;display:flex;flex-direction:column;gap:9px}
+.agent-features li{font-size:.875rem;color:var(--gray-600);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
+.agent-features li::before{content:'→';color:var(--primary);font-weight:700;flex-shrink:0;margin-top:1px}
+.agent-card.featured-agent .agent-features li{color:rgba(255,255,255,.82)}
+.agent-card.featured-agent .agent-features li::before{color:rgba(255,255,255,.9)}
+.agent-badge{display:inline-block;background:rgba(255,255,255,.15);color:var(--white);font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-top:20px}
+
+/* Marketing Engine */
+.marketing{background:var(--gray-50);padding:100px 0}
+.marketing-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px;align-items:center}
+@media(max-width:768px){.marketing-grid{grid-template-columns:1fr;gap:32px}}
+.marketing-channels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:500px){.marketing-channels{grid-template-columns:1fr}}
+.mkt-channel{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:20px;display:flex;align-items:flex-start;gap:14px;transition:transform .2s,box-shadow .2s}
+.mkt-channel:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.mkt-channel-icon{font-size:1.6rem;flex-shrink:0;margin-top:2px}
+.mkt-channel h4{font-size:.95rem;margin-bottom:4px}
+.mkt-channel p{font-size:.82rem;color:var(--gray-600);line-height:1.5}
+.marketing-copy h2{margin-bottom:20px}
+.marketing-copy .section-subtitle{margin-bottom:24px}
+.mkt-highlight{display:flex;flex-direction:column;gap:16px;margin-top:28px}
+.mkt-highlight-item{display:flex;align-items:flex-start;gap:12px;font-size:.95rem;color:var(--gray-600);line-height:1.6}
+.mkt-highlight-item::before{content:'✓';color:var(--primary);font-weight:700;flex-shrink:0;font-size:1.1rem}
+
+/* Performance stats */
+.stats{padding:100px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.stats-grid{grid-template-columns:1fr}}
+.stat-card{text-align:center;padding:36px 20px;background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg)}
+.stat-card .stat-num{font-family:'DM Serif Display',serif;font-size:2.6rem;color:var(--primary);margin-bottom:8px}
+.stat-card .stat-label{font-size:.9rem;color:var(--gray-600);line-height:1.5}
 
 /* Pricing */
 .pricing{padding:100px 0}
@@ -114,7 +170,7 @@ a{color:var(--primary);text-decoration:none}
 .price-features li::before{content:'✓';color:var(--primary);font-weight:700;flex-shrink:0}
 .price-card.featured .price-features li{color:rgba(255,255,255,.85)}
 .price-card.featured .price-features li::before{color:rgba(255,255,255,.9)}
-.price-btn{display:block;width:100%;padding:14px;text-align:center;border-radius:100px;font-weight:600;font-size:.95rem;border:1.5px solid var(--gray-200);color:var(--text);background:transparent;cursor:pointer;font-family:inherit;transition:background .2s,border-color .2s,transform .1s}
+.price-btn{display:block;width:100%;padding:14px;text-align:center;border-radius:100px;font-weight:600;font-size:.95rem;border:1.5px solid var(--gray-200);color:var(--text);background:transparent;cursor:pointer;font-family:inherit;transition:background .2s,border-color .2s,transform .1s;text-decoration:none}
 .price-btn:hover{background:var(--primary);color:var(--white);border-color:var(--primary);transform:translateY(-1px)}
 .price-card.featured .price-btn{background:var(--white);color:var(--primary);border-color:var(--white)}
 .price-card.featured .price-btn:hover{background:rgba(255,255,255,.9)}
@@ -134,6 +190,7 @@ a{color:var(--primary);text-decoration:none}
 /* Footer CTA */
 .footer-cta{background:var(--primary);color:var(--white);padding:100px 0;text-align:center;position:relative;overflow:hidden}
 .footer-cta::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:rgba(255,255,255,.06);border-radius:50%}
+.footer-cta::after{content:'';position:absolute;bottom:-80px;left:-80px;width:250px;height:250px;background:rgba(255,255,255,.04);border-radius:50%}
 .footer-cta .section-title{color:var(--white)}
 .footer-cta p{color:rgba(255,255,255,.75);max-width:500px;margin:0 auto 36px;font-size:1.1rem}
 .footer-cta-form{display:flex;gap:12px;max-width:460px;margin:0 auto;flex-wrap:wrap;justify-content:center}
@@ -166,9 +223,10 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <a href="/" class="nav-logo"><span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span></a>
 <div class="nav-links">
 <a href="#how-it-works" class="hide-mobile">How It Works</a>
+<a href="#agents" class="hide-mobile">Your Agent</a>
+<a href="#marketing" class="hide-mobile">Marketing</a>
 <a href="#pricing" class="hide-mobile">Pricing</a>
-<a href="/demo" class="hide-mobile">See Demo</a>
-<a href="/onboard" class="nav-cta">Create Your Listing</a>
+<a href="/onboard" class="nav-cta">Get Your Agent</a>
 </div>
 </div>
 </nav>
@@ -178,32 +236,50 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <!-- Hero -->
 <section class="hero">
 <div class="container">
-<h1 class="reveal">Your own booking site.<br><span>No Airbnb. No fees.</span></h1>
-<p class="reveal reveal-delay-1">Create a beautiful direct booking page for your medium-term rental in 5 minutes. Stop paying 15-20% to platforms.</p>
-<a href="/onboard" class="hero-cta reveal reveal-delay-2">Create Your Free Listing &rarr;</a>
-<p class="hero-sub reveal reveal-delay-3">Free during beta. No credit card required.</p>
+<div class="agent-status reveal">
+<span class="dot"></span>
+<span class="label">Agent Active</span>
+<span class="meta">Responding to inquiries now</span>
+</div>
+<h1 class="reveal">Your AI Agent Manages<br>Your Rental.<br><span>You Keep 100%.</span></h1>
+<p class="reveal reveal-delay-1">Your agent handles every inquiry, qualifies every guest, and closes direct bookings around the clock — so you never pay Airbnb another cent, and never lose another hour.</p>
+<a href="/onboard" class="hero-cta reveal reveal-delay-2">Get Your Agent &rarr;</a>
+<p class="hero-sub reveal reveal-delay-3">Performance-based pricing. We only get paid when you save money.</p>
 </div>
 </section>
 
 <!-- Pain Section -->
 <section class="pain">
 <div class="container text-center">
-<p class="section-label reveal">The Problem</p>
-<h2 class="section-title reveal" style="color:var(--white)">You lose money every single month.</h2>
-<div class="pain-amount reveal reveal-delay-1">$3,000 – $8,000/year</div>
-<p class="pain-detail reveal reveal-delay-2">That's what Airbnb takes from a typical MTR host. On a $4,500/month rental, you're handing over $675–$900/month in platform fees. Every month. Forever. Keep it.</p>
+<p class="section-label reveal">The Real Cost of Doing It Yourself</p>
+<h2 class="section-title reveal" style="color:var(--white)">You're losing money and time every single month.</h2>
+<p class="pain-intro reveal reveal-delay-1">Platforms don't just take your revenue — they eat your calendar. Most MTR hosts are running a second job they never signed up for.</p>
+<div class="pain-cols reveal reveal-delay-2">
+<div class="pain-col">
+<div class="pain-col-icon">💸</div>
+<h3>The Money Problem</h3>
+<div class="pain-amount">$3,000–$8,000/year</div>
+<p>On a $4,500/month rental, you're handing over $675–$900 per booking to Airbnb. Every single booking. That's your profit walking out the door.</p>
+</div>
+<div class="pain-col">
+<div class="pain-col-icon">⏱️</div>
+<h3>The Time Problem</h3>
+<div class="pain-amount">5–10 hrs/week</div>
+<p>Fielding inquiries, screening guests, negotiating stays, coordinating move-ins. Medium-term rentals require constant back-and-forth — most hosts have day jobs.</p>
+</div>
+</div>
 <div class="pain-math reveal reveal-delay-3">
 <div class="pain-stat">
 <div class="num">15–20%</div>
 <div class="desc">Airbnb's cut of every booking</div>
 </div>
 <div class="pain-stat">
-<div class="num">$675+</div>
-<div class="desc">Lost per month on a $4,500 rental</div>
+<div class="num">4+ hrs</div>
+<div class="desc">Average response time for manual inquiries</div>
 </div>
 <div class="pain-stat">
 <div class="num">$0</div>
-<div class="desc">What you should be paying</div>
+<div class="desc">Platform fees on direct bookings</div>
 </div>
 </div>
 </div>
@@ -214,90 +290,221 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <div class="container">
 <div class="text-center">
 <p class="section-label reveal">How It Works</p>
-<h2 class="section-title reveal">Live in 3 steps. Under 5 minutes.</h2>
-<p class="section-subtitle mx-auto reveal">No code. No design skills. No waiting.</p>
+<h2 class="section-title reveal">Your agent is live in 3 steps.</h2>
+<p class="section-subtitle mx-auto reveal">No code. No configuration. Your agent starts working immediately.</p>
 </div>
 <div class="steps-grid">
 <div class="step-card reveal reveal-delay-1">
 <div class="step-num">1</div>
-<h3>Fill in your details</h3>
-<p>Property info, pricing, photos, and amenities. Our wizard walks you through it in 4 quick steps.</p>
+<h3>Connect your listings</h3>
+<p>Link your Airbnb, Furnished Finder, and VRBO profiles. Your agent syncs availability, pricing, and listing details automatically.</p>
+<p class="step-detail">Takes about 5 minutes. We handle the rest.</p>
 </div>
 <div class="step-card reveal reveal-delay-2">
 <div class="step-num">2</div>
-<h3>Get your page</h3>
-<p>We instantly generate a beautiful, mobile-optimized booking page with your own unique URL.</p>
+<h3>Your agent starts working</h3>
+<p>From that moment on, your agent monitors every inquiry channel, responds in under a minute, qualifies guests, and nudges the right ones toward a direct booking.</p>
+<p class="step-detail">24/7. No exceptions. No missed messages.</p>
 </div>
 <div class="step-card reveal reveal-delay-3">
 <div class="step-num">3</div>
-<h3>Share with guests</h3>
-<p>Send the link to travel nurses, corporate relocators, or anyone looking for a furnished rental.</p>
+<h3>Watch bookings come in</h3>
+<p>Your agent negotiates, sends contracts, collects deposits via Stripe, and follows up on stale leads — all without you lifting a finger.</p>
+<p class="step-detail">You review. You approve. You keep 100%.</p>
 </div>
 </div>
 </div>
 </section>
 
-<!-- Demo CTA -->
-<section class="demo-cta">
+<!-- Agent Capabilities -->
+<section class="agents" id="agents">
 <div class="container">
-<h2 class="section-title reveal">See what your listing could look like</h2>
-<p class="reveal reveal-delay-1">Check out a real example of an MTR Direct listing page.</p>
-<a href="/demo" class="demo-btn reveal reveal-delay-2">See a Real Listing &rarr;</a>
+<div class="text-center">
+<p class="section-label reveal">Your Agent</p>
+<h2 class="section-title reveal">Three agents. One rental that runs itself.</h2>
+<p class="section-subtitle mx-auto reveal">Start with the Booking Agent. Add capabilities as you grow. Every tier is fully autonomous.</p>
+</div>
+<div class="agents-grid">
+<div class="agent-card reveal reveal-delay-1">
+<div class="agent-icon">🤝</div>
+<div class="agent-tier">Tier 1</div>
+<h3>Booking Agent</h3>
+<p>Converts inquiries into direct bookings around the clock. The core of everything.</p>
+<ul class="agent-features">
+<li>Instant response to every inquiry (&lt;1 min, 24/7)</li>
+<li>Guest qualification — dates, budget, purpose, pets</li>
+<li>Nudges qualified leads toward direct booking</li>
+<li>Handles negotiation for mid-term stays</li>
+<li>Sends contracts, collects deposits via Stripe</li>
+<li>Auto follows up on stale leads</li>
+</ul>
+</div>
+<div class="agent-card featured-agent reveal reveal-delay-2">
+<div class="agent-icon">📈</div>
+<div class="agent-tier">Tier 2</div>
+<h3>Revenue Agent</h3>
+<p>Maximizes your income across every channel. Pricing, placement, marketing, and attribution on autopilot.</p>
+<ul class="agent-features">
+<li>Dynamic pricing based on demand + seasonality</li>
+<li>Auto-adjusts rates across all platforms</li>
+<li>Fills calendar gaps with targeted outreach</li>
+<li>Runs Facebook &amp; Google ads for your property</li>
+<li>Tracks which channels convert best</li>
+<li>Reallocates spend to highest-ROI sources</li>
+</ul>
+<span class="agent-badge">Coming Soon</span>
+</div>
+<div class="agent-card reveal reveal-delay-3">
+<div class="agent-icon">⚙️</div>
+<div class="agent-tier">Tier 3</div>
+<h3>Operations Agent</h3>
+<p>Runs the full guest lifecycle — check-in to checkout — without a single manual step.</p>
+<ul class="agent-features">
+<li>Coordinates cleaners and maintenance crews</li>
+<li>Smart lock codes and welcome guides</li>
+<li>Guest communication throughout the stay</li>
+<li>Proactive issue detection from reviews</li>
+<li>Handles review responses automatically</li>
+<li>Lease renewal outreach for expiring tenants</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Marketing Engine -->
+<section class="marketing" id="marketing">
+<div class="container">
+<div class="marketing-grid">
+<div class="marketing-copy reveal">
+<p class="section-label">Marketing Engine</p>
+<h2 class="section-title">Your agent doesn't just close leads. It finds them.</h2>
+<p class="section-subtitle">Most hosts wait for inquiries. Your agent actively markets your property — running targeted ads, optimizing listings, and driving demand to your direct booking page. You set the budget, it does the rest.</p>
+<div class="mkt-highlight">
+<div class="mkt-highlight-item">Agent creates and manages ad campaigns — you never touch the ad platform</div>
+<div class="mkt-highlight-item">Targets traveling nurses, relocators, and corporate travelers in your area</div>
+<div class="mkt-highlight-item">Automatically pauses ads when your calendar fills up</div>
+<div class="mkt-highlight-item">Full attribution — know exactly which ad drove each booking</div>
+</div>
+</div>
+<div class="reveal reveal-delay-2">
+<div class="marketing-channels">
+<div class="mkt-channel">
+<div class="mkt-channel-icon">📘</div>
+<div>
+<h4>Facebook Ads</h4>
+<p>Targeted campaigns for traveling nurses, relocators, and corporate travelers. Auto-generated creatives from your listing photos.</p>
+</div>
+</div>
+<div class="mkt-channel">
+<div class="mkt-channel-icon">🔍</div>
+<div>
+<h4>Google Ads</h4>
+<p>Capture high-intent searches like "furnished rental in [your city]." Agent bids, optimizes, and scales automatically.</p>
+</div>
+</div>
+<div class="mkt-channel">
+<div class="mkt-channel-icon">📸</div>
+<div>
+<h4>Instagram</h4>
+<p>Story and feed ads showcasing your property. Retargets visitors who didn't book on the first visit.</p>
+</div>
+</div>
+<div class="mkt-channel">
+<div class="mkt-channel-icon">🔗</div>
+<div>
+<h4>Direct SEO</h4>
+<p>Your booking page is optimized for local search from day one. Your agent keeps it fresh with updated availability and content.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Performance Stats -->
+<section class="stats section">
+<div class="container">
+<div class="text-center">
+<p class="section-label reveal">Agent Performance</p>
+<h2 class="section-title reveal">Numbers no human host can match.</h2>
+<p class="section-subtitle mx-auto reveal">Your agent doesn't sleep, doesn't get distracted, and doesn't miss a lead.</p>
+</div>
+<div class="stats-grid">
+<div class="stat-card reveal reveal-delay-1">
+<div class="stat-num">&lt;1 min</div>
+<div class="stat-label">Average inquiry response time<br><small style="color:var(--gray-400)">vs. 4+ hours industry average</small></div>
+</div>
+<div class="stat-card reveal reveal-delay-2">
+<div class="stat-num">24/7</div>
+<div class="stat-label">Always available<br><small style="color:var(--gray-400)">No holidays. No sick days.</small></div>
+</div>
+<div class="stat-card reveal reveal-delay-3">
+<div class="stat-num">$675+</div>
+<div class="stat-label">Saved per direct booking<br><small style="color:var(--gray-400)">On a typical $4,500/mo rental</small></div>
+</div>
+<div class="stat-card reveal reveal-delay-4">
+<div class="stat-num">0%</div>
+<div class="stat-label">Platform fees on direct bookings<br><small style="color:var(--gray-400)">Every dollar goes to you</small></div>
+</div>
+</div>
 </div>
 </section>
 
 <!-- Pricing -->
-<section class="section" id="pricing">
+<section class="pricing" id="pricing">
 <div class="container">
 <div class="text-center">
 <p class="section-label reveal">Pricing</p>
-<h2 class="section-title reveal">Simple, Transparent Pricing</h2>
-<p class="section-subtitle mx-auto reveal">No percentage fees. No hidden costs. Cancel anytime.</p>
+<h2 class="section-title reveal">We only get paid when you save money.</h2>
+<p class="section-subtitle mx-auto reveal">Performance-based pricing means our incentives are perfectly aligned. No savings, no fee.</p>
 </div>
 <div class="pricing-grid">
 <div class="price-card reveal reveal-delay-1">
-<div class="price-tier">Free Beta</div>
-<div class="price-amount">$0<span>/mo</span></div>
-<div class="price-tag">While we're in beta</div>
+<div class="price-tier">Booking Agent</div>
+<div class="price-amount">$49<span>/mo</span></div>
+<div class="price-tag">+ 10% of platform fees saved</div>
 <ul class="price-features">
-<li>1 property listing</li>
-<li>Direct booking page</li>
-<li>Inquiry capture</li>
-<li>Mobile-optimized</li>
-<li>Custom URL</li>
+<li>24/7 inquiry response</li>
+<li>Guest qualification AI</li>
+<li>Direct booking conversion</li>
+<li>Contract + deposit collection</li>
+<li>Lead follow-up sequences</li>
+<li>1 property</li>
 </ul>
-<a href="/onboard" class="price-btn" style="display:block;text-decoration:none;text-align:center">Join Free Beta</a>
+<a href="/onboard" class="price-btn">Get Your Agent</a>
 </div>
 <div class="price-card featured reveal reveal-delay-2">
-<div class="price-tier">Starter</div>
-<div class="price-amount" style="color:var(--white)">$29<span>/mo</span></div>
-<div class="price-tag">For serious hosts</div>
+<div class="price-tier">Revenue Agent</div>
+<div class="price-amount" style="color:var(--white)">$99<span>/mo</span></div>
+<div class="price-tag">+ 10% of platform fees saved</div>
 <ul class="price-features">
+<li>Everything in Booking Agent</li>
+<li>Dynamic pricing engine</li>
+<li>Multi-channel rate sync</li>
+<li>Calendar gap outreach</li>
+<li>Channel attribution analytics</li>
 <li>Up to 3 properties</li>
-<li>Everything in Free</li>
-<li>Availability calendar</li>
-<li>Guest messaging</li>
-<li>Analytics dashboard</li>
-<li>Priority support</li>
 </ul>
-<a href="/onboard" class="price-btn" style="display:block;text-decoration:none;text-align:center">Join Free Beta</a>
+<a href="/onboard" class="price-btn">Get Your Agent</a>
 </div>
 <div class="price-card reveal reveal-delay-3">
-<div class="price-tier">Pro</div>
-<div class="price-amount">$79<span>/mo</span></div>
-<div class="price-tag">For growing portfolios</div>
+<div class="price-tier">Operations Agent</div>
+<div class="price-amount">$199<span>/mo</span></div>
+<div class="price-tag">+ 10% of platform fees saved</div>
 <ul class="price-features">
+<li>Everything in Revenue Agent</li>
+<li>Vendor + cleaner coordination</li>
+<li>Smart lock + check-in flows</li>
+<li>Full guest lifecycle management</li>
+<li>Review management</li>
 <li>Unlimited properties</li>
-<li>Everything in Starter</li>
-<li>Custom domain</li>
-<li>Lease generation</li>
-<li>Payment processing</li>
-<li>Marketing tools</li>
 </ul>
-<a href="/onboard" class="price-btn" style="display:block;text-decoration:none;text-align:center">Join Free Beta</a>
+<a href="/onboard" class="price-btn">Get Your Agent</a>
 </div>
 </div>
-<p class="pricing-note reveal">Currently free during beta. Lock in early pricing forever.</p>
+<p class="pricing-note reveal">60-day free trial. No credit card required. Cancel anytime.</p>
 </div>
 </section>
 
@@ -305,44 +512,44 @@ button:focus-visible,.price-btn:focus-visible,.nav-cta:focus-visible{outline:2px
 <section class="testimonials">
 <div class="container">
 <div class="text-center">
-<p class="section-label reveal">What Hosts Are Saying</p>
-<h2 class="section-title reveal">Hosts Love MTR Direct</h2>
+<p class="section-label reveal">Early Results</p>
+<h2 class="section-title reveal">Hosts who let the agent work.</h2>
 </div>
 <div class="testimonials-grid">
 <div class="testimonial-card reveal reveal-delay-1">
 <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-<p class="testimonial-quote">"I had my listing page up in 4 minutes flat. Sent the link to a travel nurse that night and booked her the next day. No Airbnb fee. That's $810 I kept in my pocket."</p>
+<p class="testimonial-quote">"A travel nurse messaged at 11pm. By 11:02 the agent had qualified her, answered every question, and sent a direct booking link. She booked the next morning. I was asleep."</p>
 <p class="testimonial-name">Sarah K.</p>
 <p class="testimonial-role">Travel Nurse Housing Host, Austin TX</p>
 </div>
 <div class="testimonial-card reveal reveal-delay-2">
 <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-<p class="testimonial-quote">"I manage 3 corporate rentals in Denver. MTR Direct saves me $2,400/month in platform fees. The listing pages look more professional than Airbnb's."</p>
+<p class="testimonial-quote">"I manage 3 corporate rentals. I used to spend Sunday nights doing inquiry triage. Now the agent handles it all. I've saved over $2,400/month in platform fees. It pays for itself in the first booking."</p>
 <p class="testimonial-name">Marcus T.</p>
 <p class="testimonial-role">Corporate Housing Host, Denver CO</p>
 </div>
 <div class="testimonial-card reveal reveal-delay-3">
 <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-<p class="testimonial-quote">"The booking inquiry form is so clean. Guests fill it out and I get an email instantly. No more Airbnb middleman. This is exactly what MTR hosts needed."</p>
+<p class="testimonial-quote">"I was skeptical an AI could negotiate a $5,000/month rental. It did. Qualified the guest, countered their offer, confirmed the stay — and sent me a summary. I approved it in 30 seconds."</p>
 <p class="testimonial-name">Jennifer R.</p>
 <p class="testimonial-role">MTR Host, Nashville TN</p>
 </div>
 </div>
-<p class="testimonials-note reveal">*Early tester feedback. Product in beta.</p>
+<p class="testimonials-note reveal">*Early tester feedback. Agent in active beta.</p>
 </div>
 </section>
 
 <!-- Footer CTA -->
-<section class="footer-cta" id="waitlist">
-<div class="container">
-<h2 class="section-title reveal">Ready to keep your rental income?</h2>
-<p class="reveal reveal-delay-1">Create your free listing in 5 minutes. Or join the waitlist for updates.</p>
+<section class="footer-cta" id="get-agent">
+<div class="container" style="position:relative;z-index:1">
+<h2 class="section-title reveal">Your rental runs itself.<br>Starting now.</h2>
+<p class="reveal reveal-delay-1">Stop managing your rental. Your agent handles inquiries, qualifies guests, closes bookings — 24/7. You keep every dollar.</p>
 <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px" class="reveal reveal-delay-2">
-<a href="/onboard" class="hero-cta" style="background:var(--white);color:var(--primary)">Create Your Free Listing &rarr;</a>
+<a href="/onboard" class="hero-cta" style="background:var(--white);color:var(--primary)">Get Your Agent &rarr;</a>
 </div>
 <form class="footer-cta-form reveal reveal-delay-3" id="waitlist-form">
-<input type="email" name="email" placeholder="Or enter email for updates" required>
-<button type="submit">Join Waitlist</button>
+<input type="email" name="email" placeholder="Or enter email for early access" required>
+<button type="submit">Start Free</button>
 </form>
 </div>
 </section>
@@ -370,25 +577,25 @@ window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',wind
 var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
 
-// Waitlist form
+// Waitlist / early access form
 document.getElementById('waitlist-form').addEventListener('submit',async function(e){
   e.preventDefault();
   var input=this.querySelector('input[name="email"]');
   var btn=this.querySelector('button');
   var email=input.value.trim();
   if(!email)return;
-  btn.textContent='Joining...';
+  btn.textContent='Sending...';
   btn.disabled=true;
   try{
     await fetch('/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'footer-cta'})});
-    btn.textContent='You\'re on the list!';
+    btn.textContent='You\'re in!';
     input.value='';
   }catch(err){
-    console.log('Waitlist signup:',email);
-    btn.textContent='You\'re on the list!';
+    console.log('Early access signup:',email);
+    btn.textContent='You\'re in!';
     input.value='';
   }
-  setTimeout(function(){btn.textContent='Join Waitlist';btn.disabled=false},3000);
+  setTimeout(function(){btn.textContent='Start Free';btn.disabled=false},3000);
 });
 </script>
 </body>
