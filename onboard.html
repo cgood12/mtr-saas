@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Your Listing — MTR Direct</title>
+<meta name="description" content="Create your direct booking page in 5 minutes. Free during beta.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<meta name="theme-color" content="#A0583E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#A0583E;--primary-light:#C4795A;--primary-dark:#7A3F2B;--bg:#FAF8F5;--text:#2D2D2D;--white:#FFFFFF;--gray-50:#F7F5F2;--gray-100:#EDE9E4;--gray-200:#D9D3CC;--gray-400:#9E9689;--gray-600:#6B6560;--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08),0 12px 40px rgba(0,0,0,.06)}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400;line-height:1.2}
+a{color:var(--primary);text-decoration:none}
+
+/* Nav */
+.nav{padding:16px 0;background:var(--bg);border-bottom:1px solid var(--gray-100)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Rubik',sans-serif;font-size:1.4rem;color:var(--text);display:flex;align-items:center;gap:2px}
+.nav-logo .mtr{font-weight:700}
+.nav-logo .bar{color:var(--primary);font-weight:500}
+.nav-logo .direct{font-weight:500}
+.nav-cta{background:var(--primary);color:var(--white);padding:10px 24px;border-radius:100px;font-weight:600;font-size:.9rem;transition:background .2s}
+.nav-cta:hover{background:var(--primary-dark)}
+
+/* Page */
+.page{max-width:640px;margin:0 auto;padding:48px 24px 100px}
+.page h1{font-size:clamp(1.8rem,4vw,2.4rem);text-align:center;margin-bottom:8px}
+.page h1 span{color:var(--primary)}
+.page-sub{text-align:center;color:var(--gray-600);font-size:1.05rem;margin-bottom:40px}
+
+/* Progress */
+.progress{display:flex;gap:8px;margin-bottom:36px}
+.progress-step{flex:1;height:4px;border-radius:4px;background:var(--gray-200);transition:background .4s}
+.progress-step.active,.progress-step.done{background:var(--primary)}
+.step-indicator{text-align:center;font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:24px}
+
+/* Card */
+.card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow)}
+@media(max-width:480px){.card{padding:28px 20px}}
+
+/* Form */
+.form-group{margin-bottom:24px}
+.form-group label{display:block;font-weight:600;font-size:.95rem;margin-bottom:8px}
+.form-group .hint{font-size:.8rem;color:var(--gray-400);font-weight:400;margin-left:4px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius);font-size:1rem;font-family:inherit;background:var(--white);outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary)}
+.form-group select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239E9689' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.form-group .error-msg{color:#dc3545;font-size:.8rem;margin-top:4px;display:none}
+.form-group.has-error input,.form-group.has-error select,.form-group.has-error textarea{border-color:#dc3545}
+.form-group.has-error .error-msg{display:block}
+
+/* Radio */
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.radio-group{grid-template-columns:1fr}}
+.radio-option{position:relative}
+.radio-option input{position:absolute;opacity:0;pointer-events:none}
+.radio-option label{display:block;padding:14px;border:1.5px solid var(--gray-200);border-radius:var(--radius);text-align:center;cursor:pointer;font-weight:500;font-size:.95rem;transition:border-color .2s,background .2s}
+.radio-option input:checked+label{border-color:var(--primary);background:rgba(160,88,62,.06);color:var(--primary)}
+.radio-option label:hover{border-color:var(--gray-400)}
+
+/* Checkbox grid */
+.checkbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.checkbox-grid{grid-template-columns:1fr}}
+.checkbox-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:var(--radius);cursor:pointer;transition:border-color .2s,background .2s;font-size:.9rem;font-weight:500}
+.checkbox-item:hover{border-color:var(--gray-400)}
+.checkbox-item.checked{border-color:var(--primary);background:rgba(160,88,62,.06)}
+.checkbox-item input{width:16px;height:16px;accent-color:var(--primary);cursor:pointer;flex-shrink:0}
+
+/* Buttons */
+.actions{display:flex;gap:12px;margin-top:32px}
+.btn-next{flex:1;padding:16px 32px;background:var(--primary);color:var(--white);border:none;border-radius:100px;font-size:1rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,transform .1s}
+.btn-next:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-next:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-back{padding:16px 24px;background:transparent;color:var(--gray-600);border:1.5px solid var(--gray-200);border-radius:100px;font-size:1rem;font-weight:500;font-family:inherit;cursor:pointer;transition:border-color .2s}
+.btn-back:hover{border-color:var(--gray-400)}
+
+/* Steps */
+.step{display:none}
+.step.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Success */
+.success{text-align:center;padding:40px 20px}
+.success .icon{font-size:4rem;margin-bottom:20px}
+.success h2{font-size:1.8rem;margin-bottom:12px}
+.success p{color:var(--gray-600);font-size:1.05rem;line-height:1.7;margin-bottom:16px}
+.success .listing-url{display:inline-block;padding:14px 24px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius);font-size:1rem;font-weight:600;color:var(--primary);word-break:break-all;margin-bottom:24px}
+.success .btn-view{display:inline-block;padding:16px 36px;background:var(--primary);color:var(--white);border-radius:100px;font-weight:600;font-size:1rem;transition:background .2s,transform .1s}
+.success .btn-view:hover{background:var(--primary-dark);transform:translateY(-1px)}
+
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-inner">
+<a href="/" class="nav-logo"><span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span></a>
+<a href="/" class="nav-cta">Create Your Listing</a>
+</div>
+</nav>
+
+<div class="page">
+<h1>Create Your <span>Listing</span></h1>
+<p class="page-sub">4 quick steps. Your page goes live instantly.</p>
+
+<div class="progress">
+<div class="progress-step active" id="prog-1"></div>
+<div class="progress-step" id="prog-2"></div>
+<div class="progress-step" id="prog-3"></div>
+<div class="progress-step" id="prog-4"></div>
+</div>
+
+<div class="card">
+
+<!-- Step 1: Property Basics -->
+<div class="step active" id="step-1">
+<div class="step-indicator">Step 1 of 4 — Property Basics</div>
+<div class="form-group">
+<label for="prop-name">Property Name</label>
+<input type="text" id="prop-name" placeholder="e.g. Sunny Austin Loft">
+<div class="error-msg">Please enter a property name</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="prop-city">City</label>
+<input type="text" id="prop-city" placeholder="e.g. Austin">
+<div class="error-msg">Required</div>
+</div>
+<div class="form-group">
+<label for="prop-state">State</label>
+<input type="text" id="prop-state" placeholder="e.g. TX">
+<div class="error-msg">Required</div>
+</div>
+</div>
+<div class="form-group">
+<label>Property Type</label>
+<div class="radio-group">
+<div class="radio-option"><input type="radio" name="propType" id="pt-apt" value="Apartment"><label for="pt-apt">Apartment</label></div>
+<div class="radio-option"><input type="radio" name="propType" id="pt-house" value="House"><label for="pt-house">House</label></div>
+<div class="radio-option"><input type="radio" name="propType" id="pt-condo" value="Condo"><label for="pt-condo">Condo</label></div>
+<div class="radio-option"><input type="radio" name="propType" id="pt-town" value="Townhome"><label for="pt-town">Townhome</label></div>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="prop-beds">Bedrooms</label>
+<select id="prop-beds">
+<option value="">Select</option>
+<option value="Studio">Studio</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5+">5+</option>
+</select>
+<div class="error-msg">Required</div>
+</div>
+<div class="form-group">
+<label for="prop-baths">Bathrooms</label>
+<select id="prop-baths">
+<option value="">Select</option>
+<option value="1">1</option>
+<option value="1.5">1.5</option>
+<option value="2">2</option>
+<option value="2.5">2.5</option>
+<option value="3">3</option>
+<option value="3+">3+</option>
+</select>
+<div class="error-msg">Required</div>
+</div>
+</div>
+<div class="form-group">
+<label for="prop-guests">Max Guests</label>
+<select id="prop-guests">
+<option value="">Select</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8+">8+</option>
+</select>
+<div class="error-msg">Required</div>
+</div>
+<div class="actions">
+<button class="btn-next" onclick="nextStep(1)">Continue &rarr;</button>
+</div>
+</div>
+
+<!-- Step 2: Pricing & Availability -->
+<div class="step" id="step-2">
+<div class="step-indicator">Step 2 of 4 — Pricing & Availability</div>
+<div class="form-group">
+<label for="prop-rate">Monthly Rate <span class="hint">(USD)</span></label>
+<input type="number" id="prop-rate" placeholder="e.g. 4500" min="100">
+<div class="error-msg">Please enter a monthly rate</div>
+</div>
+<div class="form-group">
+<label for="prop-minstay">Minimum Stay</label>
+<div class="radio-group">
+<div class="radio-option"><input type="radio" name="minStay" id="ms-30" value="30"><label for="ms-30">30 days</label></div>
+<div class="radio-option"><input type="radio" name="minStay" id="ms-60" value="60"><label for="ms-60">60 days</label></div>
+<div class="radio-option"><input type="radio" name="minStay" id="ms-90" value="90"><label for="ms-90">90 days</label></div>
+</div>
+</div>
+<div class="form-group">
+<label for="prop-available">Available From</label>
+<input type="date" id="prop-available">
+<div class="error-msg">Please select a date</div>
+</div>
+<div class="form-group">
+<label>Pet Policy</label>
+<div class="radio-group">
+<div class="radio-option"><input type="radio" name="petPolicy" id="pet-yes" value="Pets allowed"><label for="pet-yes">Pets Allowed</label></div>
+<div class="radio-option"><input type="radio" name="petPolicy" id="pet-no" value="No pets"><label for="pet-no">No Pets</label></div>
+</div>
+</div>
+<div class="actions">
+<button class="btn-back" onclick="prevStep(2)">&larr; Back</button>
+<button class="btn-next" onclick="nextStep(2)">Continue &rarr;</button>
+</div>
+</div>
+
+<!-- Step 3: Description & Photos -->
+<div class="step" id="step-3">
+<div class="step-indicator">Step 3 of 4 — Description & Photos</div>
+<div class="form-group">
+<label for="prop-headline">Property Headline</label>
+<input type="text" id="prop-headline" placeholder="e.g. Bright Austin loft near downtown">
+<div class="error-msg">Please enter a headline</div>
+</div>
+<div class="form-group">
+<label for="prop-desc">Description</label>
+<textarea id="prop-desc" placeholder="Describe your property — what makes it great for medium-term guests?"></textarea>
+</div>
+<div class="form-group">
+<label for="prop-photo">Photo URL <span class="hint">(optional — paste any image URL)</span></label>
+<input type="url" id="prop-photo" placeholder="https://...">
+</div>
+<div class="form-group">
+<label>Amenities</label>
+<div class="checkbox-grid" id="amenities-grid">
+<label class="checkbox-item"><input type="checkbox" value="WiFi"><span>WiFi</span></label>
+<label class="checkbox-item"><input type="checkbox" value="Parking"><span>Parking</span></label>
+<label class="checkbox-item"><input type="checkbox" value="Washer/Dryer"><span>Washer/Dryer</span></label>
+<label class="checkbox-item"><input type="checkbox" value="AC"><span>AC</span></label>
+<label class="checkbox-item"><input type="checkbox" value="Kitchen"><span>Kitchen</span></label>
+<label class="checkbox-item"><input type="checkbox" value="Gym"><span>Gym</span></label>
+<label class="checkbox-item"><input type="checkbox" value="Pool"><span>Pool</span></label>
+<label class="checkbox-item"><input type="checkbox" value="Workspace"><span>Workspace</span></label>
+</div>
+</div>
+<div class="actions">
+<button class="btn-back" onclick="prevStep(3)">&larr; Back</button>
+<button class="btn-next" onclick="nextStep(3)">Continue &rarr;</button>
+</div>
+</div>
+
+<!-- Step 4: Host Info -->
+<div class="step" id="step-4">
+<div class="step-indicator">Step 4 of 4 — Your Info</div>
+<div class="form-group">
+<label for="host-name">Your Name</label>
+<input type="text" id="host-name" placeholder="First and last name">
+<div class="error-msg">Please enter your name</div>
+</div>
+<div class="form-group">
+<label for="host-email">Email Address</label>
+<input type="email" id="host-email" placeholder="you@example.com">
+<div class="error-msg">Please enter a valid email</div>
+</div>
+<div class="form-group">
+<label for="host-phone">Phone <span class="hint">(optional)</span></label>
+<input type="tel" id="host-phone" placeholder="(555) 123-4567">
+</div>
+<div class="form-group">
+<label>How do you want guests to contact you?</label>
+<div class="radio-group">
+<div class="radio-option"><input type="radio" name="contactMethod" id="cm-email" value="Email" checked><label for="cm-email">Email</label></div>
+<div class="radio-option"><input type="radio" name="contactMethod" id="cm-whatsapp" value="WhatsApp"><label for="cm-whatsapp">WhatsApp</label></div>
+<div class="radio-option"><input type="radio" name="contactMethod" id="cm-both" value="Both"><label for="cm-both">Both</label></div>
+</div>
+</div>
+<div class="actions">
+<button class="btn-back" onclick="prevStep(4)">&larr; Back</button>
+<button class="btn-next" id="submit-btn" onclick="submitListing()">Create My Listing &rarr;</button>
+</div>
+</div>
+
+<!-- Success -->
+<div class="step" id="step-done">
+<div class="success">
+<div class="icon">&#127881;</div>
+<h2>Your listing is live!</h2>
+<p>Share this link with potential guests:</p>
+<div class="listing-url" id="listing-url"></div>
+<br>
+<a href="#" class="btn-view" id="view-listing-btn">View Your Listing &rarr;</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+var currentStep = 1;
+var formData = {};
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(function(el){el.classList.remove('active')});
+  var id = n > 4 ? 'step-done' : 'step-' + n;
+  document.getElementById(id).classList.add('active');
+  for (var i = 1; i <= 4; i++) {
+    var p = document.getElementById('prog-' + i);
+    p.classList.remove('active','done');
+    if (i < n) p.classList.add('done');
+    else if (i === n) p.classList.add('active');
+  }
+  if (n > 4) {
+    for (var j = 1; j <= 4; j++) document.getElementById('prog-' + j).classList.add('done');
+  }
+  currentStep = n;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function validate(fields) {
+  var valid = true;
+  fields.forEach(function(f) {
+    var el = document.getElementById(f.id);
+    var group = el.closest('.form-group');
+    if (f.type === 'radio') {
+      el = document.querySelector('input[name="'+f.name+'"]:checked');
+      if (!el) { valid = false; }
+      return;
+    }
+    if (!el.value.trim()) {
+      group.classList.add('has-error');
+      valid = false;
+    } else {
+      group.classList.remove('has-error');
+    }
+    if (f.type === 'email' && el.value.trim() && !el.value.includes('@')) {
+      group.classList.add('has-error');
+      valid = false;
+    }
+  });
+  return valid;
+}
+
+function nextStep(from) {
+  if (from === 1) {
+    if (!validate([
+      {id:'prop-name'},{id:'prop-city'},{id:'prop-state'},
+      {id:'prop-beds'},{id:'prop-baths'},{id:'prop-guests'}
+    ])) return;
+    var propType = document.querySelector('input[name="propType"]:checked');
+    if (!propType) { alert('Please select a property type.'); return; }
+    formData.propertyName = document.getElementById('prop-name').value.trim();
+    formData.city = document.getElementById('prop-city').value.trim();
+    formData.state = document.getElementById('prop-state').value.trim();
+    formData.propertyType = propType.value;
+    formData.bedrooms = document.getElementById('prop-beds').value;
+    formData.bathrooms = document.getElementById('prop-baths').value;
+    formData.maxGuests = document.getElementById('prop-guests').value;
+  }
+  if (from === 2) {
+    if (!validate([{id:'prop-rate'},{id:'prop-available'}])) return;
+    var minStay = document.querySelector('input[name="minStay"]:checked');
+    var petPolicy = document.querySelector('input[name="petPolicy"]:checked');
+    formData.monthlyRate = document.getElementById('prop-rate').value;
+    formData.minStay = minStay ? minStay.value : '30';
+    formData.availableFrom = document.getElementById('prop-available').value;
+    formData.petPolicy = petPolicy ? petPolicy.value : 'No pets';
+  }
+  if (from === 3) {
+    if (!validate([{id:'prop-headline'}])) return;
+    formData.headline = document.getElementById('prop-headline').value.trim();
+    formData.description = document.getElementById('prop-desc').value.trim();
+    formData.photoUrl = document.getElementById('prop-photo').value.trim();
+    var amenities = [];
+    document.querySelectorAll('#amenities-grid input:checked').forEach(function(cb){amenities.push(cb.value)});
+    formData.amenities = amenities;
+  }
+  showStep(from + 1);
+}
+
+function prevStep(from) {
+  showStep(from - 1);
+}
+
+// Checkbox styling
+document.querySelectorAll('.checkbox-item input').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    this.closest('.checkbox-item').classList.toggle('checked', this.checked);
+  });
+});
+
+async function submitListing() {
+  if (!validate([{id:'host-name'},{id:'host-email',type:'email'}])) return;
+
+  formData.hostName = document.getElementById('host-name').value.trim();
+  formData.hostEmail = document.getElementById('host-email').value.trim();
+  formData.hostPhone = document.getElementById('host-phone').value.trim();
+  var cm = document.querySelector('input[name="contactMethod"]:checked');
+  formData.contactMethod = cm ? cm.value : 'Email';
+
+  var btn = document.getElementById('submit-btn');
+  btn.textContent = 'Creating your listing...';
+  btn.disabled = true;
+
+  try {
+    var res = await fetch('/api/onboard', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(formData)
+    });
+    var data = await res.json();
+    if (data.success) {
+      var url = window.location.origin + data.listingUrl;
+      document.getElementById('listing-url').textContent = url;
+      var viewBtn = document.getElementById('view-listing-btn');
+      viewBtn.href = data.listingUrl;
+      // Save listing data to localStorage for the listing page
+      localStorage.setItem('mtr-listing-' + data.slug, JSON.stringify(formData));
+      showStep(5);
+    } else {
+      btn.textContent = 'Create My Listing \u2192';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again.');
+    }
+  } catch (err) {
+    console.error('Onboard error:', err);
+    // Fallback: generate slug client-side
+    var slug = formData.propertyName.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') + '-' + Math.random().toString(36).substr(2,4);
+    localStorage.setItem('mtr-listing-' + slug, JSON.stringify(formData));
+    var url = window.location.origin + '/listing/' + slug;
+    document.getElementById('listing-url').textContent = url;
+    document.getElementById('view-listing-btn').href = '/listing/' + slug;
+    showStep(5);
+  }
+}
+</script>
+</body>
+</html>

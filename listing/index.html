@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Listing — MTR Direct</title>
+<meta name="description" content="Book this furnished medium-term rental directly — no platform fees.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<meta name="theme-color" content="#A0583E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#A0583E;--primary-light:#C4795A;--primary-dark:#7A3F2B;--bg:#FAF8F5;--text:#2D2D2D;--white:#FFFFFF;--gray-50:#F7F5F2;--gray-100:#EDE9E4;--gray-200:#D9D3CC;--gray-400:#9E9689;--gray-600:#6B6560;--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08),0 12px 40px rgba(0,0,0,.06)}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'DM Serif Display',serif;font-weight:400;line-height:1.2}
+img{max-width:100%;display:block}
+a{color:var(--primary);text-decoration:none}
+
+/* Nav */
+.nav{padding:16px 0;background:var(--white);border-bottom:1px solid var(--gray-100);position:sticky;top:0;z-index:50}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Rubik',sans-serif;font-size:1.4rem;color:var(--text);display:flex;align-items:center;gap:2px}
+.nav-logo .mtr{font-weight:700}
+.nav-logo .bar{color:var(--primary);font-weight:500}
+.nav-logo .direct{font-weight:500}
+.nav-cta{background:var(--primary);color:var(--white);padding:10px 24px;border-radius:100px;font-weight:600;font-size:.9rem;transition:background .2s}
+.nav-cta:hover{background:var(--primary-dark)}
+
+/* Hero Image */
+.listing-hero{position:relative;max-height:500px;overflow:hidden}
+.listing-hero img{width:100%;height:500px;object-fit:cover}
+.listing-hero .overlay{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(transparent,rgba(0,0,0,.3))}
+@media(max-width:768px){.listing-hero img{height:300px}}
+
+/* Layout */
+.listing-container{max-width:1140px;margin:0 auto;padding:0 24px}
+.listing-layout{display:grid;grid-template-columns:1fr 380px;gap:40px;padding:40px 0 80px;align-items:start}
+@media(max-width:900px){.listing-layout{grid-template-columns:1fr;gap:24px}}
+
+/* Main Content */
+.listing-header{margin-bottom:32px}
+.listing-header h1{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:8px}
+.listing-location{color:var(--gray-600);font-size:1rem;display:flex;align-items:center;gap:6px}
+.listing-meta{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap}
+.listing-meta .meta-item{font-size:.9rem;color:var(--gray-600);display:flex;align-items:center;gap:6px}
+.listing-meta .meta-item strong{color:var(--text)}
+
+.listing-divider{height:1px;background:var(--gray-100);margin:32px 0}
+
+/* Description */
+.listing-section{margin-bottom:32px}
+.listing-section h2{font-size:1.4rem;margin-bottom:16px}
+.listing-section p{color:var(--gray-600);line-height:1.8}
+
+/* Amenities */
+.amenities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:480px){.amenities-grid{grid-template-columns:1fr}}
+.amenity-badge{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);font-size:.9rem;font-weight:500}
+.amenity-icon{width:32px;height:32px;border-radius:8px;background:rgba(160,88,62,.1);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+
+/* Availability */
+.availability-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:28px}
+.availability-card h3{font-size:1.1rem;margin-bottom:16px}
+.availability-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.availability-row input{padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:var(--radius);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;width:100%}
+.availability-row input:focus{border-color:var(--primary)}
+.availability-row label{font-size:.8rem;font-weight:600;color:var(--gray-600);margin-bottom:4px;display:block}
+
+/* Host Card */
+.host-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:28px;margin-top:24px}
+.host-card h3{font-size:1.1rem;margin-bottom:12px}
+.host-info{display:flex;align-items:center;gap:16px}
+.host-avatar{width:56px;height:56px;border-radius:50%;background:var(--primary);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;flex-shrink:0}
+.host-details .host-name{font-weight:600;font-size:1rem}
+.host-details .host-contact{font-size:.85rem;color:var(--gray-600);margin-top:2px}
+
+/* Sidebar Booking Card */
+.booking-card{position:sticky;top:80px;background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-lg)}
+.booking-price{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--primary);margin-bottom:4px}
+.booking-price span{font-size:1rem;font-family:'DM Sans',sans-serif;color:var(--gray-400);font-weight:400}
+.booking-minstay{font-size:.85rem;color:var(--gray-600);margin-bottom:20px}
+.booking-details{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;padding:20px 0;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100)}
+.booking-details li{display:flex;justify-content:space-between;font-size:.9rem}
+.booking-details li span:first-child{color:var(--gray-600)}
+.booking-details li span:last-child{font-weight:600}
+.booking-btn{display:block;width:100%;padding:16px;background:var(--primary);color:var(--white);border:none;border-radius:100px;font-size:1.05rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,transform .1s;text-align:center}
+.booking-btn:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.booking-note{font-size:.8rem;color:var(--gray-400);text-align:center;margin-top:12px}
+.booking-pet{font-size:.85rem;color:var(--gray-600);margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-100);text-align:center}
+
+/* Modal */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.active{display:flex}
+.modal{background:var(--white);border-radius:var(--radius-lg);padding:40px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .3s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:none;background:var(--gray-50);border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;color:var(--gray-600);transition:background .2s}
+.modal-close:hover{background:var(--gray-100)}
+.modal h2{font-size:1.4rem;margin-bottom:8px}
+.modal .modal-sub{color:var(--gray-600);font-size:.9rem;margin-bottom:24px}
+.modal .form-group{margin-bottom:20px}
+.modal .form-group label{display:block;font-weight:600;font-size:.9rem;margin-bottom:6px}
+.modal .form-group input,.modal .form-group textarea,.modal .form-group select{width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:var(--radius);font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s}
+.modal .form-group input:focus,.modal .form-group textarea:focus,.modal .form-group select:focus{border-color:var(--primary)}
+.modal .form-group textarea{resize:vertical;min-height:80px}
+.modal .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-submit{width:100%;padding:16px;background:var(--primary);color:var(--white);border:none;border-radius:100px;font-size:1rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,transform .1s}
+.modal-submit:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.modal-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.modal-success{text-align:center;padding:20px 0}
+.modal-success .icon{font-size:3rem;margin-bottom:12px}
+.modal-success h3{font-size:1.3rem;margin-bottom:8px}
+.modal-success p{color:var(--gray-600);font-size:.95rem}
+
+/* Mobile booking bar */
+.mobile-booking{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--gray-100);padding:12px 24px;z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.08)}
+.mobile-booking-inner{display:flex;align-items:center;justify-content:space-between;max-width:600px;margin:0 auto}
+.mobile-booking .mob-price{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--primary)}
+.mobile-booking .mob-price span{font-size:.8rem;font-family:'DM Sans',sans-serif;color:var(--gray-400)}
+.mobile-booking .mob-btn{padding:12px 28px;background:var(--primary);color:var(--white);border:none;border-radius:100px;font-weight:600;font-family:inherit;cursor:pointer;font-size:.95rem}
+@media(max-width:900px){.mobile-booking{display:block}.booking-card{position:static}}
+
+/* Powered by */
+.powered-by{text-align:center;padding:40px 0 60px;font-size:.85rem;color:var(--gray-400)}
+.powered-by a{color:var(--primary);font-weight:600}
+
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+<div class="nav-inner">
+<a href="/" class="nav-logo"><span class="mtr">mtr</span><span class="bar">|</span><span class="direct">direct</span></a>
+<a href="/onboard" class="nav-cta">Create Your Listing</a>
+</div>
+</nav>
+
+<!-- Hero Image -->
+<div class="listing-hero">
+<img id="hero-img" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&q=80" alt="Property photo">
+<div class="overlay"></div>
+</div>
+
+<!-- Listing Content -->
+<div class="listing-container">
+<div class="listing-layout">
+
+<!-- Main Column -->
+<div class="listing-main">
+<div class="listing-header">
+<h1 id="listing-name">Bright Austin Loft Near Downtown</h1>
+<div class="listing-location" id="listing-location">Austin, TX</div>
+<div class="listing-meta" id="listing-meta">
+<div class="meta-item"><strong>2</strong>&nbsp;Bedrooms</div>
+<div class="meta-item"><strong>1</strong>&nbsp;Bathroom</div>
+<div class="meta-item"><strong>4</strong>&nbsp;Guests</div>
+<div class="meta-item"><strong>Apartment</strong></div>
+</div>
+</div>
+
+<div class="listing-divider"></div>
+
+<!-- Description -->
+<div class="listing-section">
+<h2>About This Place</h2>
+<p id="listing-headline" style="font-weight:600;margin-bottom:8px">Bright Austin loft near downtown</p>
+<p id="listing-desc">Welcome to this beautifully furnished loft in the heart of Austin. Perfect for traveling professionals, nurses, or anyone looking for a comfortable home away from home. Walking distance to downtown, restaurants, and public transit. Fast WiFi, fully equipped kitchen, and in-unit washer/dryer included. Your ideal medium-term rental.</p>
+</div>
+
+<div class="listing-divider"></div>
+
+<!-- Amenities -->
+<div class="listing-section">
+<h2>Amenities</h2>
+<div class="amenities-grid" id="amenities-list">
+<div class="amenity-badge"><div class="amenity-icon">&#128246;</div>WiFi</div>
+<div class="amenity-badge"><div class="amenity-icon">&#128663;</div>Parking</div>
+<div class="amenity-badge"><div class="amenity-icon">&#129523;</div>Washer/Dryer</div>
+<div class="amenity-badge"><div class="amenity-icon">&#10052;</div>AC</div>
+<div class="amenity-badge"><div class="amenity-icon">&#127860;</div>Kitchen</div>
+<div class="amenity-badge"><div class="amenity-icon">&#128187;</div>Workspace</div>
+</div>
+</div>
+
+<div class="listing-divider"></div>
+
+<!-- Availability -->
+<div class="listing-section">
+<h2>Check Availability</h2>
+<div class="availability-card">
+<div class="availability-row">
+<div>
+<label for="check-in">Move-in Date</label>
+<input type="date" id="check-in">
+</div>
+<div>
+<label for="check-out">Move-out Date</label>
+<input type="date" id="check-out">
+</div>
+</div>
+</div>
+</div>
+
+<div class="listing-divider"></div>
+
+<!-- Host -->
+<div class="listing-section">
+<h2>Your Host</h2>
+<div class="host-card" style="margin-top:0;border:none;padding:0;background:transparent">
+<div class="host-info">
+<div class="host-avatar" id="host-initial">S</div>
+<div class="host-details">
+<div class="host-name" id="host-name-display">Sarah</div>
+<div class="host-contact" id="host-contact-display">Responds within a few hours</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Sidebar -->
+<div class="listing-sidebar">
+<div class="booking-card">
+<div class="booking-price" id="booking-price">$4,500 <span>/month</span></div>
+<div class="booking-minstay" id="booking-minstay">Minimum stay: 30 days</div>
+<ul class="booking-details" id="booking-details">
+<li><span>Monthly rate</span><span id="detail-rate">$4,500</span></li>
+<li><span>Minimum stay</span><span id="detail-minstay">30 days</span></li>
+<li><span>Available from</span><span id="detail-available">Now</span></li>
+<li><span>Platform fee</span><span style="color:var(--primary)">$0</span></li>
+</ul>
+<button class="booking-btn" onclick="openInquiry()">Request to Book</button>
+<p class="booking-note">No fees. No commitment. Just a message to the host.</p>
+<div class="booking-pet" id="booking-pet"></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- Mobile Booking Bar -->
+<div class="mobile-booking">
+<div class="mobile-booking-inner">
+<div class="mob-price" id="mob-price">$4,500 <span>/month</span></div>
+<button class="mob-btn" onclick="openInquiry()">Request to Book</button>
+</div>
+</div>
+
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="inquiry-modal">
+<div class="modal">
+<button class="modal-close" onclick="closeInquiry()">&times;</button>
+<div id="inquiry-form-container">
+<h2>Request to Book</h2>
+<p class="modal-sub">Send a message to the host. No fees, no commitment.</p>
+<form id="inquiry-form" onsubmit="submitInquiry(event)">
+<div class="form-group">
+<label for="guest-name">Your Name</label>
+<input type="text" id="guest-name" placeholder="First and last name" required>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="guest-email">Email</label>
+<input type="email" id="guest-email" placeholder="you@email.com" required>
+</div>
+<div class="form-group">
+<label for="guest-phone">Phone</label>
+<input type="tel" id="guest-phone" placeholder="(555) 123-4567">
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="guest-movein">Move-in Date</label>
+<input type="date" id="guest-movein">
+</div>
+<div class="form-group">
+<label for="guest-duration">Length of Stay</label>
+<select id="guest-duration">
+<option value="">Select</option>
+<option value="1 month">1 month</option>
+<option value="2 months">2 months</option>
+<option value="3 months">3 months</option>
+<option value="4-6 months">4-6 months</option>
+<option value="6-12 months">6-12 months</option>
+<option value="12+ months">12+ months</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="guest-message">Message to Host</label>
+<textarea id="guest-message" placeholder="Tell the host a bit about yourself and your stay..."></textarea>
+</div>
+<button type="submit" class="modal-submit" id="inquiry-submit">Send Request</button>
+</form>
+</div>
+<div id="inquiry-success" style="display:none">
+<div class="modal-success">
+<div class="icon">&#9989;</div>
+<h3>Request Sent!</h3>
+<p>The host will get back to you shortly. Check your email for updates.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Powered By -->
+<div class="powered-by">
+Powered by <a href="/">mtr|direct</a> — Direct bookings for medium-term rentals
+</div>
+
+<script>
+// Demo listing data
+var demoListing = {
+  propertyName: 'Bright Austin Loft Near Downtown',
+  city: 'Austin',
+  state: 'TX',
+  propertyType: 'Apartment',
+  bedrooms: '2',
+  bathrooms: '1',
+  maxGuests: '4',
+  monthlyRate: '4500',
+  minStay: '30',
+  availableFrom: '',
+  petPolicy: 'Pets allowed',
+  headline: 'Bright Austin loft near downtown',
+  description: 'Welcome to this beautifully furnished loft in the heart of Austin. Perfect for traveling professionals, nurses, or anyone looking for a comfortable home away from home. Walking distance to downtown, restaurants, and public transit. Fast WiFi, fully equipped kitchen, and in-unit washer/dryer included.\n\nThe space features an open floor plan with plenty of natural light, a dedicated workspace, modern kitchen with everything you need, and a comfortable queen bed in each room. Located in a quiet neighborhood just 10 minutes from downtown.\n\nIdeal for travel nurses, corporate relocators, or anyone in transition who wants to feel at home.',
+  photoUrl: '',
+  amenities: ['WiFi','Parking','Washer/Dryer','AC','Kitchen','Workspace'],
+  hostName: 'Sarah',
+  hostEmail: 'sarah@example.com',
+  contactMethod: 'Email'
+};
+
+var amenityIcons = {
+  'WiFi':'&#128246;','Parking':'&#128663;','Washer/Dryer':'&#129523;','AC':'&#10052;',
+  'Kitchen':'&#127860;','Gym':'&#127947;','Pool':'&#127946;','Workspace':'&#128187;'
+};
+
+// Get slug from URL
+var path = window.location.pathname;
+var slug = path.split('/listing/')[1] || '';
+slug = slug.replace(/\/$/, '');
+
+// Try to load listing data
+var listing = null;
+
+if (slug && slug !== 'index.html') {
+  // Try localStorage first
+  var stored = localStorage.getItem('mtr-listing-' + slug);
+  if (stored) {
+    try { listing = JSON.parse(stored); } catch(e) {}
+  }
+}
+
+// Fall back to demo
+if (!listing) {
+  listing = demoListing;
+}
+
+// Render listing
+function renderListing(data) {
+  document.title = data.propertyName + ' — MTR Direct';
+  document.getElementById('page-title').textContent = data.propertyName + ' — MTR Direct';
+  document.getElementById('listing-name').textContent = data.propertyName;
+  document.getElementById('listing-location').textContent = (data.city || '') + (data.state ? ', ' + data.state : '');
+
+  // Meta
+  var metaHtml = '';
+  if (data.bedrooms) metaHtml += '<div class="meta-item"><strong>' + data.bedrooms + '</strong>&nbsp;Bed' + (data.bedrooms !== '1' && data.bedrooms !== 'Studio' ? 's' : '') + '</div>';
+  if (data.bathrooms) metaHtml += '<div class="meta-item"><strong>' + data.bathrooms + '</strong>&nbsp;Bath' + (data.bathrooms !== '1' ? 's' : '') + '</div>';
+  if (data.maxGuests) metaHtml += '<div class="meta-item"><strong>' + data.maxGuests + '</strong>&nbsp;Guest' + (data.maxGuests !== '1' ? 's' : '') + '</div>';
+  if (data.propertyType) metaHtml += '<div class="meta-item"><strong>' + data.propertyType + '</strong></div>';
+  document.getElementById('listing-meta').innerHTML = metaHtml;
+
+  // Description
+  if (data.headline) document.getElementById('listing-headline').textContent = data.headline;
+  if (data.description) document.getElementById('listing-desc').textContent = data.description;
+
+  // Photo
+  if (data.photoUrl) {
+    document.getElementById('hero-img').src = data.photoUrl;
+  }
+
+  // Amenities
+  if (data.amenities && data.amenities.length) {
+    var amenHtml = data.amenities.map(function(a) {
+      var icon = amenityIcons[a] || '&#10003;';
+      return '<div class="amenity-badge"><div class="amenity-icon">' + icon + '</div>' + escHtml(a) + '</div>';
+    }).join('');
+    document.getElementById('amenities-list').innerHTML = amenHtml;
+  }
+
+  // Pricing
+  var rate = data.monthlyRate ? '$' + Number(data.monthlyRate).toLocaleString() : '$4,500';
+  document.getElementById('booking-price').innerHTML = rate + ' <span>/month</span>';
+  document.getElementById('mob-price').innerHTML = rate + ' <span>/month</span>';
+  document.getElementById('detail-rate').textContent = rate;
+
+  var minstay = data.minStay ? data.minStay + ' days' : '30 days';
+  document.getElementById('booking-minstay').textContent = 'Minimum stay: ' + minstay;
+  document.getElementById('detail-minstay').textContent = minstay;
+
+  if (data.availableFrom) {
+    var d = new Date(data.availableFrom + 'T00:00:00');
+    document.getElementById('detail-available').textContent = d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  }
+
+  // Pet policy
+  if (data.petPolicy) {
+    document.getElementById('booking-pet').textContent = data.petPolicy === 'Pets allowed' ? '&#128054; Pets welcome' : 'No pets allowed';
+  }
+
+  // Host
+  if (data.hostName) {
+    document.getElementById('host-name-display').textContent = data.hostName;
+    document.getElementById('host-initial').textContent = data.hostName.charAt(0).toUpperCase();
+  }
+  if (data.contactMethod) {
+    var contact = data.contactMethod === 'Both' ? 'Via Email & WhatsApp' : 'Via ' + data.contactMethod;
+    document.getElementById('host-contact-display').textContent = 'Contact: ' + contact;
+  }
+}
+
+function escHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+renderListing(listing);
+
+// Inquiry modal
+function openInquiry() {
+  document.getElementById('inquiry-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  // Pre-fill move-in from availability check
+  var checkIn = document.getElementById('check-in').value;
+  if (checkIn) document.getElementById('guest-movein').value = checkIn;
+}
+
+function closeInquiry() {
+  document.getElementById('inquiry-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close on overlay click
+document.getElementById('inquiry-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeInquiry();
+});
+
+// Close on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeInquiry();
+});
+
+async function submitInquiry(e) {
+  e.preventDefault();
+  var btn = document.getElementById('inquiry-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  var data = {
+    slug: slug || 'demo',
+    guestName: document.getElementById('guest-name').value.trim(),
+    email: document.getElementById('guest-email').value.trim(),
+    phone: document.getElementById('guest-phone').value.trim(),
+    moveIn: document.getElementById('guest-movein').value,
+    duration: document.getElementById('guest-duration').value,
+    message: document.getElementById('guest-message').value.trim()
+  };
+
+  try {
+    await fetch('/api/booking', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+  } catch(err) {
+    console.log('Booking inquiry:', data);
+  }
+
+  document.getElementById('inquiry-form-container').style.display = 'none';
+  document.getElementById('inquiry-success').style.display = 'block';
+
+  setTimeout(function() {
+    closeInquiry();
+    // Reset
+    document.getElementById('inquiry-form-container').style.display = 'block';
+    document.getElementById('inquiry-success').style.display = 'none';
+    document.getElementById('inquiry-form').reset();
+    btn.textContent = 'Send Request';
+    btn.disabled = false;
+  }, 3000);
+}
+</script>
+</body>
+</html>
