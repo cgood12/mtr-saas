@@ -15,6 +15,14 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#A0583E">
+<!-- TODO: Replace G-PLACEHOLDER with your real GA4 measurement ID from https://analytics.google.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PLACEHOLDER');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
@@ -1904,6 +1912,50 @@ button:focus-visible,
   .chat-body { padding: 16px 14px 14px; }
 }
 
+/* ============================================
+   SOUND FAMILIAR
+   ============================================ */
+
+.sound-familiar {
+  background: var(--bg-dark);
+  padding: 100px 0;
+  position: relative;
+}
+
+.sound-familiar-list {
+  list-style: none;
+  max-width: 640px;
+  margin: 0 auto 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sound-familiar-list li {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  padding-left: 32px;
+  position: relative;
+}
+
+.sound-familiar-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--primary-light);
+  font-weight: 700;
+}
+
+.sound-familiar-punchline {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--primary-light);
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 /* Noscript fallback */
 noscript .reveal { opacity: 1 !important; transform: none !important; }
 </style>
@@ -1925,7 +1977,7 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
       <a href="#agents" class="hide-mobile">Your Agent</a>
       <a href="#marketing" class="hide-mobile">Marketing</a>
       <a href="#pricing" class="hide-mobile">Pricing</a>
-      <a href="/onboard" class="nav-cta">Get Your Agent</a>
+      <a href="#get-agent" class="nav-cta">Get Early Access</a>
     </div>
   </div>
 </nav>
@@ -1945,23 +1997,23 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
     </div>
 
     <h1 class="fade-up-d1">
-      Your AI Agent Runs<br>Your Rental.<br>
-      <span class="accent">You Keep Every Dollar.</span>
+      Stop Losing 20% to Airbnb.<br>
+      <span class="accent">Your AI Agent Handles Everything.</span>
     </h1>
 
     <p class="hero-description fade-up-d2">
-      Your agent handles every inquiry, qualifies every guest, and closes direct bookings around the clock — so you never pay Airbnb another cent.
+      MTR Direct builds your booking site, lists you on Furnished Finder, handles every inquiry, and markets your property — so you keep more of every booking.
     </p>
 
     <div class="hero-cta-group fade-up-d3">
-      <a href="/onboard" class="btn-primary">
-        Get Your Agent
+      <a href="#get-agent" class="btn-primary">
+        Get Early Access
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
       <a href="#how-it-works" class="btn-secondary">See How It Works</a>
     </div>
 
-    <p class="hero-sub fade-up-d4">Performance-based pricing. We only get paid when you save money.</p>
+    <p class="hero-sub fade-up-d4">Already helping hosts save $500–2,000 per booking</p>
 
     <!-- Interactive Chat Demo -->
     <div class="hero-chat-demo fade-up-d5">
@@ -2035,13 +2087,31 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
 </section>
 
 <!-- ============================================
+     SOUND FAMILIAR?
+     ============================================ -->
+<section class="sound-familiar">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-title reveal" style="color:var(--white);">Sound familiar?</h2>
+    </div>
+    <ul class="sound-familiar-list reveal stagger-children">
+      <li class="reveal-child">Airbnb was great — until it wasn't</li>
+      <li class="reveal-child">Furnished Finder is a mess — inquiries go nowhere</li>
+      <li class="reveal-child">You want direct bookings but don't know where to start</li>
+      <li class="reveal-child">You're tired of paying 15–20% on every booking</li>
+    </ul>
+    <p class="sound-familiar-punchline reveal">That's exactly what MTR Direct solves.</p>
+  </div>
+</section>
+
+<!-- ============================================
      HOW IT WORKS
      ============================================ -->
 <section class="how-it-works" id="how-it-works">
   <div class="container">
     <div class="text-center">
       <p class="section-label reveal">How It Works</p>
-      <h2 class="section-title reveal">Your agent is live in 3 steps.</h2>
+      <h2 class="section-title reveal">Three steps to more revenue,<br>less work.</h2>
       <p class="section-subtitle mx-auto reveal">No code. No configuration. Your agent starts working immediately.</p>
     </div>
 
@@ -2050,21 +2120,21 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
       <div class="steps-grid reveal stagger-children">
         <div class="step-card reveal-child">
           <div class="step-num">1</div>
-          <h3>Connect your listings</h3>
-          <p>Link your Airbnb, Furnished Finder, and VRBO profiles. Your agent syncs availability, pricing, and listing details automatically.</p>
-          <p class="step-detail">Takes about 5 minutes. We handle the rest.</p>
+          <h3>We build your direct booking site</h3>
+          <p>Professional listing page, your brand, your calendar. Guests book directly with you — no middleman, no platform fees.</p>
+          <p class="step-detail">Live in 24 hours. You own it.</p>
         </div>
         <div class="step-card reveal-child">
           <div class="step-num">2</div>
-          <h3>Your agent starts working</h3>
-          <p>From that moment, your agent monitors every inquiry channel, responds in under a minute, qualifies guests, and nudges the right ones toward direct booking.</p>
+          <h3>Your AI agent handles every inquiry</h3>
+          <p>Responds in minutes, qualifies guests, nudges toward direct booking. 24/7, no commission. Never misses a lead.</p>
           <p class="step-detail">24/7. No exceptions. No missed messages.</p>
         </div>
         <div class="step-card reveal-child">
           <div class="step-num">3</div>
-          <h3>Watch bookings come in</h3>
-          <p>Your agent negotiates, sends contracts, collects deposits via Stripe, and follows up on stale leads — all without you lifting a finger.</p>
-          <p class="step-detail">You review. You approve. You keep 100%.</p>
+          <h3>We market you everywhere</h3>
+          <p>Furnished Finder, Google, Facebook groups, travel nurse networks. More leads, less per booking. Your agent fills the calendar.</p>
+          <p class="step-detail">You get the bookings. You keep the revenue.</p>
         </div>
       </div>
     </div>
@@ -2266,32 +2336,28 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
 <section class="pricing-section" id="pricing">
   <div class="container">
     <div class="text-center">
-      <div class="pricing-banner reveal">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        60-day free trial · No credit card required
-      </div>
       <p class="section-label reveal">Pricing</p>
-      <h2 class="section-title reveal">Zero risk. Pay only<br>when you win.</h2>
-      <p class="section-subtitle mx-auto reveal">Free to start. We charge a small fee when your agent closes a booking — and nothing else. You're paying 15% to Airbnb. We're asking for 1%.</p>
+      <h2 class="section-title reveal">Simple pricing.<br>Serious savings.</h2>
+      <p class="section-subtitle mx-auto reveal">Every plan pays for itself with a single direct booking. You're paying 15–20% to Airbnb — pick a plan and keep the difference.</p>
     </div>
 
     <div class="pricing-grid reveal stagger-children">
-      <!-- Starter — Free -->
+      <!-- Starter -->
       <div class="price-card reveal-child">
         <div class="price-tier">Starter</div>
         <div class="price-row">
-          <span class="price-amount">Free</span>
+          <span class="price-amount">$49</span>
+          <span class="price-period">/mo</span>
         </div>
-        <div class="price-tag">1% of first month's rent per booking</div>
+        <div class="price-tag">Everything you need to go direct</div>
         <ul class="price-features">
-          <li><span class="check">✓</span> 24/7 inquiry response</li>
-          <li><span class="check">✓</span> Guest qualification AI</li>
-          <li><span class="check">✓</span> Direct booking conversion</li>
+          <li><span class="check">✓</span> AI booking agent (24/7)</li>
+          <li><span class="check">✓</span> Direct booking site</li>
+          <li><span class="check">✓</span> Furnished Finder listing optimization</li>
           <li><span class="check">✓</span> Lead tracking dashboard</li>
           <li><span class="check">✓</span> 1 property</li>
-          <li><span class="check">✓</span> No monthly fee. Ever.</li>
         </ul>
-        <a href="/onboard" class="price-btn">Start Free</a>
+        <a href="#get-agent" class="price-btn">Get Early Access</a>
       </div>
 
       <!-- Growth — Featured -->
@@ -2299,42 +2365,40 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
         <span class="price-popular">Most Popular</span>
         <div class="price-tier">Growth</div>
         <div class="price-row">
-          <span class="price-amount">$39</span>
+          <span class="price-amount">$149</span>
           <span class="price-period">/mo</span>
         </div>
-        <div class="price-tag">per property · no closing fees</div>
+        <div class="price-tag">Fill your calendar faster</div>
         <ul class="price-features">
           <li><span class="check">✓</span> Everything in Starter</li>
-          <li><span class="check">✓</span> Unlimited bookings, flat fee</li>
-          <li><span class="check">✓</span> Dynamic pricing engine</li>
-          <li><span class="check">✓</span> Facebook + Google ads</li>
-          <li><span class="check">✓</span> Multi-channel rate sync</li>
-          <li><span class="check">✓</span> Up to 5 properties</li>
+          <li><span class="check">✓</span> Marketing campaigns</li>
+          <li><span class="check">✓</span> Google Ads management</li>
+          <li><span class="check">✓</span> Social outreach (FB groups, networks)</li>
+          <li><span class="check">✓</span> Up to 3 properties</li>
         </ul>
-        <a href="/onboard" class="price-btn">Get Your Agent</a>
+        <a href="#get-agent" class="price-btn">Get Early Access</a>
       </div>
 
       <!-- Scale -->
       <div class="price-card reveal-child">
         <div class="price-tier">Scale</div>
         <div class="price-row">
-          <span class="price-amount">$29</span>
-          <span class="price-period">/property</span>
+          <span class="price-amount">$299</span>
+          <span class="price-period">/mo</span>
         </div>
-        <div class="price-tag">per month · volume pricing</div>
+        <div class="price-tag">Maximize every property</div>
         <ul class="price-features">
           <li><span class="check">✓</span> Everything in Growth</li>
-          <li><span class="check">✓</span> Vendor + cleaner coordination</li>
-          <li><span class="check">✓</span> Smart lock + check-in flows</li>
-          <li><span class="check">✓</span> Full guest lifecycle management</li>
-          <li><span class="check">✓</span> Review management + responses</li>
+          <li><span class="check">✓</span> Revenue optimization</li>
+          <li><span class="check">✓</span> Dynamic pricing</li>
+          <li><span class="check">✓</span> Multi-property management</li>
           <li><span class="check">✓</span> Unlimited properties</li>
         </ul>
-        <a href="/onboard" class="price-btn">Get Your Agent</a>
+        <a href="#get-agent" class="price-btn">Get Early Access</a>
       </div>
     </div>
 
-    <p class="pricing-note reveal">Start free today. No credit card required. Upgrade anytime.</p>
+    <p class="pricing-note reveal">Cancel anytime. No contracts. No setup fees.</p>
   </div>
 </section>
 
@@ -2400,8 +2464,8 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
     <p class="footer-cta-desc reveal">Stop managing your rental. Your agent handles inquiries, qualifies guests, and closes bookings — 24/7. You keep every dollar.</p>
 
     <div class="footer-cta-actions reveal">
-      <a href="/onboard" class="btn-primary">
-        Get Your Agent
+      <a href="#waitlist-form" class="btn-primary" onclick="document.getElementById('waitlist-form').querySelector('input').focus(); return false;">
+        Get Early Access
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
     </div>
