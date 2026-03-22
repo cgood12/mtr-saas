@@ -32,7 +32,7 @@ The waitlist API sends to FormSubmit.co using your Gmail. First submission requi
 
 ### 4. Support Channel
 When people sign up, they'll have questions. Options:
-- Email (chadwick23.ai@gmail.com or hello@mtrdirect.io)
+- Email (candmcapital.llc@gmail.com or hello@mtrdirect.io)
 - Intercom/Crisp widget on site
 - Just reply manually at first (fine for <100 users)
 

@@ -73,7 +73,7 @@ export default async function handler(req, res) {
 
     // Send notification via FormSubmit
     try {
-      await fetch('https://formsubmit.co/ajax/chadwick23.ai@gmail.com', {
+      await fetch('https://formsubmit.co/ajax/candmcapital.llc@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
