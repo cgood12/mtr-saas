@@ -2211,13 +2211,14 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
 
     ```
 <h1 class="fade-up-d1">
-      Your Platform Is Stealing $500–2,000 Per Booking
+      Your Guests Want to Book Direct.<br>
+      <span class="accent">Let Them.</span>
     </h1>
 ```
 
     ```
 <p class="hero-description fade-up-d2">
-      Every direct inquiry you lose to Airbnb's algorithm costs you 20% commission plus hours screening guests. MTR's AI agent captures and qualifies every lead automatically, 24/7.
+      Platforms profit from friction. MTR removes it—your AI agent qualifies leads in minutes, eliminates commissions, and keeps guests coming back to you directly.
     </p>
 ```
 
@@ -2229,7 +2230,7 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
       <a href="#how-it-works" class="btn-secondary">See How It Works</a>
     </div>
 
-    <p class="hero-sub fade-up-d4">Hosts reclaim average $8,000–Already helping hosts save $500–2,000 per booking4,000 annually in lost commissions</p>
+    <p class="hero-sub fade-up-d4">3x higher direct booking rates vs. platform-dependent hosts</p>
 
     <!-- Interactive Chat Demo -->
     <div class="hero-chat-demo fade-up-d5">
