@@ -2211,14 +2211,13 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
 
     ```
 <h1 class="fade-up-d1">
-      Your Guests Want to Book Direct.<br>
-      <span class="accent">Let Them.</span>
+      Stop Handing 20% of Your Revenue to Platforms
     </h1>
 ```
 
     ```
 <p class="hero-description fade-up-d2">
-      Platforms profit from friction. MTR removes it—your AI agent qualifies leads in minutes, eliminates commissions, and keeps guests coming back to you directly.
+      Every booking costs you. MTR's AI agent qualifies guests and closes direct deals 24/7, keeping commissions in your pocket instead of theirs.
     </p>
 ```
 
@@ -2230,7 +2229,7 @@ noscript .reveal { opacity: 1 !important; transform: none !important; }
       <a href="#how-it-works" class="btn-secondary">See How It Works</a>
     </div>
 
-    <p class="hero-sub fade-up-d4">3x higher direct booking rates vs. platform-dependent hosts</p>
+    <p class="hero-sub fade-up-d4">Hosts save <p class="hero-sub fade-up-d4">2K+ annually on average per property</p>
 
     <!-- Interactive Chat Demo -->
     <div class="hero-chat-demo fade-up-d5">
